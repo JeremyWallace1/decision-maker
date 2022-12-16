@@ -16,3 +16,6 @@ app.get('/login/:id', (req, res) => {
   res.redirect('/');
 });
 ```
+
+
+* Don't code on master/main, use branches!
