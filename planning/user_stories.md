@@ -29,10 +29,5 @@ eg. As a user, I want to be able to save posts, because I want to review them la
 
 ### TABLE NAMES ###
 - polls
-  - links
-- 
-- users
-  - creators
-  - friends
+- poll_choices
 - responses
-  - ip log
