@@ -1,11 +1,4 @@
 # User Stories
-* A user story describes how users will interact with your application
-* They have the form: As a ___, I want to _, because ____.
-eg. As a user, I want to be able to save posts, because I want to review them later.
-* User stories can also be negated: As a __, I shouldn't be able to _, because ___.
-* eg. As a user, I shouldn't be able to edit other users posts, because I don't own those posts.
-
-# User Stories
 * As a poll creator, I want to be able to create a poll that I can share with my friends, because I want to make group decision making easier.
 * As a poll creator, I want to be able to share a poll that I created with my friends, because I want them to be able to specify their preference(s).
 * As a poll creator, I want to be able to view the results of the polls I've created, because I want to be able to use the results to inform a decision.
@@ -19,7 +12,7 @@ eg. As a user, I want to be able to save posts, because I want to review them la
 * As a poll user, I should only be permitted to respond one time to each poll, because each users response needs to be weighted equally.
 * As a poll user, I should only be permitted to see the poll that was shared with me, for the privacy of the poll creator and other users is important.
 
-**** STRETCH ****
+#### STRETCH ####
 - send the result_link to friends
 - do you want to allow others to be able to view the results?
   - after specific date/time or anytime?
@@ -31,3 +24,7 @@ eg. As a user, I want to be able to save posts, because I want to review them la
 - polls
 - poll_choices
 - responses
+
+### START WITH ###
+- 768px max width
+- BRANCH BRANCH BRANCH BRANCH BRANCH!!!!!!!
