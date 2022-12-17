@@ -1,0 +1,3 @@
+-- polls table seeds here
+INSERT INTO polls (creator_email, question, description, results_url, sharing_url) VALUES ('test1@test.com', 'What gift should we give to Danny?', 'Birthday is coming next Friday, so let''s have a decision by then!', 'http://localhost:8080/polls/r12345', 'http://localhost:8080/polls/p12345');
+INSERT INTO polls (creator_email, question, description, results_url, sharing_url) VALUES ('test2@test.com', 'Which movie should we go see?', 'If anyone answers Black Adam, we''re no longer friends!', 'http://localhost:8080/polls/r98765', 'http://localhost:8080/polls/p98765');
