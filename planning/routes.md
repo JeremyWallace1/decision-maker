@@ -21,3 +21,10 @@ Delete    --    --
 * edit with no responses so far...
 * view other polls created by that email address (on browse GET /polls)
 * picture polls!
+* poll options change to bar w/ weighting
+* copy button
+* email link(s) button
+* you have already replied to this on <date>
+* responsive to screen sizes
+* works on mobile... (jquery UI draggable)
+* pretty logo
