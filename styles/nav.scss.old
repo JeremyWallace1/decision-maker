@@ -1,0 +1,11 @@
+/* CSS for Navigation bar */
+nav {
+  position: fixed;
+  color: white;
+  background-color: black;
+}
+
+.logo {
+  color: white
+}
+
