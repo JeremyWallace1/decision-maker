@@ -1,5 +1,29 @@
 const db = require('../connection');
 
+const createPoll = (data) => {
+  const query = {
+    text: `
+    INSERT INTO polls (
+      creator_email,
+      question,
+      description,
+      results_url,
+      sharing_url
+    )
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *
+  `,
+    values: [data.email, data.question, data.description, data.results_url, data.sharing_url],
+  }
+  
+  return db.query(query)
+    .then(response => {
+      data.response = response.rows[0];
+      return data;
+    })
+    .catch(error => console.log(error.message));
+};
+
 const getPoll = (id) => {
   return db.query(`
   SELECT
@@ -57,6 +81,7 @@ const getPollResponses = (id) => {
 };
 
 module.exports = {
+  createPoll,
   getPoll,
   getPollChoices,
   getRespondentChoices,
