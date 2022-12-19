@@ -22,10 +22,34 @@ router.post('/', (req, res) => {
   // const results_url = 'r' + Math.floor(Math.random() * 99999) + 1;
   // const sharing_url = 's' + Math.floor(Math.random() * 99999) + 1;
   req.body.results_url = 'r' + Math.floor(Math.random() * 99999) + 1;
-  req.body.sharing_url= 's' + Math.floor(Math.random() * 99999) + 1;
-  pollQueries.createPoll(req.body)
-    .then(console.log);
-  }
-); 
+  req.body.sharing_url = 's' + Math.floor(Math.random() * 99999) + 1;
 
+  pollQueries.createPoll(req.body)
+    .then(data => {
+      const choicePromises = [];
+      choicePromises.push(pollQueries.createPoll(req.body));
+      let countChoice = 0;
+      while (true) {
+        countChoice += 1;
+        if (!req.body[`answer${countChoice}_title`]) {
+          break;
+        }
+
+        const choiceData = {
+          poll_id: data.response.id,
+          title: req.body[`answer${countChoice}_title`],
+          description: req.body[`answer${countChoice}_description`]
+        }
+
+        choicePromises.push(pollQueries.createChoice(choiceData));
+      }
+      
+      Promise.all(choicePromises)
+        .then(console.log)
+        .catch(error => console.log(error.message)); 
+      }
+
+    );
+  }
+)
 module.exports = router;
