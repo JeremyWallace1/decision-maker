@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
     .then(data => {
       const pollId = data[0].response.id;
       console.log(pollId)
-      return res.redirect(`/polls/:id${pollId}`);
+      return res.redirect(`/polls/${pollId}`);
     })
     .catch(error => console.log(error.message));
     
