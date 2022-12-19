@@ -24,6 +24,27 @@ const createPoll = (data) => {
     .catch(error => console.log(error.message));
 };
 
+const createChoice = (data) => {
+  const query = {
+    text: `
+    INSERT INTO poll_choices (
+      poll_id,
+      title,
+      description
+    )
+    VALUES ($1, $2, $3)
+    RETURNING *
+  `,
+    values: [data.poll_id, data.title, data.description],
+  }
+  
+  return db.query(query)
+    .then(response => {
+      return response.rows[0];
+    })
+    .catch(error => console.log(error.message));
+};
+
 const getPoll = (id) => {
   return db.query(`
   SELECT
@@ -82,6 +103,7 @@ const getPollResponses = (id) => {
 
 module.exports = {
   createPoll,
+  createChoice,
   getPoll,
   getPollChoices,
   getRespondentChoices,
