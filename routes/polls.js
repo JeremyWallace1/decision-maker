@@ -17,6 +17,9 @@ router.post('/', (req, res) => {
   const answerDescription1 = req.body.answer1_description;
   const answerDescription2 = req.body.answer2_description;
   const answerDescription3 = req.body.answer3_description;
+  // TODO: Better random generator for urls
+  const results_url = 'r' + Math.floor(Math.random() * 99999) + 1;
+  const sharing_url = 's' + Math.floor(Math.random() * 99999) + 1;
   console.log('email: ', email);
   console.log('title: ', title);
   console.log('question: ', question);
@@ -26,6 +29,8 @@ router.post('/', (req, res) => {
   console.log('answerDescription1: ', answerDescription1);
   console.log('answerDescription2: ', answerDescription2);
   console.log('answerDescription3: ', answerDescription3);
+  console.log('results_url: ', results_url);
+  console.log('sharing_url: ', sharing_url);
   }
 ); 
 
