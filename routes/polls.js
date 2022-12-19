@@ -17,9 +17,8 @@ router.post('/', (req, res) => {
   req.body.sharing_url = 's' + Math.floor(Math.random() * 99999) + 1;
 
   pollQueries.createPoll(req.body)
-    .then(data => {
+  .then(data => {
         const choicePromises = [];
-        choicePromises.push(pollQueries.createPoll(req.body));
         let countChoice = 0;
         while (true) {
           countChoice += 1;
@@ -41,8 +40,7 @@ router.post('/', (req, res) => {
 
     )
     .then(data => {
-      const pollId = data[0].response.id;
-      console.log(pollId)
+      const pollId = data[0].poll_id;
       return res.redirect(`/polls/${pollId}`);
     })
     .catch(error => console.log(error.message));
