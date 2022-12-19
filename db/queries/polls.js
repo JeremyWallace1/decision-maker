@@ -21,7 +21,6 @@ const createPoll = (data) => {
       data.response = response.rows[0];
       return data;
     })
-    .catch(error => console.log(error.message));
 };
 
 const createChoice = (data) => {
@@ -42,7 +41,6 @@ const createChoice = (data) => {
     .then(response => {
       return response.rows[0];
     })
-    .catch(error => console.log(error.message));
 };
 
 const getPoll = (id) => {
