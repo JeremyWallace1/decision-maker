@@ -42,46 +42,67 @@
           </div>
         </div>
         <!-- <div class="row mb-3"><h3>Your Poll Info:</h3></div> -->
-        <div class="row mb-3">
-          <label for="inputTitle" class="col-sm-2 col-form-label">Poll title:</label>
-          <div class="col-sm-10">
-            <input type="textfield" class="form-control" id="inputTitle" name="description">
-          </div>
-        </div>
-        
+        <div class="row mb-3"><h3>What do you want to ask?</h3></div>
         <div class="row mb-3">
           <label for="inputQuestion" class="col-sm-2 col-form-label">Question:</label>
           <div class="col-sm-10">
-            <input type="textarea" class="form-control" id="inputQuestion" name="question">
+            <input type="text" class="form-control" id="inputQuestion" name="question">
           </div>
-        </div>
-        <div class="row mb-3">
-          
         </div>
 
-        <div class="row mb-3"><h3>Answers:</h3></div>
+        <div class="row mb-3">
+          <label for="inputTitle" class="col-sm-2 col-form-label">Description:</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" id="inputTitle" name="description" placeholder="optional"></textarea>
+          </div>
+        </div>
+
+        <div class="row mb-3"><h3>Answer #1:</h3></div>
 
         <div class="row mb-3">
-          <label for="answer1" class="col-sm-1 col-form-label">#1:</label>
-          <div class="col-sm-11">
-            <input type="textarea" class="form-control" id="answer1" name="answer1_title">
+          <label for="answer1" class="col-sm-2 col-form-label">Answer:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="answer1" name="answer1_title">
           </div>
         </div>
         <div class="row mb-3">
-          <label for="answer2" class="col-sm-1 col-form-label">#2:</label>
-          <div class="col-sm-11">
-            <input type="textarea" class="form-control" id="answer2" name="answer2_title">
+          <label for="answer1_description" class="col-sm-2 col-form-label">Description:</label>
+          <div class="col-sm-10">
+            <textarea rows="3" class="form-control" id="answer1_description" name="answer1_description" placeholder="optional"></textarea>
+          </div>
+        </div>
+
+        <div class="row mb-3"><h3>Answer #2:</h3></div>
+        <div class="row mb-3">
+          <label for="answer2" class="col-sm-2 col-form-label">Answer:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="answer2" name="answer2_title">
           </div>
         </div>
         <div class="row mb-3">
-          <label for="answer3" class="col-sm-1 col-form-label">#3:</label>
-          <div class="col-sm-11">
-            <input type="textarea" class="form-control" id="answer3" name="answer3_title">
+          <label for="answer2_description" class="col-sm-2 col-form-label">Description:</label>
+          <div class="col-sm-10">
+            <textarea rows="3" class="form-control" id="answer2_description" name="answer2_description" placeholder="optional"></textarea>
           </div>
         </div>
+
+        <div class="row mb-3"><h3>Answer #3:</h3></div>
+        <div class="row mb-3">
+          <label for="answer3" class="col-sm-2 col-form-label">Answer:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="answer3" name="answer3_title">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="answer3_description" class="col-sm-2 col-form-label">Description:</label>
+          <div class="col-sm-10">
+            <textarea rows="3" class="form-control" id="answer3_description" name="answer3_description" placeholder="optional"></textarea>
+          </div>
+        </div>
+
         <div class="row mb-3">
           <div class="col-sm-1"></div>
-          <div class="col-sm-11">
+          <div class="col-sm-10">
             <button type="button text-nowrap" class="btn btn-primary" id="addMoreAnswers">add options</button>
           </div>
         </div>
