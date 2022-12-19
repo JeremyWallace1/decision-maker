@@ -1,0 +1,1 @@
+ curl -X POST -i localhost:8080/polls -d "email=test%40emails.com&title=Poll title Test&question=Is this a good poll%3F&answer1_title=Yes, definitely&answer1_description=I like turtles%21&answer2_title=Maybe&answer2_description=I hate making decisions%21&answer3_title=No, it sucks%21&answer3_description=I think we can do better."
