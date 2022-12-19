@@ -11,6 +11,8 @@ const router  = express.Router();
 const pollQueries = require('../db/queries/polls');
 
 router.post('/', (req, res) => {
+  // TODO: validation of data
+  // TODO: better randomization, not just numerical
   req.body.results_url = 'r' + Math.floor(Math.random() * 99999) + 1;
   req.body.sharing_url = 's' + Math.floor(Math.random() * 99999) + 1;
 
