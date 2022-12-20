@@ -24,6 +24,24 @@ router.post('/',
       .isLength({ max: 255})
       .withMessage("the poll question is too long, please shorten it")
       .trim(),
+    check('answer1_title')
+      .isLength({ min: 1})
+      .withMessage("poll answer 1 is not long enough, please lengthen it")
+      .isLength({ max: 255})
+      .withMessage("poll answer 1 is too long, please shorten it")
+      .trim(),
+    check('answer2_title')
+      .isLength({ min: 1})
+      .withMessage("poll answer 2 is not long enough, please lengthen it")
+      .isLength({ max: 255})
+      .withMessage("poll answer 2 is too long, please shorten it")
+      .trim(),
+    check('answer3_title')
+      .isLength({ min: 1})
+      .withMessage("poll answer 3 is not long enough, please lengthen it")
+      .isLength({ max: 255})
+      .withMessage("poll answer 3 is too long, please shorten it")
+      .trim(),
   ],
   (req, res) => {
     const errors = validationResult(req).formatWith(({ msg }) => msg);
