@@ -16,15 +16,7 @@ router.get('/:id', (req, res) => {
   const data = {};
   pollQueries.getPoll(pollId)
     .then(poll => {
-      data.config = {
-        id: poll.id,
-        creator_email: poll.creator_email,
-        question: poll.question,
-        description: poll.description,
-        results_url: poll.results_url,
-        sharing_url: poll.sharing_url,
-      };
-      
+      data.config = poll;
       return data;
     })
     .then(poll => pollQueries.getPollChoices(pollId))
