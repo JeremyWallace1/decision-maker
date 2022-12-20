@@ -64,7 +64,7 @@ const getPollChoices = (id) => {
   SELECT
     id,
     title,
-    description,
+    description
   FROM poll_choices
   WHERE poll_id = $1`, [id])
     .then(response => {
