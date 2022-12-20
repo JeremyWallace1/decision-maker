@@ -11,6 +11,7 @@ const dbParams = {
 
 const db = new Pool(dbParams);
 
-db.connect();
+db.connect()
+  .catch(err => err.message);
 
 module.exports = db;
