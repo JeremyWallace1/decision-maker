@@ -11,9 +11,14 @@ const router  = express.Router();
 const { body, validationResult } = require('express-validator');
 const pollQueries = require('../db/queries/polls');
 
+// creator landing page to create new poll
+router.get('/', (req, res) => {
+  res.status(200).send('GET route /polls/ ***Coming soon...***');
+});
+
 // creator views poll results & links for sharing
 router.get('/:id', (req, res) => {
-  res.status(200).send('GET route polls/:id. Coming soon...');
+  res.status(200).send('GET route /polls/:id ***Coming soon...***');
 });
 
 // creator submits new poll
