@@ -11,11 +11,6 @@ const router  = express.Router();
 const { body, validationResult } = require('express-validator');
 const responseQueries = require('../db/queries/polls');
 
-// users view poll and can submit their choice order preference
-router.get('/:id', (req, res) => {
-  res.status(200).send('GET route /responses/:id ***Coming soon...***');
-});
-
 // user responds to a poll
 router.post('/:id', (req, res) => {
   console.log(req.body);
