@@ -15,19 +15,12 @@ router.get('/:id', (req, res) => {
   const pollId = req.params.id;
   const data = {};
   pollQueries.getPoll(pollId)
-    .then(poll => {
-      data.config = poll;
-      return data;
-    })
+    .then(poll => data.config = poll)
     .then(poll => pollQueries.getPollChoices(pollId))
-    .then(choices => {
-      data.choices = choices;
-      return data;
-    })
-    .then(data => res.json(data))
+    .then(choices => data.choices = choices)
+    .then(output => res.json(data))
     .catch(err => {
-      res
-        .status(500)
+      res.status(500)
         .json({ error: err.message });
     });
 });
