@@ -28,23 +28,15 @@ app.use(express.static('public'));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const userApiRoutes = require('./routes/users-api');
-const widgetApiRoutes = require('./routes/widgets-api');
 const pollsApiRoutes = require('./routes/polls-api');
 const responsesApiRoutes = require('./routes/responses-api');
-const usersRoutes = require('./routes/users');
 const pollsRoutes = require('./routes/polls');
 const responsesRoutes = require('./routes/responses');
 
 // Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
-app.use('/api/users', userApiRoutes);
-app.use('/api/widgets', widgetApiRoutes);
 app.use('/api/polls', pollsApiRoutes);
 app.use('/api/responses', responsesApiRoutes);
-app.use('/users', usersRoutes);
-// Note: mount other resources here, using the same pattern above
 app.use('/polls', pollsRoutes);
 app.use('/responses', responsesRoutes);
 
