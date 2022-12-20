@@ -16,7 +16,8 @@ router.post('/',
   [
     check('email')
       .isEmail()
-      .withMessage("please enter a valid email"),
+      .withMessage("please enter a valid email")
+      .normalizeEmail(),
     check('question')
       .isLength({ min: 5})
       .withMessage("the poll question isn't descriptive long enough, please lengthen it")
