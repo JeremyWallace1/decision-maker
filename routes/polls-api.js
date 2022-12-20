@@ -24,8 +24,14 @@ router.get('/:id', (req, res) => {
         results_url: poll.results_url,
         sharing_url: poll.sharing_url,
       };
-      return poll;
+      return data;
     })
+    .then(data => pollQueries.getPollChoices(data.config.poll_id))
+    .then(choices => {
+      data.choices = choices;
+      return data;
+    })
+    .then(console.log)
     .catch(err => {
       res
         .status(500)
