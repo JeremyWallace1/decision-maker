@@ -5,7 +5,7 @@ $dkblue: rgb(0,87,119);
 $uberdkblue: rgb(0, 44, 60);
 $ltblue: rgb(0,139,188);
 $yellowgr: rgb(187,188,0);
-$ltyellowgr: rgb(254, 255, 180);
+$ltyellowgr: rgb(254, 255, 240);
 
 body {
   background: linear-gradient(
@@ -44,6 +44,7 @@ body {
   .bg-dark {
     background-color: $uberdkblue !important;
   }
+  
   .text-bg-dark {
     background-color: $dkblue !important;
     color: $ltyellowgr !important;
