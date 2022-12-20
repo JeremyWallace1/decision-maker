@@ -1,0 +1,51 @@
+// Custom.scss
+// bootstrap for defaults, change reminder below
+
+$dkblue: rgb(0,87,119);
+$uberdkblue: rgb(0, 44, 60);
+$ltblue: rgb(0,139,188);
+$yellowgr: rgb(187,188,0);
+$ltyellowgr: rgb(254, 255, 180);
+
+body {
+  background: linear-gradient(
+    225deg,
+    $ltblue 0%,
+    // rgba(163, 176, 219, 1) 20%,
+    // rgba(163, 173, 219, 1) 34%,
+    $yellowgr 50%,
+    // rgba(163, 208, 219, 1) 74%,
+    $dkblue 100%
+  );
+
+  .form-control:focus {  //not working, but is compiling
+    border-color: $dkblue;
+    box-shadow: 0 0 0 0.4em $ltblue;
+  }; 
+  
+  .btn-primary {  //not working, not compiling
+    background-color: $ltblue !important;
+    border-color: $uberdkblue !important;
+    color: $ltyellowgr !important;
+  };
+  .btn-primary:hover {
+    background-color: $yellowgr !important;
+    color: $dkblue;
+  }
+  .btn-primary:disabled {
+    background-color: $dkblue !important;
+  }
+
+  .border-primary {
+    color: $ltblue !important;
+    opacity: 50%;
+  }
+
+  .bg-dark {
+    background-color: $uberdkblue !important;
+  }
+  .text-bg-dark {
+    background-color: $dkblue !important;
+    color: $ltyellowgr !important;
+  }
+};
