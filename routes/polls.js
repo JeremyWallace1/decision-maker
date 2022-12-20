@@ -16,11 +16,6 @@ router.get('/', (req, res) => {
   res.status(200).send('GET route /polls/ ***Coming soon...***');
 });
 
-// creator views poll results & links for sharing
-router.get('/:id', (req, res) => {
-  res.status(200).send('GET route /polls/:id ***Coming soon...***');
-});
-
 // creator submits new poll
 router.post('/',
   // Use express-validator middleware to validate the post request
