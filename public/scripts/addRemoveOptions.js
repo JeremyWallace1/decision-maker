@@ -1,6 +1,19 @@
 $(() => {
   let num = 2;
   const max = 5;
+  const toggleButtons = () => {
+    if (num > 2) {
+      $('#removeAnswers').prop('disabled', false);
+    } else {
+      $('#removeAnswers').prop('disabled', true);
+    }
+    if (num === max) {
+      $('#addMoreAnswers').prop('disabled', true);
+    } else {
+      $('#addMoreAnswers').prop('disabled', false);
+    }
+  };
+
   addOption = () => {
     if (num < max) {
       num++;
@@ -24,40 +37,14 @@ $(() => {
         </div>
         `
       );
-      if (num > 2) {
-        $('#removeAnswers').prop('disabled', false);
-      } else {
-        $('#removeAnswers').prop('disabled', true);
-      }
-      if (num === max) {
-        $('#addMoreAnswers').prop('disabled', true);
-      } else {
-        $('#addMoreAnswers').prop('disabled', false);
-      }
-    } else {
-      console.log(`too many answers, max number of answers is set to ${max}`);
-    }
-    console.log(`num is ${num}`)
+      toggleButtons();
+    } 
   };
   removeOption = () => {
-    console.log(`at time of removeProduct num is ${num}`);
     if (num > 2) {
       $(`#Answer${num}`).remove();
       num--;
-      console.log(`now that it is removed num is ${num}`);
-      if (num > 2) {
-        $('#removeAnswers').prop('disabled', false);
-      } else {
-        $('#removeAnswers').prop('disabled', true);
-      }
-      if (num === max) {
-        $('#addMoreAnswers').prop('disabled', true);
-      } else {
-        $('#addMoreAnswers').prop('disabled', false);
-      }
-
-    } else {
-      console.log(`unable to remove any more answers, 2 is the minimum`);
+      toggleButtons();
     }
   };
 });

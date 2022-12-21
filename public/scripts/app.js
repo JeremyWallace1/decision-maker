@@ -1,87 +1,86 @@
 // Client facing scripts here
 $(() => {
-  $('.generatedPage').empty().then(
-    $('.generatedPage').append(
-      `
-        <form action="/polls" method="POST" id="create-poll">
+  $('.generatedPage').empty()
+  $('.generatedPage').append(
+    `
+      <form action="/polls" method="POST" id="create-poll">
+      <div class="row mb-3">
         <div class="row mb-3">
-          <div class="row mb-3">
-            <label for="inputEmail" class="col-sm-2 col-form-label">Your email:</label>
-            <div class="col-sm-10">
-              <input type="email" class="form-control" id="inputEmail" name="email">
-            </div>
+          <label for="inputEmail" class="col-sm-2 col-form-label">Your email:</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputEmail" name="email">
           </div>
         </div>
-    
-        <div class="row mb-3"><h3>What do you want to ask?</h3>
-          <div class="row mb-3">
-            <label for="inputQuestion" class="col-sm-2 col-form-label">Question:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputQuestion" name="question">
-            </div>
-          </div>
-    
-          <div class="row mb-3">
-            <label for="inputTitle" class="col-sm-2 col-form-label">Description:</label>
-            <div class="col-sm-10">
-              <textarea class="form-control" id="inputTitle" name="description" placeholder="optional"></textarea>
-            </div>
-          </div>
-        </div>
-        <div id="Answer1">
-          <div class="row mb-3 answerOne"><h3>Answer #1:</h3>
-    
-            <div class="row mb-3">
-              <label for="answer1" class="col-sm-2 col-form-label">Answer:</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="answer1" name="answer1_title">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="answer1_description" class="col-sm-2 col-form-label">Description:</label>
-              <div class="col-sm-10">
-                <textarea rows="3" class="form-control" id="answer1_description" name="answer1_description" placeholder="optional"></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div id="Answer2">
-          <div class="row mb-3"><h3>Answer #2:</h3>
-            <div class="row mb-3">
-              <label for="answer2" class="col-sm-2 col-form-label">Answer:</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="answer2" name="answer2_title">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="answer2_description" class="col-sm-2 col-form-label">Description:</label>
-              <div class="col-sm-10">
-                <textarea rows="3" class="form-control" id="answer2_description" name="answer2_description" placeholder="optional"></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-    
-        <div id="moreAnswers">
-    
-        </div>
-    
+      </div>
+  
+      <div class="row mb-3"><h3>What do you want to ask?</h3>
         <div class="row mb-3">
-          <div class="col-sm-2"></div>
-          <div class="col-sm-7">
-            <button type="button" class="btn btn-primary" id="addMoreAnswers"  onclick="addOption();">add options</button>
+          <label for="inputQuestion" class="col-sm-2 col-form-label">Question:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputQuestion" name="question">
           </div>
-          <div class="col-sm-3">
-            <button type="button" class="btn btn-primary" id="removeAnswers"  disabled onclick="removeOption();">remove options</button>
-          </div>
-    
         </div>
-        <hr class="border border-primary border-1">
-        <button type="submit" class="btn btn-primary btn-lg col-12 text-nowrap">Create Poll</button>      
-      </form>
-      `
-    )
-  );
+  
+        <div class="row mb-3">
+          <label for="inputTitle" class="col-sm-2 col-form-label">Description:</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" id="inputTitle" name="description" placeholder="optional"></textarea>
+          </div>
+        </div>
+      </div>
+      <div id="Answer1">
+        <div class="row mb-3 answerOne"><h3>Answer #1:</h3>
+  
+          <div class="row mb-3">
+            <label for="answer1" class="col-sm-2 col-form-label">Answer:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="answer1" name="answer1_title">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="answer1_description" class="col-sm-2 col-form-label">Description:</label>
+            <div class="col-sm-10">
+              <textarea rows="3" class="form-control" id="answer1_description" name="answer1_description" placeholder="optional"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="Answer2">
+        <div class="row mb-3"><h3>Answer #2:</h3>
+          <div class="row mb-3">
+            <label for="answer2" class="col-sm-2 col-form-label">Answer:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="answer2" name="answer2_title">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="answer2_description" class="col-sm-2 col-form-label">Description:</label>
+            <div class="col-sm-10">
+              <textarea rows="3" class="form-control" id="answer2_description" name="answer2_description" placeholder="optional"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div id="moreAnswers">
+  
+      </div>
+  
+      <div class="row mb-3">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-7">
+          <button type="button" class="btn btn-primary" id="addMoreAnswers"  onclick="addOption();">add options</button>
+        </div>
+        <div class="col-sm-3">
+          <button type="button" class="btn btn-primary" id="removeAnswers"  disabled onclick="removeOption();">remove options</button>
+        </div>
+  
+      </div>
+      <hr class="border border-primary border-1">
+      <button type="submit" class="btn btn-primary btn-lg col-12 text-nowrap">Create Poll</button>      
+    </form>
+    `
+  )
 });
 
