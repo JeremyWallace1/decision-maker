@@ -9,7 +9,6 @@ const { response } = require('express');
 const express = require('express');
 const router  = express.Router();
 const responseQueries = require('../db/queries/polls');
-const $ = require('../public/vendor/jquery-3.0.0');
 
 // user views poll and values and can modify selections before posting
 router.get('/:id', (req, res) => {
