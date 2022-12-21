@@ -1,0 +1,1 @@
+ curl -X POST -i localhost:8080/responses/2 -d "poll_id=1&choice_id=4&choice_id=3&choice_id=5&choice_id=1&choice_id=6&choice_id=2"
