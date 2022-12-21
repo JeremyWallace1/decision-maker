@@ -22,14 +22,28 @@ router.post('/:id', (req, res) => {
     const joined = ipRanges.join('.');
     return joined;
   };
+  
+  const countChoices = req.body.choices.length;
+  const ip = generateIP();
+  const pollId = req.body.poll_id;
+  const promises = [];
 
-  const data = {};
-  data.poll_id = req.body.poll_id;
-  data.choices = req.body.choice_id;
-  data.ip = generateIP();
-  console.log(data);
+  for (const choice in req.body.choices) {
+    const data = {};
+    data.poll_id = pollId;
+    data.choice_id = req.body.choices[choice];
+    data.respondent_ip = ip;
+    data.rank_score = countChoices - choice;
+    promises.push(responseQueries.createResponse(data));
+  }
 
-  res.status(200).send('POST route /responses/:id ***Coming soon...***');
+  Promise.all(promises)
+    .then(data => {
+      console.log(data);
+      return res.redirect(`/responses/${pollId}`);
+    })
+    .catch(err => console.log(err.message));
+    
 });
 
 module.exports = router;
