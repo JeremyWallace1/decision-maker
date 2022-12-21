@@ -8,7 +8,7 @@ $(() => {
         <div class="row mb-3">
           <label for="inputEmail" class="col-sm-2 col-form-label">Your email:</label>
           <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail" name="email">
+            <input type="email" class="form-control" id="inputEmail" name="email" required>
           </div>
         </div>
       </div>
@@ -17,7 +17,7 @@ $(() => {
         <div class="row mb-3">
           <label for="inputQuestion" class="col-sm-2 col-form-label">Question:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputQuestion" name="question">
+            <input type="text" class="form-control" id="inputQuestion" name="question" required>
           </div>
         </div>
   
@@ -34,7 +34,7 @@ $(() => {
           <div class="row mb-3">
             <label for="answer1" class="col-sm-2 col-form-label">Answer:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="answer1" name="answer1_title">
+              <input type="text" class="form-control" id="answer1" name="answer1_title" required>
             </div>
           </div>
           <div class="row mb-3">
@@ -51,7 +51,7 @@ $(() => {
           <div class="row mb-3">
             <label for="answer2" class="col-sm-2 col-form-label">Answer:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="answer2" name="answer2_title">
+              <input type="text" class="form-control" id="answer2" name="answer2_title" required>
             </div>
           </div>
           <div class="row mb-3">

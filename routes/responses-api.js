@@ -12,6 +12,7 @@ const responseQueries = require('../db/queries/polls');
 
 // view poll with options
 router.get('/:id', (req, res) => {
+  console.log(`${res.body}`);
   res.status(200).send('GET route /responses/:id ***Coming soon...***');
 });
 
