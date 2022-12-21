@@ -14,7 +14,8 @@ const pollQueries = require('../db/queries/polls');
 
 // creator landing page to create new poll
 router.get('/', (req, res) => {
-  res.status(200).send('GET route /polls/ ***Coming soon...***');
+  res.redirect('/');
+  // res.status(200).send('GET route /polls/ ***Coming soon...***');
 });
 
 // creator submits new poll

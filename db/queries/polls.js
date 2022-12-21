@@ -107,6 +107,7 @@ const getRespondentChoices = (ip) => {
     });
 };
 
+// SELECT choice_id, SUM(rank_score) AS scoring FROM responses WHERE poll_id = $1 GROUP BY choice_id ORDER BY scoring DESC;
 const getPollResponses = (id) => {
   return db.query(`
   SELECT

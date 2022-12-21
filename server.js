@@ -45,8 +45,7 @@ app.use('/responses', responsesRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  res.render('index');
-  // createPoll();
+  res.render('/');
 });
 
 app.listen(PORT, () => {

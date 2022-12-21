@@ -24,7 +24,7 @@ $(() => {
             <div class="row mb-3">
               <label for="answer${num}" class="col-sm-2 col-form-label">Answer:</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="answer${num}" name="answer${num}_title">
+                <input type="text" class="form-control" id="answer${num}" name="answer${num}_title" required>
               </div>
             </div>
             <div class="row mb-3">
