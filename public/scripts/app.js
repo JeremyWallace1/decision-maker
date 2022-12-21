@@ -83,7 +83,7 @@ $(() => {
     `
   );
 
-  const redirectFunction = () => {
+  const redirectButton = () => {
     if ($('#inputEmail').val() || $('#inputQuestion').val() || $('#inputQuestion').val() || $('#answer1').val() || $('#answer2').val()) {
       if (confirm('This will start a new poll and remove the current form\'s data.\nAre you sure?')) {
         console.log('Ok is clicked.');
@@ -96,7 +96,7 @@ $(() => {
     }
   };
 
-  document.getElementById("newPoll").addEventListener("click", redirectFunction);
+  document.getElementById("newPoll").addEventListener("click", redirectButton);
 
 });
 
