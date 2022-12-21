@@ -15,7 +15,17 @@ const cookieParser = require('cookie-parser');
 
 // user responds to a poll
 router.post('/:id', (req, res) => {
-  console.log(req.cookies);
+  // const ip = req.cookies["ip"];
+  // For test purposes only, when using curl to POST
+  const generateIP = () => {
+    const buffer = Array(4).fill(0);
+    const ipRanges = buffer.map(element => Math.floor(Math.random() * 255) + 1);
+    const joined = ipRanges.join('.');
+    return joined;
+  };
+
+  const ip = generateIP();
+
   res.status(200).send('POST route /responses/:id ***Coming soon...***');
 });
 
