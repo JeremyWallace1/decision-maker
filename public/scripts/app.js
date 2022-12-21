@@ -3,7 +3,7 @@ $(() => {
   $('.generatedPage').empty()
   $('.generatedPage').append(
     `
-      <form action="/polls" method="POST" id="create-poll">
+    <form action="/polls" method="POST" id="create-poll">
       <div class="row mb-3">
         <div class="row mb-3">
           <label for="inputEmail" class="col-sm-2 col-form-label">Your email:</label>
@@ -82,5 +82,22 @@ $(() => {
     </form>
     `
   )
+
+  const redirectFunction = () => {
+    if ($('#inputEmail').val() || $('#inputQuestion').val() || $('#inputQuestion').val() || $('#answer1').val() || $('#answer2').val()) {
+      if (confirm('Are you sure?')) {
+        console.log('Ok is clicked.');
+        $(location).attr('href', '/');
+      } else {
+        console.log('Cancel is clicked.');
+      }
+    } else {
+      $(location).attr('href', '/');
+    }
+  };
+
+  document.getElementById("newPoll").addEventListener("click", redirectFunction);
+
 });
+
 
