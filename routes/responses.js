@@ -8,7 +8,6 @@
 const { response } = require('express');
 const express = require('express');
 const router  = express.Router();
-const { body, validationResult } = require('express-validator');
 const responseQueries = require('../db/queries/polls');
 
 const cookieParser = require('cookie-parser');
@@ -24,7 +23,11 @@ router.post('/:id', (req, res) => {
     return joined;
   };
 
-  const ip = generateIP();
+  const data = {};
+  data.poll_id = req.body.poll_id;
+  data.choices = req.body.choice_id;
+  data.ip = generateIP();
+  console.log(data);
 
   res.status(200).send('POST route /responses/:id ***Coming soon...***');
 });
