@@ -43,6 +43,27 @@ const createChoice = (data) => {
     })
 };
 
+const createResponse = (data) => {
+  const query = {
+    text: `
+    INSERT INTO responses (
+      poll_id,
+      choice_id,
+      respondent_ip,
+      rank_score
+    )
+    VALUES ($1, $2, $3, $4)
+    RETURNING *
+  `,
+    values: [data.poll_id, data.choice_id, data.respondent_ip, data.rank_score],
+  }
+  
+  return db.query(query)
+    .then(response => {
+      return response.rows[0];
+    })
+};
+
 const getPoll = (id) => {
   return db.query(`
   SELECT
