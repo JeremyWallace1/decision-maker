@@ -21,10 +21,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha512-bnIvzh6FU75ZKxp0GXLH9bewza/OIw6dLVh9ICg0gogclmYGguQJWl8U30WpbsGTqbIiAwxTsbe76DErLq5EDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- External JS -->
-    <script type="text/javascript" src="/scripts/app.js"></script>
-    <script type="text/javascript" src="/scripts/addRemoveOptions.js"></script>
-
   </head>
 
   <body>
@@ -38,18 +34,15 @@
     </nav>
     
     <main class="container-fluid container-md text-bg-dark p-5">
-      <!-- Place to post error messages via slide-down, default status is hidden -->
-      <div class="error" hidden>
-        <span><i class="fa-solid fa-triangle-exclamation"></i></span>
-        <span class="error-message"></span>
-        <span><i class="fa-solid fa-triangle-exclamation"></i></span>
-      </div>          
 
-      <!-- DYNAMICALLY GENERATED CONTENT -->
-      <div id="generatedPage">
-        
-      </div>
-      <!-- END OF DYNAMICALLY GENERATED CONTENT -->
-    </main>  
+    </main>
+    <!-- External JS -->
+    <script src="scripts/formPollNew.js"></script>
+
+    <script src="scripts/network.js"></script>
+    <script src="scripts/viewsManager.js"></script>
+    <script src="scripts/index.js"></script>
+    
+    
   </body>
 </html>
