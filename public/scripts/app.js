@@ -1,6 +1,6 @@
 // Client facing scripts here
 $(() => {
-  $('.generatedPage').empty()
+  $('.generatedPage').empty();
   $('.generatedPage').append(
     `
     <form action="/polls" method="POST" id="create-poll">
@@ -17,8 +17,9 @@ $(() => {
         <div class="row mb-3">
           <label for="inputQuestion" class="col-sm-2 col-form-label">Question:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputQuestion" name="question" required>
+            <input type="text" class="form-control" id="inputQuestion" name="question" minlength="5" required>
           </div>
+
         </div>
   
         <div class="row mb-3">
@@ -30,7 +31,6 @@ $(() => {
       </div>
       <div id="Answer1">
         <div class="row mb-3 answerOne"><h3>Answer #1:</h3>
-  
           <div class="row mb-3">
             <label for="answer1" class="col-sm-2 col-form-label">Answer:</label>
             <div class="col-sm-10">
@@ -51,7 +51,7 @@ $(() => {
           <div class="row mb-3">
             <label for="answer2" class="col-sm-2 col-form-label">Answer:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="answer2" name="answer2_title" required>
+              <input type="text" class="form-control" id="answer2" aria-describedby="answer2Feedback" name="answer2_title" required>
             </div>
           </div>
           <div class="row mb-3">
@@ -81,11 +81,11 @@ $(() => {
       <button type="submit" class="btn btn-primary btn-lg col-12 text-nowrap">Create Poll</button>      
     </form>
     `
-  )
+  );
 
   const redirectFunction = () => {
     if ($('#inputEmail').val() || $('#inputQuestion').val() || $('#inputQuestion').val() || $('#answer1').val() || $('#answer2').val()) {
-      if (confirm('Are you sure?')) {
+      if (confirm('This will start a new poll and remove the current form\'s data.\nAre you sure?')) {
         console.log('Ok is clicked.');
         $(location).attr('href', '/');
       } else {
