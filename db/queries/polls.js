@@ -123,6 +123,7 @@ const getPollResponses = (id) => {
 module.exports = {
   createPoll,
   createChoice,
+  createResponse,
   getPoll,
   getPollChoices,
   getRespondentChoices,
