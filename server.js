@@ -46,6 +46,7 @@ app.use('/responses', responsesRoutes);
 
 app.get('/', (req, res) => {
   res.render('index');
+  // createPoll();
 });
 
 app.listen(PORT, () => {
