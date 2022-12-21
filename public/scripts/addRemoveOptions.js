@@ -24,6 +24,16 @@ $(() => {
         </div>
         `
       );
+      if (num > 2) {
+        $('#removeAnswers').prop('disabled', false);
+      } else {
+        $('#removeAnswers').prop('disabled', true);
+      }
+      if (num === max) {
+        $('#addMoreAnswers').prop('disabled', true);
+      } else {
+        $('#addMoreAnswers').prop('disabled', false);
+      }
     } else {
       console.log(`too many answers, max number of answers is set to ${max}`);
     }
@@ -35,9 +45,19 @@ $(() => {
       $(`#Answer${num}`).remove();
       num--;
       console.log(`now that it is removed num is ${num}`);
+      if (num > 2) {
+        $('#removeAnswers').prop('disabled', false);
+      } else {
+        $('#removeAnswers').prop('disabled', true);
+      }
+      if (num === max) {
+        $('#addMoreAnswers').prop('disabled', true);
+      } else {
+        $('#addMoreAnswers').prop('disabled', false);
+      }
+
     } else {
       console.log(`unable to remove any more answers, 2 is the minimum`);
     }
-
   };
 });
