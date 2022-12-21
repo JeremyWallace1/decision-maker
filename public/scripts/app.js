@@ -1,7 +1,7 @@
 // Client facing scripts here
 $(() => {
-  $('.generatedPage').empty();
-  $('.generatedPage').append(
+  $('#generatedPage').empty();
+  $('#generatedPage').append(
     `
     <form action="/polls" method="POST" id="create-poll">
       <div class="row mb-3">
