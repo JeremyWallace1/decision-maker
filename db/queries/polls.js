@@ -107,15 +107,35 @@ const getRespondentChoices = (ip) => {
     });
 };
 
-// SELECT choice_id, SUM(rank_score) AS scoring FROM responses WHERE poll_id = $1 GROUP BY choice_id ORDER BY scoring DESC;
 const getPollResponses = (id) => {
   return db.query(`
   SELECT
     responses.id AS response_id,
     responses.poll_id,
+    responses.respondent_ip,
     choice_id
   FROM responses
   WHERE responses.poll_id = $1`, [id])
+    .then(response => {
+      return response.rows;
+    });
+};
+
+const sumResponseScores = (id) => {
+  const query = {
+    text: `
+    SELECT
+      choice_id,
+      SUM(rank_score) AS scoring
+    FROM responses
+    WHERE poll_id = $1
+    GROUP BY choice_id
+    ORDER BY scoring DESC
+  `,
+    values: [id],
+  }
+
+  return db.query(query)
     .then(response => {
       return response.rows;
     });
@@ -128,5 +148,6 @@ module.exports = {
   getPoll,
   getPollChoices,
   getRespondentChoices,
-  getPollResponses
+  getPollResponses,
+  sumResponseScores
 };
