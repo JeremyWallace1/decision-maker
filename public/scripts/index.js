@@ -1,6 +1,6 @@
 // Client facing scripts here
 $(() => {
-  
+
   views_manager.show('pollNew');
 
   const redirectButton = () => {
