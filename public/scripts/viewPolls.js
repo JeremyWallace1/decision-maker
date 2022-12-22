@@ -24,8 +24,7 @@ $(() => {
     if (showResults) {
       $polls.append( `
         <h1>${jsonData[0]['config'].creator_email}'s Polls:</h1>
-        <hr>
-        <hr>
+        <hr class="border border-primary border-2">
       `);
     }
     for (const pollData of jsonData) {
