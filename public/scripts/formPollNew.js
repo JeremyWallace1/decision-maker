@@ -90,7 +90,7 @@ $(() => {
     const data = $(this).serialize();
     submitPoll(data)
     .then(() => {
-      views_manager.show('pollResults');
+      views_manager.show('polls');
     })
     .catch((error) => {
       console.error(error);
