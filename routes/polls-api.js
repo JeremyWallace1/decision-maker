@@ -12,7 +12,7 @@ const pollQueries = require('../db/queries/polls');
 
 // creator views poll results & links for sharing
 router.get('/:id', (req, res) => {
-  const pollId = req.params.id;
+  const pollId = Number(req.params.id);
   const pollData = {};
   const outputData = [];
   pollQueries.getPoll(pollId)
