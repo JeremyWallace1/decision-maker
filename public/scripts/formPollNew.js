@@ -67,10 +67,10 @@ $(() => {
     <div class="row mb-3">
       <div class="col-sm-2"></div>
       <div class="col-sm-7">
-        <button type="button" class="btn btn-primary" id="addMoreAnswers"  onclick="addOption();">add options</button>
+        <button type="button" class="btn btn-primary text-nowrap" id="addMoreAnswers"  onclick="addOption();">add options</button>
       </div>
       <div class="col-sm-3">
-        <button type="button" class="btn btn-primary" id="removeAnswers"  disabled onclick="removeOption();">remove options</button>
+        <button type="button" class="btn btn-primary text-nowrap" id="removeAnswers"  disabled onclick="removeOption();">remove options</button>
       </div>
 
     </div>

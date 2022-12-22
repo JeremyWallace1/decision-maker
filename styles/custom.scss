@@ -50,4 +50,10 @@ body {
     background-color: $dkblue !important;
     color: $ltyellowgr !important;
   }
+  button#copyShareUrl.btn.btn-outline-none {
+    padding: 0.2em !important;
+  }
+  button#copyResultsUrl.btn.btn-outline-none {
+    padding: 0.2em !important;
+  }
 };

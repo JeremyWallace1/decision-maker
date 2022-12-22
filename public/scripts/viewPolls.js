@@ -21,10 +21,10 @@ $(() => {
   // add all the polls by this creator
   function addPolls(jsonData, showResults = false) {
     clearPolls();
+    console.log('jsonData[0]',jsonData[0]);
     if (showResults) {
       $polls.append( `
-        <h1>${jsonData[0]['config'].creator_email}'s Polls:</h1>
-        <hr class="border border-primary border-2">
+        <h1 class="bg-dark text-center">${jsonData[0]['config'].creator_email}'s Polls</h1>
       `);
     }
     for (const pollData of jsonData) {
