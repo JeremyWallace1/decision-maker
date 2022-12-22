@@ -18,12 +18,13 @@ body {
     $dkblue 100%
   );
 
-  .form-control:focus {  //not working, but is compiling
+  .form-control:focus {  
     border-color: $dkblue;
     box-shadow: 0 0 0 0.4em $ltblue;
   }; 
   
-  .btn-primary {  //not working, not compiling
+  // NEED TO INCREASE SPECIFICITY AND REMOVE !important in as many places as possible.
+  .btn-primary {  
     background-color: $ltblue !important;
     border-color: $uberdkblue !important;
     color: $ltyellowgr !important;

@@ -10,7 +10,6 @@ const express = require('express');
 const router  = express.Router();
 const { body, validationResult } = require('express-validator');
 const pollQueries = require('../db/queries/polls');
-// const { createPoll } = require('../public/scripts/app.js');
 
 // creator landing page to create new poll
 router.get('/', (req, res) => {
