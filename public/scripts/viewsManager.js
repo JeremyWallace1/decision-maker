@@ -6,13 +6,14 @@ $(() => {
 
   window.views_manager.show = function(item) {
     $formPollNew.detach();
+    $polls.detach();
 
     switch (item) {
       case 'pollNew':
         $formPollNew.appendTo($main);
         break;
-      case 'pollResults':
-        $pollResults.appendTo($main);
+      case 'polls':
+        $polls.appendTo($main);
         break
       case 'error': {
         const $error = $(`<p>${arguments[1]}</p>`);
