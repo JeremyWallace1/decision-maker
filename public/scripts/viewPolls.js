@@ -1,9 +1,10 @@
 $(() => {
-
+  // this is the creator view after creating a new poll 
+  // and same view for returning through admin link
   const $polls = $(`
   <section class="polls" id="polls">
-      <p>Loading...</p>
-    </section>
+    <p>Loading...</p>
+  </section>
   `);
   window.$polls = $polls;
 
@@ -17,8 +18,16 @@ $(() => {
   }
   window.polls.clearPolls = clearPolls;
 
+  // add all the polls by this creator
   function addPolls(jsonData, showResults = false) {
     clearPolls();
+    if (showResults) {
+      $polls.append( `
+        <h1>${jsonData[0]['config'].creator_email}'s Polls:</h1>
+        <hr>
+        <hr>
+      `);
+    }
     for (const pollData of jsonData) {
       const createdPoll = poll.createPoll(pollData, showResults);
       addPoll(createdPoll);
