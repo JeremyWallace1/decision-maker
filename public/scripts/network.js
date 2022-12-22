@@ -1,7 +1,7 @@
-const getPoll = () => {
+const getPoll = (id) => {
   return $.ajax({
     method: "GET",
-    url: "/api/polls/1"
+    url: "/api/polls/" + id
   });
 }
 
