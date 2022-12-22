@@ -1,7 +1,6 @@
 -- poll_choices table seeds here
 INSERT INTO poll_choices (poll_id, title, description) VALUES (1, 'Portable campfire', 'From the makers of wooden logs, as seen on TikTok!');
 INSERT INTO poll_choices (poll_id, title, description) VALUES (1, 'Belly button lint remover', 'Belly button fluff is one of life''s many mysteries');
-INSERT INTO poll_choices (poll_id, title, description) VALUES (1, 'Finger weightlifting kit', 'Everyone skips finger day, but no more!');
 INSERT INTO poll_choices (poll_id, title, description) VALUES (1, 'Donald Trump spray tan kit', 'Give the gift of a sunk-kissed cheeto glow.');
 INSERT INTO poll_choices (poll_id, title, description) VALUES (1, 'Crafting with cat hair book', 'Filled with projects to make using discarded cat hair including kitten mittens, coin purrrses, and even feline finger puppets.');
 INSERT INTO poll_choices (poll_id, title, description) VALUES (1, 'Ice cream pint combination lock', 'A combination lock that fits most ice cream pint size containers.');
