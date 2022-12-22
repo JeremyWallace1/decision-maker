@@ -14,6 +14,7 @@ $(() => {
         break;
       case 'polls':
         $polls.appendTo($main);
+        console.log(`case ${item} activated...`)
         break
       case 'error': {
         const $error = $(`<p>${arguments[1]}</p>`);

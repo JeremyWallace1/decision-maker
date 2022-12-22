@@ -67,4 +67,11 @@ $(() => {
     }
   };
 
+  copyUrl = (url) => {
+    navigator.clipboard.writeText(url);
+    console.log(url);
+    // Alert the copied text
+    alert(`Copied the text '${url}' to the clipboard.`);
+  };
+
 });
