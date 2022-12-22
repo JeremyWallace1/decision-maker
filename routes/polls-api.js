@@ -13,12 +13,14 @@ const pollQueries = require('../db/queries/polls');
 // creator views poll results & links for sharing
 router.get('/:id', (req, res) => {
   const pollId = req.params.id;
-  const data = {};
+  const pollData = {};
+  const outputData = [];
   pollQueries.getPoll(pollId)
-    .then(poll => data.config = poll)
+    .then(poll => pollData.config = poll)
     .then(poll => pollQueries.getPollChoices(pollId))
-    .then(choices => data.choices = choices)
-    .then(output => res.json(data))
+    .then(choices => pollData.choices = choices)
+    .then(output => outputData.push(pollData))
+    .then(output => res.json(outputData))
     .catch(err => {
       res.status(500)
         .json({ error: err.message });
