@@ -26,19 +26,19 @@ INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (1,
 INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  8,  '251.241.210.229', 4);
 INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  9,  '251.241.210.229', 3);
 INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  7,  '251.241.210.229', 2);
-INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  10, '251.241.210.229', 1);
+INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  6, '251.241.210.229', 1);
 
 INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  7,  '14.216.239.68', 4);
 INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  8,  '14.216.239.68', 3);
-INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  10, '14.216.239.68', 2);
+INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  6, '14.216.239.68', 2);
 INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  9,  '14.216.239.68', 1);
 
-INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  10, '159.208.42.238', 4);
+INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  6, '159.208.42.238', 4);
 INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  7,  '159.208.42.238', 3);
 INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  9,  '159.208.42.238', 2);
 INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  8,  '159.208.42.238', 1);
 
 INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  9,  '37.201.142.255', 4);
-INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  10, '37.201.142.255', 3);
+INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  6, '37.201.142.255', 3);
 INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  8,  '37.201.142.255', 2);
 INSERT INTO responses (poll_id, choice_id, respondent_ip, rank_score) VALUES (2,  7,  '37.201.142.255', 1);
