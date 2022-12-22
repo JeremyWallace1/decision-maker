@@ -84,9 +84,13 @@ router.post('/',
 
     )
     .then(data => {
-      const pollId = data[0].poll_id;
-      return res.redirect(`/polls/${pollId}`);
+      console.log(data);
+      res.send(data);
     })
+    // .then(data => {
+    //   const pollId = data[0].poll_id;
+    //   return res.redirect(`/polls/${pollId}`);
+    // })
     .catch(error => {
       console.log(`error output: `, error.message)
       return res.status(500).send('500 - Internal Server Error');
