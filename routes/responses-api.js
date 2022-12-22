@@ -12,11 +12,16 @@ const responseQueries = require('../db/queries/polls');
 
 // user views poll and values and can modify selections before posting
 router.get('/:id', (req, res) => {
-  const pollId = req.params.id;
+  const pollId = Number(req.params.id);
   const responsesData = {};
   const outputData = [];
+  responsesData.pollId = pollId;
   responseQueries.getPollResponses(pollId)
-    .then(responses => res.json(responses))
+    .then(pollResponses => responsesData.responses = pollResponses)
+    .then(pollResponses => responseQueries.sumResponseScores(pollId))
+    .then(scores => responsesData.scores = scores)
+    .then(output => outputData.push(responsesData))
+    .then(output => res.json(outputData))
     .catch(err => {
       res.status(500)
         .json({ error: err.message });
