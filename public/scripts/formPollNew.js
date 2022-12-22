@@ -17,7 +17,6 @@ $(() => {
         <div class="col-sm-10">
           <input type="text" class="form-control" id="inputQuestion" name="question" minlength="5" required>
         </div>
-
       </div>
 
       <div class="row mb-3">
@@ -89,7 +88,12 @@ $(() => {
 
     const data = $(this).serialize();
     submitPoll(data)
-    .then(() => {
+    .then(data => data[0].poll_id)
+    .then(pollId => getPoll(pollId))
+    .then(data => {
+      const pollData = [];
+      pollData.push(data[0]);
+      polls.addPolls(pollData, true);
       views_manager.show('polls');
     })
     .catch((error) => {
