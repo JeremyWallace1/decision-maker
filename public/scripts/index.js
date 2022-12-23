@@ -77,19 +77,23 @@ $(() => {
       num++;
       $('#moreAnswers').append(
         `
-        <div id="Answer${num}">
-          <div class="row mb-3"><h3>Answer #${num}:</h3>
-            <div class="row mb-3">
-              <label for="answer${num}" class="col-sm-2 col-form-label">Answer:</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="answer${num}" name="answer${num}_title" required>
-              </div>
+        <div class="row mb-3">
+          <h5>Answer #${num}:</h5>
+          <div class="row mb-3">
+            <label for="answer${num}" class="col-md-2 col-form-label">
+              Answer:
+            </label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="answer${num}" 
+              aria-describedby="answer${num}Feedback" name="answer${num}_title" required>
             </div>
-            <div class="row mb-3">
-              <label for="answer${num}_description" class="col-sm-2 col-form-label">Description:</label>
-              <div class="col-sm-10">
-                <textarea rows="3" class="form-control" id="answer${num}_description" name="answer${num}_description" placeholder="optional"></textarea>
-              </div>
+          </div>
+          <div class="row mb-3">
+            <label for="answer${num}_description" class="col-md-2 col-form-label">
+              Description:
+            </label>
+            <div class="col-md-10">
+              <textarea rows="3" class="form-control" id="answer${num}_description" name="answer${num}_description" placeholder="optional"></textarea>
             </div>
           </div>
         </div>
