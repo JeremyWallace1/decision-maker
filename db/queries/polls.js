@@ -64,7 +64,7 @@ const createResponse = (data) => {
     })
 };
 
-const getPoll = (id) => {
+const getPollById = (id) => {
   return db.query(`
   SELECT
     id,
@@ -75,6 +75,38 @@ const getPoll = (id) => {
     sharing_url
   FROM polls
   WHERE polls.id = $1`, [id])
+    .then(response => {
+      return response.rows[0];
+    });
+};
+
+const getPollByResultsUri = (uri) => {
+  return db.query(`
+  SELECT
+    id,
+    creator_email,
+    question,
+    polls.description,
+    results_url,
+    sharing_url
+  FROM polls
+  WHERE results_url = $1`, [uri])
+    .then(response => {
+      return response.rows[0];
+    });
+};
+
+const getPollBySharingUri = (uri) => {
+  return db.query(`
+  SELECT
+    id,
+    creator_email,
+    question,
+    polls.description,
+    results_url,
+    sharing_url
+  FROM polls
+  WHERE sharing_url = $1`, [uri])
     .then(response => {
       return response.rows[0];
     });
@@ -145,7 +177,9 @@ module.exports = {
   createPoll,
   createChoice,
   createResponse,
-  getPoll,
+  getPollById,
+  getPollByResultsUri,
+  getPollBySharingUri,
   getPollChoices,
   getRespondentChoices,
   getPollResponses,

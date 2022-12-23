@@ -1,15 +1,54 @@
 // Client facing scripts here
 $(() => {
 
-  views_manager.show('pollNew');
+  const queryString = location.search;
+  const defaultView = 'pollNew';
+  const output = [];
+  let view = null;
+  let uri = null;
+  if (queryString) {
+    uri = queryString.slice(1).split('&')[0];
+  }
+  
+  getPollbyUri(uri)
+    .then(data => {
+      if (!data[0]) {
+        return Promise.reject('end');
+      }
+      
+      output.push(data[0]);
+    })
+    .then(() => {
+      if (output[0].uriType === 'Share') {
+        view = 'pollRespond';
+        return Promise.reject('end');
+      }
+    })
+    .then(() => getResponsesbyUri(uri))
+    .then(data => {
+      output[0].pollId = output[0].config.id;
+      output[0].responses = data[0].responses;
+      output[0].scores = data[0].scores;
+      polls.addPolls(output, true);
+      view = 'polls';
+      return Promise.reject('end');
+    })
+    .catch(err => {
+      if (err.message) {
+      };
+    })
+    .then(() => {
+      if (!view) {
+        view = defaultView; 
+      }
+    
+      views_manager.show(view);
+    })
 
   const redirectButton = () => {
     if ($('#inputEmail').val() || $('#inputQuestion').val() || $('#inputQuestion').val() || $('#answer1').val() || $('#answer2').val()) {
       if (confirm('This will start a new poll and remove the current form\'s data.\nAre you sure?')) {
-        console.log('Ok is clicked.');
         $(location).attr('href', '/');
-      } else {
-        console.log('Cancel is clicked.');
       }
     } else {
       $(location).attr('href', '/');
@@ -69,7 +108,6 @@ $(() => {
 
   copyUrl = (url) => {
     navigator.clipboard.writeText(url);
-    console.log(url);
     // Alert the copied text
     alert(`Copied the text '${url}' to the clipboard.`);
   };

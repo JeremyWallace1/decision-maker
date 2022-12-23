@@ -5,6 +5,20 @@ const getPoll = (id) => {
   });
 }
 
+const getPollbyUri = (uri) => {
+  return $.ajax({
+    method: "GET",
+    url: "/api/polls/" + uri
+  });
+}
+
+const getResponsesbyUri = (uri) => {
+  return $.ajax({
+    method: "GET",
+    url: "/api/responses/" + uri
+  });
+}
+
 const submitPoll = (data) => {
   return $.ajax({
     method: "POST",

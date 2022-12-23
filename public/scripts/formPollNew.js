@@ -91,7 +91,7 @@ $(() => {
     const output = [];
     submitPoll(data)
     .then(data => pollId = data[0].poll_id)
-    .then(data => getPoll(pollId))
+    .then(data => getPollById(pollId))
     .then(data => output.push(data[0]))
     .then(data => getResponses(pollId))
     .then(data => {
