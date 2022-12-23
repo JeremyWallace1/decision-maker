@@ -26,6 +26,14 @@ app.use(
 );
 app.use(express.static('public'));
 
+// Custom middleware to rewrite a uri request for api routing
+app.get('/:uri', (req, res, next) => {
+  const uri = req.params.uri;
+  const path = '/api/polls/' + uri;
+  req.url = path;
+  next();
+});
+
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const pollsApiRoutes = require('./routes/polls-api');
