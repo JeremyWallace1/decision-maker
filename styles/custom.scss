@@ -34,7 +34,7 @@ body {
     flex-wrap: wrap;
     align-items: center;
     align-content: center;
-    justify-content: space-between;
+    // justify-content: space-between;
   }
 
   .navigation {
@@ -49,32 +49,30 @@ body {
   }
 
   form {
-    width: 450px;
+    width: 430px;
     display:flex;
     flex-direction: column;
     justify-content: center;
-    padding-top: 1em;
+    padding-top: 2em;
+    padding-left: 1em;
+    padding-right: 1em;
   }
+
+  .polls {
+    width: 430px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 2em;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+
 
   .form-control:focus {  
     border-color: $dkblue;
     box-shadow: 0 0 0 0.4em $ltblue;
   }; 
-  
-
-  hr {
-    color: $ltblue;
-    opacity: 100%;
-  }
-
-  .major {
-    opacity: 50%;
-  }
-
-  .minor {
-    opacity: 25%
-  }
-
 
   .bg-dark {
     background-color: $uberdkblue;
@@ -117,16 +115,43 @@ body {
   .button:hover {
     background-color: $yellowgr;
     color: $dkblue;
+    border-color: $dkblue;
+    box-shadow: 0 0 0 0.4em $ltblue;
   }
 
   .button:disabled {
     background-color: $dkblue;
     color: $ltblue;
     cursor: auto;
+    box-shadow: none;
   }
 
   .button-large {
     font-size: 1.5em;
+  }
+
+  .titling {
+    // width: 480px;
+    background-color: $uberdkblue;
+    padding: 0.5em 1em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+  }
+
+  hr {
+    color: $ltblue;
+    opacity: 100%;
+  }
+
+  hr.major {
+    opacity: 75%;
+  }
+
+  hr.minor {
+    opacity: 50%
   }
 
   @media only screen and (min-width: 600px){
@@ -139,7 +164,15 @@ body {
     }
   
     form {
-      width: 550px;
+      width: 530px;
+      padding-left: 2em;
+      padding-right: 1em;
+    }
+    
+    .polls {
+      width: 530px;
+      padding-left: 1em;
+      padding-right: 2em;
     }
   }
     
@@ -153,7 +186,15 @@ body {
     }
   
     form {
-      width: 728px;
+      width: 698px;
+      padding-left: 2em;
+      padding-right: 1em;
+    }
+    
+    .polls {
+      width: 698px;
+      padding-left: 1em;
+      padding-right: 2em;
     }
   }
   
@@ -167,7 +208,15 @@ body {
     }
   
     form {
-      width: 942px;
+      width: 902px;
+      padding-left: 2em;
+      padding-right: 1em;
+    }
+
+    .polls {
+      width: 902px;
+      padding-left: 2em;
+      padding-right: 1em;
     }
   }
 };
