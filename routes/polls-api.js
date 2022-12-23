@@ -16,16 +16,17 @@ router.get('/:uri', (req, res) => {
   const pollData = {};
   const outputData = [];
   const promises = [];
-  console.log('polls-api initiated for uri: ', uri)
   promises.push(pollQueries.getPollByResultsUri(uri));
   promises.push(pollQueries.getPollBySharingUri(uri));
   Promise.all(promises)
     .then(all => {
       if (all[0]) {
         pollData.config = all[0];
+        pollData.uriType = 'Result';
         return pollData.config.id;
       } else if (all[1]) {
         pollData.config = all[1];
+        pollData.uriType = 'Share';
         return pollData.config.id;
       }
       throw new Error('Poll not found!');
