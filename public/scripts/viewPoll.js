@@ -40,9 +40,14 @@ $(() => {
       // poll.scores = [{choice_id: choiceId, scoring: `${num}`}];
       // console.log('poll.scores:', JSON.stringify(poll.scores), 'poll.scores.length', poll.scores.length);
       let score = 0;
+      let target;
       if (poll.scores.length > 0) {
-        const target = poll.scores.filter(element => element.choice_id = choiceId)[0];
-        // console.log(`target is ${target}, target.scoring = ${target.scoring}`);
+        for (let i in poll.scores) {
+          if (poll.scores[i].choice_id === choiceId) {
+            target = {choice_id: choiceId, scoring: poll.scores[i].scoring}
+          } 
+        }
+        // console.log(`target is ${JSON.stringify(target)}, target.scoring = ${target.scoring}`);
         score = target.scoring;
         // console.log(`score is ${score}`);
       } 
