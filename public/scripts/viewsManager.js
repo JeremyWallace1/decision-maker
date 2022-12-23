@@ -4,8 +4,9 @@ $(() => {
 
   window.views_manager = {};
 
-  window.views_manager.show = function(item) {
+  window.views_manager.show = function(item, ...params) {
     $formPollNew.detach();
+    $formPollRespond.detach();
     $polls.detach();
 
     switch (item) {
@@ -14,6 +15,10 @@ $(() => {
         break;
       case 'polls':
         $polls.appendTo($main);
+        console.log(`case ${item} activated...`)
+        break
+      case 'pollRespond':
+        $formPollRespond.appendTo($main);
         console.log(`case ${item} activated...`)
         break
       case 'error': {

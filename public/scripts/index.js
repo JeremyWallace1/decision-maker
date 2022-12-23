@@ -1,7 +1,36 @@
 // Client facing scripts here
 $(() => {
 
-  views_manager.show('pollNew');
+  const queryString = location.search;
+  let uri = null;
+  if (queryString) {
+    uri = queryString.slice(1).split('&')[0];
+  }
+  
+  if (uri) {
+    getPollbyUri(uri)
+      .then(data => {
+        if (!data[0]) {
+          return views_manager.show('pollNew');
+        }
+        
+        return new Array(data[0]);
+      })
+      .then(data => {
+        if (data[0].uriType === 'Share') {
+          return views_manager.show('pollRespond');
+        }
+
+        polls.addPolls(data, true);
+        return views_manager.show('polls');
+      })
+      .catch(err => {
+        console.log(err.message);
+        return views_manager.show('pollNew');
+      })
+  } else {
+    views_manager.show('pollNew');
+  }
 
   const redirectButton = () => {
     if ($('#inputEmail').val() || $('#inputQuestion').val() || $('#inputQuestion').val() || $('#answer1').val() || $('#answer2').val()) {
