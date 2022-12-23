@@ -102,15 +102,15 @@ $(() => {
     views_manager.show('none');
 
     const data = $(this).serialize();
-    let pollId = null;
+    let uri = null;
     const output = [];
     submitPoll(data)
-    .then(data => pollId = data[0].poll_id)
-    .then(data => getPollById(pollId))
+    .then(data => uri = data[0].results_url)
+    .then(data => getPollByUri(uri))
     .then(data => output.push(data[0]))
-    .then(data => getResponses(pollId))
+    .then(data => getResponsesByUri(uri))
     .then(data => {
-      output[0].pollId = pollId;
+      output[0].pollId = output[0].config.id;
       output[0].responses = data[0].responses;
       output[0].scores = data[0].scores;
     })
