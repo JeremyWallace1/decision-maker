@@ -30,9 +30,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  // align-content: center;
   align-items: center;
-  // align-self: stretch;
   flex-grow: 1;
 
   main {
@@ -43,7 +41,6 @@ body {
     flex-wrap: wrap;
     align-items: center;
     align-content: flex-start;
-    // height: 100vh;
   }
 
   .navigation {
@@ -97,9 +94,6 @@ body {
     justify-content: space-between;
   }
   
-  // section {
-  //   height: 100vh;
-  // }
   .button {
     background-color: $ltblue;
     border-color: $dkblue;
