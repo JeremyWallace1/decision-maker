@@ -15,8 +15,6 @@ router.get('/:uri', (req, res) => {
   const uri = req.params.uri;
   const responsesData = {};
   const outputData = [];
-  let pollId = null;
-  console.log('start')
   responseQueries.getPollByResultsUri(uri)
     .then(data => responsesData.poll_id = data.id)
     .then(data => responseQueries.getPollResponses(responsesData.poll_id))
