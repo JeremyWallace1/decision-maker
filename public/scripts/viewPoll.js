@@ -10,18 +10,27 @@ $(() => {
             <h3 id="email${poll.config.id}">${poll.config.creator_email} has asked a question...</h3>
           </div>
 
-          <hr class="border border-primary border-1">
+          <hr>
   
-          <div class="row">
-            <h2 class="col-sm-3" id="labelQuestion${poll.config.id}">Question:</h2>
-            <h2 class="col-sm-9" id="question${poll.config.id}">${poll.config.question}</h2>
-          </div>
-        
           <div class="row mb-3">
-            <p class="col-sm-12 " id="description${poll.config.id}">${poll.config.description}</p>
+            <div class="row">
+              <h4 class="col-sm-2" id="labelQuestion${poll.config.id}">
+                Question:
+              </h4>
+              <h4 class="col-sm-10" id="question${poll.config.id}">
+                ${poll.config.question}
+              </h4>
+            </div>
           </div>
 
-          <hr class="border border-primary border-1 opacity-50">
+          <div class="row">
+            <h5 class="col-sm-2"></h5>
+            <h6 class="col-sm-10" id="description${poll.config.id}">
+              ${poll.config.description}
+            </h6>
+          </div>
+
+          <hr class="major">
           
         </header>`
     
@@ -42,21 +51,22 @@ $(() => {
       buffer += `
       
           <div class="row">
-            <h4 class="col-sm-3" id="labelAnswer${poll.choices[choice].id}">Answer #${num}:</h4>
-            <h4 class="col-sm-9" id="answer${poll.choices[choice].id}">${poll.choices[choice].title}</h4>
+            <h5 class="col-sm-2" id="labelAnswer${poll.choices[choice].id}">Answer #${num}:</h5>
+            <h5 class="col-sm-10" id="answer${poll.choices[choice].id}">${poll.choices[choice].title}</h5>
           </div>
       
           <div class="row">
-            <p class="col-sm-12" id="description${poll.choices[choice].id}">${poll.choices[choice].description}</p>
+            <h5 class="col-sm-2"></h5>
+            <p class="col-sm-10" id="description${poll.choices[choice].id}">${poll.choices[choice].description}</p>
           </div>
 
-          <div class="row mb-3">
+          <div class="row mb-12">
             ${showResults ? 
               `<h6>Current score: ${score}</h6>` 
               : ``}
           </div>
 
-          <hr class="border border-primary border-1 opacity-25">
+          <hr class="minor">
 
       `
     }
@@ -74,7 +84,8 @@ $(() => {
           View results: <a href='${poll.config.results_url}' class="shareUrl" title='view poll results'>${poll.config.results_url}</a>
           <button type="button" class="btn btn-outline-none" id="copyResultsUrl" onclick="copyUrl('${resultsurl}')">📋</button>
           </h6>
-          <hr class="border border-primary border-1">
+          <hr>
+          <hr>
           `
           : `` }
         </footer>

@@ -5,7 +5,8 @@ $dkblue: rgb(0,87,119);
 $uberdkblue: rgb(0, 44, 60);
 $ltblue: rgb(0,139,188);
 $yellowgr: rgb(187,188,0);
-$ltyellowgr: rgb(254, 255, 240);
+$ltyellowgr: rgb(254, 255, 230);
+$uberltyellowgr: rgb(254, 255, 245);
 
 body {
   background: linear-gradient(
@@ -18,42 +19,204 @@ body {
     $dkblue 100%
   );
 
+  color: $ltyellowgr;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+
+  main {
+    width: 480px;
+    background-color: $dkblue;
+    padding: 0.5em 1em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    // justify-content: space-between;
+  }
+
+  .navigation {
+    width: 480px;
+    background-color: $uberdkblue;
+    padding: 0.5em 1em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+  }
+
+  form {
+    width: 430px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 2em;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+
+  .polls {
+    width: 430px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 2em;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+
+
   .form-control:focus {  
     border-color: $dkblue;
     box-shadow: 0 0 0 0.4em $ltblue;
   }; 
-  
-  // NEED TO INCREASE SPECIFICITY AND REMOVE !important in as many places as possible.
-  .btn-primary {  
-    background-color: $ltblue !important;
-    border-color: $uberdkblue !important;
-    color: $ltyellowgr !important;
-  };
-  .btn-primary:hover {
-    background-color: $yellowgr !important;
-    color: $dkblue;
-  }
-  .btn-primary:disabled {
-    background-color: $dkblue !important;
-  }
-
-  .border-primary {
-    color: $ltblue !important;
-    opacity: 50%;
-  }
 
   .bg-dark {
-    background-color: $uberdkblue !important;
+    background-color: $uberdkblue;
   }
   
   .text-bg-dark {
-    background-color: $dkblue !important;
-    color: $ltyellowgr !important;
+    background-color: $dkblue;
+    color: $ltyellowgr;
   }
-  button#copyShareUrl.btn.btn-outline-none {
-    padding: 0.2em !important;
+
+  .buttons {
+    display: flex;
+    justify-content: space-around;
   }
-  button#copyResultsUrl.btn.btn-outline-none {
-    padding: 0.2em !important;
+  
+  .button {
+    background-color: $ltblue;
+    border-color: $dkblue;
+    color: $ltyellowgr;
+    padding: 0.4em 0.8em;
+    min-width: 148px;
+    font-size: 1em;
+    line-height: 1.5;
+    border-radius: 0.5em;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    text-transform: none;
+    overflow: visible;
+    margin: 0;
+    font-family: inherit;
+    cursor: pointer;
+    border-style: groove;
+  }
+
+  .button:hover {
+    background-color: $yellowgr;
+    color: $dkblue;
+    border-color: $dkblue;
+    box-shadow: 0 0 0 0.4em $ltblue;
+  }
+
+  .button:disabled {
+    background-color: $dkblue;
+    color: $ltblue;
+    cursor: auto;
+    box-shadow: none;
+  }
+
+  .button-large {
+    font-size: 1.5em;
+  }
+
+  .titling {
+    // width: 480px;
+    background-color: $uberdkblue;
+    padding: 0.5em 1em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+  }
+
+  hr {
+    color: $ltblue;
+    opacity: 100%;
+  }
+
+  hr.major {
+    opacity: 75%;
+  }
+
+  hr.minor {
+    opacity: 50%
+  }
+
+  @media only screen and (min-width: 600px){
+    main {
+      width: 580px;
+    }
+  
+    .navigation {
+      width: 580px;
+    }
+  
+    form {
+      width: 530px;
+      padding-left: 2em;
+      padding-right: 1em;
+    }
+    
+    .polls {
+      width: 530px;
+      padding-left: 1em;
+      padding-right: 2em;
+    }
+  }
+    
+  @media only screen and (min-width: 768px){
+    main {
+      width: 748px;
+    }
+  
+    .navigation {
+      width: 748px;
+    }
+  
+    form {
+      width: 698px;
+      padding-left: 2em;
+      padding-right: 1em;
+    }
+    
+    .polls {
+      width: 698px;
+      padding-left: 1em;
+      padding-right: 2em;
+    }
+  }
+  
+  @media (min-width: 992px){
+    main {
+      width: 972px;
+    }
+  
+    .navigation {
+      width: 972px;
+    }
+  
+    form {
+      width: 902px;
+      padding-left: 2em;
+      padding-right: 1em;
+    }
+
+    .polls {
+      width: 902px;
+      padding-left: 2em;
+      padding-right: 1em;
+    }
   }
 };
