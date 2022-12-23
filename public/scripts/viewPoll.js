@@ -2,7 +2,7 @@ $(() => {
   window.poll = {};
   // TO DO: toggle whether email should show as part of the poll info
   const createPoll = (poll, showResults) => { 
-    console.log(`poll info: ${poll.config}`);
+    // console.log(`poll info: ${JSON.stringify(poll.config)}`);
     let buffer = `
       <article class="poll" id="poll_${poll.config.id}">
         <header class="poll_heading">
@@ -29,8 +29,18 @@ $(() => {
     let num = 0;
     for (const choice in poll.choices) {
       num++;
+      const choiceId = poll.choices[choice].id;
+      poll.scores = [{choice_id: choiceId, scoring: `${num}`}];
+      // console.log('poll.scores:', JSON.stringify(poll.scores), 'poll.scores.length', poll.scores.length);
+      let score = 0;
+      if (poll.scores.length > 0) {
+        const target = poll.scores.filter(element => element.choice_id = choiceId)[0];
+        // console.log(`target is ${target}, target.scoring = ${target.scoring}`);
+        score = target.scoring;
+        // console.log(`score is ${score}`);
+      } 
       buffer += `
-
+      
           <div class="row">
             <h4 class="col-sm-3" id="labelAnswer${poll.choices[choice].id}">Answer #${num}:</h4>
             <h4 class="col-sm-9" id="answer${poll.choices[choice].id}">${poll.choices[choice].title}</h4>
@@ -42,7 +52,7 @@ $(() => {
 
           <div class="row mb-3">
             ${showResults ? 
-              `<h6>Current score: TBD</h6>` 
+              `<h6>Current score: ${score}</h6>` 
               : ``}
           </div>
 

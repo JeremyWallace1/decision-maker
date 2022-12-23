@@ -20,11 +20,12 @@ Delete    --    --
 * change to put/patch/delete
 * edit with no responses so far...
 * view other polls created by that email address (on browse GET /polls)
-* picture polls!
+* picture polls! (add picture to description or clickable url)
 * poll options change to bar w/ weighting
-* copy button
+* DONE: copy button (copies to clipboard)
 * email link(s) button
 * you have already replied to this on <date>
 * responsive to screen sizes
 * works on mobile... (jquery UI draggable)
-* pretty logo
+* DONE: pretty logo (not sure how pretty it is lol)
+* data security: use object getters and private keys to hide properties that we don't want users to see if they console.log(window) in the browser console (or we could encrypt the data that is meant to be private)
