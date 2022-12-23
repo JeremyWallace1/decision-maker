@@ -5,14 +5,14 @@ const getPoll = (id) => {
   });
 }
 
-const getPollbyUri = (uri) => {
+const getPollByUri = (uri) => {
   return $.ajax({
     method: "GET",
     url: "/api/polls/" + uri
   });
 }
 
-const getResponsesbyUri = (uri) => {
+const getResponsesByUri = (uri) => {
   return $.ajax({
     method: "GET",
     url: "/api/responses/" + uri

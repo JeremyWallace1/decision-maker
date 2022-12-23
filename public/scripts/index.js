@@ -10,7 +10,7 @@ $(() => {
     uri = queryString.slice(1).split('&')[0];
   }
   
-  getPollbyUri(uri)
+  getPollByUri(uri)
     .then(data => {
       if (!data[0]) {
         return Promise.reject('end');
@@ -24,7 +24,7 @@ $(() => {
         return Promise.reject('end');
       }
     })
-    .then(() => getResponsesbyUri(uri))
+    .then(() => getResponsesByUri(uri))
     .then(data => {
       output[0].pollId = output[0].config.id;
       output[0].responses = data[0].responses;
