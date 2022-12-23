@@ -6,6 +6,9 @@ const getPoll = (id) => {
 }
 
 const getPollByUri = (uri) => {
+  if (!uri) {
+    return Promise.reject('no results');
+  }
   return $.ajax({
     method: "GET",
     url: "/api/polls/" + uri
@@ -13,6 +16,9 @@ const getPollByUri = (uri) => {
 }
 
 const getResponsesByUri = (uri) => {
+  if (!uri) {
+    return Promise.reject('no results');
+  }
   return $.ajax({
     method: "GET",
     url: "/api/responses/" + uri
