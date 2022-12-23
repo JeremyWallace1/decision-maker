@@ -12,3 +12,10 @@ const submitPoll = (data) => {
     data,
   });
 }
+
+const getResponses = (id) => {
+  return $.ajax({
+    method: "GET",
+    url: "/api/responses/" + id
+  });
+}
