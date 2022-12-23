@@ -6,28 +6,26 @@ $(() => {
     let buffer = `
       <article class="poll" id="poll_${poll.config.id}">
         <header class="poll_heading">
+          <div class="row mb-2"></div>
           <div class="row mb-3">
-            <h3 id="email${poll.config.id}">${poll.config.creator_email} has asked a question...</h3>
+            <h5 id="email${poll.config.id}">${poll.config.creator_email} has asked a question...</h5>
           </div>
 
           <hr>
   
-          <div class="row mb-3">
-            <div class="row">
-              <h4 class="col-sm-2" id="labelQuestion${poll.config.id}">
-                Question:
-              </h4>
-              <h4 class="col-sm-10" id="question${poll.config.id}">
-                ${poll.config.question}
-              </h4>
-            </div>
+          <div class="row">
+            <h4 class="col-md-2" id="labelQuestion${poll.config.id}">
+              Question:
+            </h4>
+            <h4 class="col-md-10" id="question${poll.config.id}">
+              ${poll.config.question}
+            </h4>
           </div>
 
           <div class="row">
-            <h5 class="col-sm-2"></h5>
-            <h6 class="col-sm-10" id="description${poll.config.id}">
+            <p class="col-md-12" id="description${poll.config.id}">
               ${poll.config.description}
-            </h6>
+            </p>
           </div>
 
           <hr class="major">
@@ -39,7 +37,7 @@ $(() => {
     for (const choice in poll.choices) {
       num++;
       const choiceId = poll.choices[choice].id;
-      poll.scores = [{choice_id: choiceId, scoring: `${num}`}];
+      // poll.scores = [{choice_id: choiceId, scoring: `${num}`}];
       // console.log('poll.scores:', JSON.stringify(poll.scores), 'poll.scores.length', poll.scores.length);
       let score = 0;
       if (poll.scores.length > 0) {
@@ -51,13 +49,12 @@ $(() => {
       buffer += `
       
           <div class="row">
-            <h5 class="col-sm-2" id="labelAnswer${poll.choices[choice].id}">Answer #${num}:</h5>
-            <h5 class="col-sm-10" id="answer${poll.choices[choice].id}">${poll.choices[choice].title}</h5>
+            <h5 class="col-md-2" id="labelAnswer${poll.choices[choice].id}">Answer #${num}:</h5>
+            <h6 class="col-md-10" id="answer${poll.choices[choice].id}">${poll.choices[choice].title}</h6>
           </div>
       
           <div class="row">
-            <h5 class="col-sm-2"></h5>
-            <p class="col-sm-10" id="description${poll.choices[choice].id}">${poll.choices[choice].description}</p>
+            <p class="col-md-12" id="description${poll.choices[choice].id}">${poll.choices[choice].description}</p>
           </div>
 
           <div class="row mb-12">
@@ -75,14 +72,14 @@ $(() => {
 
     buffer += `
         <footer class="poll_footer row mb-3">
-          <h6 class="col-sm-4 poll_share_url">
-          Share poll: <a href='${poll.config.sharing_url}' class="shareUrl" title='share this poll'>${poll.config.sharing_url}</a>
-          <button type="button" class="btn btn-outline-none" id="copyShareUrl" onclick="copyUrl('${shareurl}')">📋</button>
+          <h6 class="col-md-4 poll_share_url">
+            Share poll: &nbsp;&nbsp;<a href='${poll.config.sharing_url}' class="shareUrl" title='share this poll'>${poll.config.sharing_url}</a>
+            <button type="button" class="button button-small" id="copyShareUrl" onclick="copyUrl('localhost:8080/${shareurl}')">📋</button>
           </h6>
           ${showResults ? 
-          `<h6 class="col-sm-6 poll_results_url">
-          View results: <a href='${poll.config.results_url}' class="shareUrl" title='view poll results'>${poll.config.results_url}</a>
-          <button type="button" class="btn btn-outline-none" id="copyResultsUrl" onclick="copyUrl('${resultsurl}')">📋</button>
+          `<h6 class="col-md-6 poll_results_url">
+            View results: &nbsp;&nbsp;<a href='${poll.config.results_url}' class="shareUrl" title='view poll results'>${poll.config.results_url}</a>
+            <button type="button" class="button button-small" id="copyResultsUrl" onclick="copyUrl('localhost:8080/${resultsurl}')">📋</button>
           </h6>
           <hr>
           <hr>
