@@ -35,6 +35,7 @@ $(() => {
     })
     .catch(err => {
       if (err.message) {
+        console.log(err.message);
       };
     })
     .then(() => {
