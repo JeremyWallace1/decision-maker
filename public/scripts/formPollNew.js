@@ -87,13 +87,20 @@ $(() => {
     views_manager.show('none');
 
     const data = $(this).serialize();
+    let pollId = null;
+    const output = [];
     submitPoll(data)
-    .then(data => data[0].poll_id)
-    .then(pollId => getPoll(pollId))
+    .then(data => pollId = data[0].poll_id)
+    .then(data => getPoll(pollId))
+    .then(data => output.push(data[0]))
+    .then(data => getResponses(pollId))
     .then(data => {
-      const pollData = [];
-      pollData.push(data[0]);
-      polls.addPolls(pollData, true);
+      output[0].pollId = pollId;
+      output[0].responses = data[0].responses;
+      output[0].scores = data[0].scores;
+    })
+    .then(data => {
+      polls.addPolls(output, true);
       views_manager.show('polls');
     })
     .catch((error) => {
@@ -101,5 +108,4 @@ $(() => {
       views_manager.show('pollNew');
     })
   });
-  
 });
