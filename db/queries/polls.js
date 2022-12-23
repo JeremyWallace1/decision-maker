@@ -64,7 +64,7 @@ const createResponse = (data) => {
     })
 };
 
-const getPoll = (id) => {
+const getPollById = (id) => {
   return db.query(`
   SELECT
     id,
@@ -145,7 +145,7 @@ module.exports = {
   createPoll,
   createChoice,
   createResponse,
-  getPoll,
+  getPollById,
   getPollChoices,
   getRespondentChoices,
   getPollResponses,

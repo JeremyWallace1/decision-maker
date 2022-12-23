@@ -15,7 +15,7 @@ router.get('/:id', (req, res) => {
   const pollId = Number(req.params.id);
   const pollData = {};
   const outputData = [];
-  pollQueries.getPoll(pollId)
+  pollQueries.getPollById(pollId)
     .then(poll => pollData.config = poll)
     .then(poll => pollQueries.getPollChoices(pollId))
     .then(choices => pollData.choices = choices)
