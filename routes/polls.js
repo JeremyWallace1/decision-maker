@@ -35,8 +35,10 @@ router.post('/',
     // TODO: better randomization, not just numerical
     req.body.results_url = 'r' + Math.floor(Math.random() * 99999) + 1;
     req.body.sharing_url = 's' + Math.floor(Math.random() * 99999) + 1;
+    const output = [];
     pollQueries.createPoll(req.body)
-    .then(data => {
+    .then(data => output.push(data.response))
+    .then(() => {
         const choicePromises = [];
         let countChoice = 0;
         while (true) {
@@ -45,7 +47,7 @@ router.post('/',
             break;
           }
 
-          const poll_id = data.response.id;
+          const poll_id = output[0].id;
           const description = req.body[`answer${countChoice}_description`];
           let title = req.body[`answer${countChoice}_title`];
           
@@ -74,12 +76,17 @@ router.post('/',
         
         return Promise.all(choicePromises)
       }
-
     )
-    .then(data => {
-      console.log(data);
-      res.send(data);
+    .then(all => {
+      output[0].answers = [];
+      all.forEach(element => output[0].answers.push(element));
+      console.log(output);
+      res.send(output);
     })
+    // .then(data => {
+    //   console.log(data);
+    //   res.send(data);
+    // })
     // .then(data => {
     //   const pollId = data[0].poll_id;
     //   return res.redirect(`/polls/${pollId}`);
