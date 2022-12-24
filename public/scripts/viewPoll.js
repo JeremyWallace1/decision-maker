@@ -77,18 +77,19 @@ $(() => {
     }
 
     const origin = window.location.origin;
-    const sharingUrl = origin.concat('/', poll.config.sharing_url);
+    const sharingUrl = origin.concat('/?', poll.config.sharing_url);
     buffer += `
     <footer class="poll_footer row mb-3">
-    <h6 class="col-md-4 poll_share_url">
-    Share poll: &nbsp;&nbsp;<a href='${sharingUrl}' class="shareUrl" title='share this poll'>${sharingUrl}</a>
-    <button type="button" class="button button-small" id="copyShareUrl" onclick="copyUrl('${sharingUrl}')">📋</button>
-    </h6>`;
+      <h6 class="poll_share_url">
+        Share poll: &nbsp;&nbsp;<a href='${sharingUrl}' class="shareUrl" title='share this poll'>${sharingUrl}</a>
+        <button type="button" class="button button-small" id="copyShareUrl" onclick="copyUrl('${sharingUrl}')">📋</button>
+      </h6>
+    `;
     
-    const resultsUrl = origin.concat('/', poll.config.results_url);
+    const resultsUrl = origin.concat('/?', poll.config.results_url);
     if (showResults) {
       buffer += 
-      `<h6 class="col-md-6 poll_results_url">
+      `<h6 class="poll_results_url">
         View results: &nbsp;&nbsp;<a href='${resultsUrl}' class="shareUrl" title='view poll results'>${resultsUrl}</a>
         <button type="button" class="button button-small" id="copyResultsUrl" onclick="copyUrl('${resultsUrl}')">📋</button>
       </h6>
