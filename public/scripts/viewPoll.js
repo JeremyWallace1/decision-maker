@@ -45,12 +45,15 @@ $(() => {
         for (let i in poll.scores) {
           if (poll.scores[i].choice_id === choiceId) {
             target = {choice_id: choiceId, scoring: poll.scores[i].scoring}
-          } 
+          }
+
         }
+
         // console.log(`target is ${JSON.stringify(target)}, target.scoring = ${target.scoring}`);
         score = target.scoring;
         // console.log(`score is ${score}`);
-      } 
+      }
+
       buffer += `
       
           <div class="row">
@@ -72,24 +75,27 @@ $(() => {
 
       `
     }
-    let shareurl = poll.config.sharing_url;
-    let resultsurl = poll.config.results_url;
 
+    const origin = window.location.origin;
+    const sharingUrl = origin.concat('/', poll.config.sharing_url);
     buffer += `
-        <footer class="poll_footer row mb-3">
-          <h6 class="col-md-4 poll_share_url">
-            Share poll: &nbsp;&nbsp;<a href='${poll.config.sharing_url}' class="shareUrl" title='share this poll'>${poll.config.sharing_url}</a>
-            <button type="button" class="button button-small" id="copyShareUrl" onclick="copyUrl('localhost:8080/${shareurl}')">📋</button>
-          </h6>
-          ${showResults ? 
-          `<h6 class="col-md-6 poll_results_url">
-            View results: &nbsp;&nbsp;<a href='${poll.config.results_url}' class="shareUrl" title='view poll results'>${poll.config.results_url}</a>
-            <button type="button" class="button button-small" id="copyResultsUrl" onclick="copyUrl('localhost:8080/${resultsurl}')">📋</button>
-          </h6>
-          <hr>
-          <hr>
-          `
-          : `` }
+    <footer class="poll_footer row mb-3">
+    <h6 class="col-md-4 poll_share_url">
+    Share poll: &nbsp;&nbsp;<a href='${sharingUrl}' class="shareUrl" title='share this poll'>${sharingUrl}</a>
+    <button type="button" class="button button-small" id="copyShareUrl" onclick="copyUrl('${sharingUrl}')">📋</button>
+    </h6>`;
+    
+    const resultsUrl = origin.concat('/', poll.config.results_url);
+    if (showResults) {
+      buffer += 
+      `<h6 class="col-md-6 poll_results_url">
+        View results: &nbsp;&nbsp;<a href='${resultsUrl}' class="shareUrl" title='view poll results'>${resultsUrl}</a>
+        <button type="button" class="button button-small" id="copyResultsUrl" onclick="copyUrl('${resultsUrl}')">📋</button>
+      </h6>
+      `
+    }
+    
+    buffer += `
         </footer>
       </article>
     `;
