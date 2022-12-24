@@ -10,7 +10,6 @@ $(() => {
     uri = queryString.slice(1).split('&')[0];
     getPollByUri(uri)
     .then(data => {
-      console.log('line 15')
       if (!data[0]) {
         return Promise.reject('end');
       }
