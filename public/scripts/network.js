@@ -1,4 +1,4 @@
-const getPoll = (id) => {
+const getPollById = (id) => {
   return $.ajax({
     method: "GET",
     url: "/api/polls/" + id
@@ -33,7 +33,7 @@ const submitPoll = (data) => {
   });
 }
 
-const getResponses = (id) => {
+const getResponsesById = (id) => {
   return $.ajax({
     method: "GET",
     url: "/api/responses/" + id
