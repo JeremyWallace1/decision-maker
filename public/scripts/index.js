@@ -8,9 +8,7 @@ $(() => {
   let uri = null;
   if (queryString) {
     uri = queryString.slice(1).split('&')[0];
-  }
-  
-  getPollByUri(uri)
+    getPollByUri(uri)
     .then(data => {
       console.log('line 15')
       if (!data[0]) {
@@ -46,6 +44,11 @@ $(() => {
     
       views_manager.show(view);
     })
+  } else {
+    views_manager.show(defaultView);
+  }
+  
+  
 
   const redirectButton = () => {
     if ($('#inputEmail').val() || $('#inputQuestion').val() || $('#inputQuestion').val() || $('#answer1').val() || $('#answer2').val()) {
