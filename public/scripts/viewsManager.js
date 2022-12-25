@@ -4,7 +4,7 @@ $(() => {
 
   window.views_manager = {};
 
-  window.views_manager.show = function(item, ...params) {
+  window.views_manager.show = function(item) {
     $formPollNew.detach();
     $formPollRespond.detach();
     $polls.detach();
@@ -18,6 +18,7 @@ $(() => {
         console.log(`case ${item} activated...`)
         break
       case 'pollRespond':
+        poll_respond.createForm(api.data);
         $formPollRespond.appendTo($main);
         console.log(`case ${item} activated...`)
         break

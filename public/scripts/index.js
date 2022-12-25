@@ -1,4 +1,7 @@
 // Client facing scripts here
+window.api = {};
+window.api.data = null;
+
 $(() => {
 
   const queryString = location.search;
@@ -18,6 +21,7 @@ $(() => {
     })
     .then(() => {
       if (output[0].uriType === 'Share') {
+        api.data = output[0];
         view = 'pollRespond';
         return Promise.reject('end');
       }
