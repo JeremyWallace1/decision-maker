@@ -6,7 +6,7 @@ $(() => {
 
   const getHtml = (data) => {
     const poll = data;
-    let $buffer = $(`
+    let buffer = `
     <form action="/responses/${poll.config.id}" method="POST" id="poll-response" class="poll">
       <header class="poll_heading">
         <div class="row mb-2"></div>
@@ -34,24 +34,48 @@ $(() => {
         <hr class="major">
         
       </header>
+      `;
 
-      {answers}
+      let count = 0;
+      for (const choice in poll.choices) {
+        count++;
+       buffer += `
+        <div class="row">
+          <h5 class="col-md-2" id="labelAnswer${poll.choices[choice].id}">Answer #${count}:</h5>
+          <h6 class="col-md-10" id="answer${poll.choices[choice].id}">${poll.choices[choice].title}</h6>
+        </div>
+    
+        <div class="row">
+          <p class="col-md-12" id="description${poll.choices[choice].id}">${poll.choices[choice].description}</p>
+        </div>
 
-    </form>
-    `);
-    return $buffer;
+        <hr class="minor">
+        `;
+      }
+
+    buffer += `
+        <footer class="poll_footer row mb-3">
+          <div class="buttons">
+            <button type="submit" class="button button-large col-12">Submit Choices</button> 
+          </div>
+        </footer>
+      </form>
+      `;
+    
+    const $html = $(buffer);
+    return $html;
   }
   
   const createForm = (data) => {
     window.$formPollRespond = getHtml(data);
-    attachEventListener($formPollRespond);
+    attachEventListener(window.$formPollRespond);
   }
 
   window.poll_respond.createForm = createForm;
   
   const attachEventListener = ($element) => {
     $element.on('submit', function (event) {
-      // event.preventDefault();
+      event.preventDefault();
       console.log('test')
       views_manager.show('none');
       
