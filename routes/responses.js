@@ -13,7 +13,7 @@ const responseQueries = require('../db/queries/polls');
 const cookieParser = require('cookie-parser');
 
 // user responds to a poll
-router.post('/:id', (req, res) => {
+router.post('/', (req, res) => {
   // const ip = req.cookies["ip"];
   // For test purposes only, when using curl to POST
   const generateIP = () => {
@@ -22,7 +22,7 @@ router.post('/:id', (req, res) => {
     const joined = ipRanges.join('.');
     return joined;
   };
-  
+
   const countChoices = req.body.choices.length;
   const ip = generateIP();
   const pollId = req.body.poll_id;
@@ -38,9 +38,9 @@ router.post('/:id', (req, res) => {
   }
 
   Promise.all(promises)
-    .then(data => {
-      console.log(data);
-      return res.redirect(`/responses/${pollId}`);
+    .then(output => {
+      console.log(output);
+      res.send(output);
     })
     .catch(err => console.log(err.message));
     
