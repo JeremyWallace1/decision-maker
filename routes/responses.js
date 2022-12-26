@@ -16,6 +16,9 @@ const cookieParser = require('cookie-parser');
 router.post('/', (req, res) => {
   // const ip = req.cookies["ip"];
   // For test purposes only, when using curl to POST
+  const output = [];
+  output.push({ results_url: req.body.results_url });
+
   const generateIP = () => {
     const buffer = Array(4).fill(0);
     const ipRanges = buffer.map(element => Math.floor(Math.random() * 255) + 1);
@@ -38,8 +41,8 @@ router.post('/', (req, res) => {
   }
 
   Promise.all(promises)
-    .then(output => {
-      console.log(output);
+    .then(all => {
+      output[0].responses = all;
       res.send(output);
     })
     .catch(err => console.log(err.message));
