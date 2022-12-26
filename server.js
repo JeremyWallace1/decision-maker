@@ -38,6 +38,7 @@ const responsesRoutes = require('./routes/responses');
 app.use('/api/polls', pollsApiRoutes);
 app.use('/api/responses', responsesApiRoutes);
 app.use('/polls', pollsRoutes);
+app.use('/responses', responsesRoutes);
 
 // Home page
 // Warning: avoid creating more routes in this file!
