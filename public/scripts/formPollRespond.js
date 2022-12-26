@@ -48,14 +48,15 @@ $(() => {
         </div>
 
         <hr class="minor">
-        `;
-      }
+      `;
+    }
 
     buffer += `
         <footer class="poll_footer row mb-3">
           <div class="buttons">
             <button type="submit" class="button button-large col-12">Submit Choices</button>
             <input type="hidden" name="poll_id" value="${poll.config.id}" />
+            <input type="hidden" name="results_url" value="${poll.config.results_url}" />
           </div>
         </footer>
       </form>
@@ -80,8 +81,22 @@ $(() => {
       views_manager.show('none');
       
       const data = $(this).serialize();
+      let uri = null;
+      const output = [];
       submitResponse(data)
-        .then(data => console.log(data))
+        .then(data => uri = data[0].results_url)
+        .then(data => getPollByUri(uri))
+        .then(data => output.push(data[0]))
+        .then(data => getResponsesByUri(uri))
+        .then(data => {
+          output[0].pollId = output[0].config.id;
+          output[0].responses = data[0].responses;
+          output[0].scores = data[0].scores;
+        })
+        .then(data => {
+          polls.addPolls(output, true);
+          views_manager.show('polls');
+        })
     });
 
   }
