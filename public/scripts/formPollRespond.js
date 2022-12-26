@@ -44,7 +44,7 @@ $(() => {
           <h5 class="col-md-2" id="labelAnswer${poll.choices[choice].id}">Answer #${count}:</h5>
           <h6 class="col-md-10" id="answer${poll.choices[choice].id}">${poll.choices[choice].title}</h6>
           <p class="col-md-12" id="description${poll.choices[choice].id}">${poll.choices[choice].description}</p>
-          <input type="hidden" name="answer" value="${poll.choices[choice].id}" />
+          <input type="hidden" name="choices" value="${poll.choices[choice].id}" />
         </div>
 
         <hr class="minor">
@@ -74,12 +74,16 @@ $(() => {
   
   const attachEventListener = ($element) => {
     $element.on('submit', function (event) {
+
       event.preventDefault();
-      console.log('test');
+
       views_manager.show('none');
+      
       const data = $(this).serialize();
-      console.log(data);
+      submitResponse(data)
+        .then(data => console.log(data))
     });
+
   }
 
 });
