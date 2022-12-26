@@ -25,6 +25,14 @@ const getResponsesByUri = (uri) => {
   });
 }
 
+const getResponsesById = (id) => {
+  return $.ajax({
+    method: "GET",
+    url: "/api/responses/" + id
+  });
+}
+
+
 const submitPoll = (data) => {
   return $.ajax({
     method: "POST",
@@ -33,9 +41,13 @@ const submitPoll = (data) => {
   });
 }
 
-const getResponsesById = (id) => {
+
+const submitResponse = (data) => {
+  console.log('submitResponse activated')
+  console.log('data typeof', typeof data)
   return $.ajax({
-    method: "GET",
-    url: "/api/responses/" + id
+    method: "POST",
+    url: "/responses",
+    data,
   });
 }
