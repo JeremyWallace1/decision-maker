@@ -43,8 +43,6 @@ const submitPoll = (data) => {
 
 
 const submitResponse = (data) => {
-  console.log('submitResponse activated')
-  console.log('data typeof', typeof data)
   return $.ajax({
     method: "POST",
     url: "/responses",
