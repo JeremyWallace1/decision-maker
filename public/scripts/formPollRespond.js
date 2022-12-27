@@ -34,12 +34,23 @@ $(() => {
           <hr class="major">
           
         </header>
+        <script>
+          $(()=> {
+            $( "#sortable" ).sortable();
+          });
+        </script>
+        <p class="col-md-12" id="orderInstructions">
+          Please order your choices from top to bottom before submitting.
+        </p>
+        <ul id="sortable" class="ui-sortable">
+
       `;
 
     let count = 0;
     for (const choice in poll.choices) {
       count++;
       buffer += `
+      <li class="row ui-state-default ui-sortable-handle" id="answer${poll.choices[choice].id}">
         <div class="row">
           <h5 class="col-md-2" id="labelAnswer${poll.choices[choice].id}">Answer #${count}:</h5>
           <h6 class="col-md-10" id="answer${poll.choices[choice].id}">${poll.choices[choice].title}</h6>
@@ -47,12 +58,13 @@ $(() => {
           <input type="hidden" name="choices" value="${poll.choices[choice].id}" />
         </div>
 
-        <hr class="minor">
+      </li>
       `;
     }
 
     buffer += `
-        <footer class="poll_footer row mb-3">
+      </ul>
+      <footer class="poll_footer row mb-3">
           <div class="buttons">
             <button type="submit" class="button button-large col-12">Submit Choices</button>
             <input type="hidden" name="poll_id" value="${poll.config.id}" />
