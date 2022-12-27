@@ -10,6 +10,23 @@ const express = require('express');
 const router  = express.Router();
 const responseQueries = require('../db/queries/polls');
 
+// API request for responses data with ip address
+router.get('/:uri/:ip', (req, res) => {
+  const uri = req.params.uri;
+  const ip = req.params.ip;
+  const responsesData = {};
+  const outputData = [];
+  responsesData.response_url = uri;
+  responseQueries.getRespondentChoices(ip)
+    .then(data => responsesData.responses = data)
+    .then(output => outputData.push(responsesData))
+    .then(output => res.json(outputData))
+    .catch(err => {
+      res.status(500)
+      .json({ error: err.message });
+    });
+});
+
 // API request for responses data with shortcode uri reference
 router.get('/:uri', (req, res) => {
   const uri = req.params.uri;
