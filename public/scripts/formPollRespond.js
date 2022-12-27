@@ -97,7 +97,7 @@ $(() => {
           output[0].scores = data[0].scores;
         })
         .then(() => {
-          polls.addPolls(output, true);
+          polls.addPolls(output, false);
           views_manager.show('polls');
         })
     });
