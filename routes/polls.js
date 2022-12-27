@@ -98,6 +98,7 @@ router.post('/',
         'share': 'Sharing url: http://localhost:8080/?' + poll.sharing_url,
         'results': 'Results url: http://localhost:8080/?' + poll.results_url
       }
+      console.log(emailConfig)
       return sendEmail(emailConfig);
     })
     .then((data) => console.log(data))
