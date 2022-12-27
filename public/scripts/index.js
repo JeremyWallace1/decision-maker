@@ -25,7 +25,7 @@ $(() => {
         return getMyIp()
         .then(data => getResponsesByIp(data.ip, uri))
         .then(data => {
-          if (!data[0].responses) {
+          if (data[0].responses.length === 0) {
             view = 'pollRespond';
             return Promise.reject('end promise chain');
           }
