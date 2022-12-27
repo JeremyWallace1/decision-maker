@@ -9,6 +9,7 @@ const { response } = require('express');
 const express = require('express');
 const router  = express.Router();
 const responseQueries = require('../db/queries/polls');
+const sendEmail = require('../lib/emailBuilder.js')
 
 const cookieParser = require('cookie-parser');
 
@@ -50,8 +51,27 @@ router.post('/', (req, res) => {
         .then(all => {
           output[0].responses = all;
           console.log('database updated!', output);
-          res.send(output);
         })
+        .then(() => responseQueries.getPollByResultsUri(output[0].results_url))
+        .then(data => {
+          const poll = data;
+          const emailConfig = {};
+          emailConfig['subject'] = 'New response to your poll!',
+          emailConfig['sender'] = {'email': 'api@sendinblue.com', 'name': 'Sendinblue'},
+          emailConfig['replyTo'] = {'email': 'api@sendinblue.com', 'name': 'Sendinblue'},
+          // emailConfig['to'] = [{ 'name': 'Poll Owner', 'email': poll.creator_email }],
+          emailConfig['to'] = [{ 'name': 'Poll Owner', 'email': process.env.DEV_EMAIL }],
+          emailConfig['htmlContent'] = '<html><body><h1>{{params.headline}}</h1><p>{{params.body}}</p><p>{{params.share}}</p><p>{{params.results}}</p></body></html>',
+          emailConfig['params'] = {
+            'headline': 'Someone has responded to your poll!',
+            'body': `We have just received a new response to your poll, ${poll.question}. Please use the links below to view results or share your poll with others.`,
+            'share': 'Sharing url: http://localhost:8080/?' + poll.sharing_url,
+            'results': 'Results url: http://localhost:8080/?' + poll.results_url
+          }
+          return sendEmail(emailConfig);
+        })
+        .then((data) => console.log(data))
+        .then(() => res.send(output))
         .catch(err => console.log(err.message));
     })
     .catch(error => {
