@@ -22,8 +22,20 @@ $(() => {
     .then(() => {
       if (output[0].uriType === 'Share') {
         api.data = output[0];
-        view = 'pollRespond';
-        return Promise.reject('end');
+        return getMyIp()
+        .then(data => getResponsesByIp(data.ip, uri))
+        .then(data => {
+          if (!data[0].responses) {
+            view = 'pollRespond';
+            return Promise.reject('end promise chain');
+          }
+          output[0].pollId = output[0].config.id;
+          output[0].responses = data[0].responses;
+          output[0].scores = [];
+          polls.addPolls(output, false);
+          view = 'polls';
+          return Promise.reject('end promise chain');
+        })
       }
     })
     .then(() => getResponsesByUri(uri))
@@ -33,7 +45,7 @@ $(() => {
       output[0].scores = data[0].scores;
       polls.addPolls(output, true);
       view = 'polls';
-      return Promise.reject('end');
+      return Promise.reject('end promise chain');
     })
     .catch(err => {
       if (err.message) {
@@ -44,7 +56,6 @@ $(() => {
       if (!view) {
         view = defaultView; 
       }
-    
       views_manager.show(view);
     })
   } else {
