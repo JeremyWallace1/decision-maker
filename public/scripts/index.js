@@ -23,8 +23,8 @@ $(() => {
       if (output[0].uriType === 'Share') {
         api.data = output[0];
         return getMyIp()
-        // .then(data => getResponsesByIp(data.ip, uri))
-        .then(data => getResponsesByIp(process.env.DEV_IP, uri))
+        .then(data => getResponsesByIp(data.ip, uri))
+        // .then(data => getResponsesByIp(process.env.DEV_IP, uri))
         .then(data => {
           if (data[0].responses.length === 0) {
             view = 'pollRespond';

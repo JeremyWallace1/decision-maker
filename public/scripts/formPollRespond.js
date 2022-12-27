@@ -97,8 +97,8 @@ $(() => {
       const output = [];
 
       getMyIp()
-        // .then(data => postData + '&ip=' + data.ip)
-        .then(data => postData + '&ip=' + process.env.DEV_IP)
+        .then(data => postData + '&ip=' + data.ip)
+        // .then(data => postData + '&ip=' + process.env.DEV_IP)
         .then(modifiedPostData => submitResponse(modifiedPostData))
         .then(data => uri = data[0].results_url)
         .then(() => getPollByUri(uri))
