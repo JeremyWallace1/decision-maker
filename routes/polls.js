@@ -10,6 +10,7 @@ const express = require('express');
 const router  = express.Router();
 const { body, validationResult } = require('express-validator');
 const pollQueries = require('../db/queries/polls');
+const sendEmail = require('../lib/emailBuilder.js')
 
 // creator submits new poll
 router.post('/',
@@ -81,8 +82,26 @@ router.post('/',
       output[0].answers = [];
       all.forEach(element => output[0].answers.push(element));
       console.log(output);
-      res.send(output);
     })
+    .then(() => {
+      const poll = output[0];
+      const emailConfig = {};
+      emailConfig['subject'] = 'New Decision Maker poll created!',
+      emailConfig['sender'] = {'email': 'api@sendinblue.com', 'name': 'Sendinblue'},
+      emailConfig['replyTo'] = {'email': 'api@sendinblue.com', 'name': 'Sendinblue'},
+      // emailConfig['to'] = [{ 'name': 'Poll Owner', 'email': poll.creator_email }],
+      emailConfig['to'] = [{ 'name': 'Poll Owner', 'email': process.env.DEV_EMAIL }],
+      emailConfig['htmlContent'] = '<html><body><h1>{{params.headline}}</h1><p>{{params.body}}</p><p>{{params.share}}</p><p>{{params.results}}</p></body></html>',
+      emailConfig['params'] = {
+        'headline': 'You have successfully created a new poll with Decision Maker!',
+        'body': `You want to know, ${poll.question} Please use the links below to view results or share your poll with others.`,
+        'share': 'Sharing url: http://localhost:8080/?' + poll.sharing_url,
+        'results': 'Results url: http://localhost:8080/?' + poll.results_url
+      }
+      return sendEmail(emailConfig);
+    })
+    .then((data) => console.log(data))
+    .then(() => res.send(output))
     // .then(data => {
     //   console.log(data);
     //   res.send(data);
