@@ -25,6 +25,16 @@ const getResponsesByUri = (uri) => {
   });
 }
 
+const getResponsesByIp = (ip, uri) => {
+  if (!ip) {
+    return Promise.reject('could not determine ip');
+  }
+  return $.ajax({
+    method: "GET",
+    url: "/api/responses/" + uri + "/" + ip
+  });
+}
+
 const getResponsesById = (id) => {
   return $.ajax({
     method: "GET",
@@ -49,3 +59,10 @@ const submitResponse = (data) => {
     data,
   });
 }
+
+const getMyIp = () => {
+  return $.ajax({
+    method: "GET",
+    url: "https://api.ipify.org?format=json",
+  });
+};
