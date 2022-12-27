@@ -18,16 +18,16 @@ router.post('/', (req, res) => {
   // For test purposes only, when using curl to POST
   const output = [];
   output.push({ results_url: req.body.results_url });
-
-  const generateIP = () => {
-    const buffer = Array(4).fill(0);
-    const ipRanges = buffer.map(element => Math.floor(Math.random() * 255) + 1);
-    const joined = ipRanges.join('.');
-    return joined;
-  };
+  // const generateIP = () => {
+  //   const buffer = Array(4).fill(0);
+  //   const ipRanges = buffer.map(element => Math.floor(Math.random() * 255) + 1);
+  //   const joined = ipRanges.join('.');
+  //   return joined;
+  // };
+  // const ip = generateIP();
 
   const countChoices = req.body.choices.length;
-  const ip = generateIP();
+  const ip = req.body.ip;
   const pollId = req.body.poll_id;
   const promises = [];
 
@@ -43,6 +43,7 @@ router.post('/', (req, res) => {
   Promise.all(promises)
     .then(all => {
       output[0].responses = all;
+      console.log('database updated!', output);
       res.send(output);
     })
     .catch(err => console.log(err.message));
