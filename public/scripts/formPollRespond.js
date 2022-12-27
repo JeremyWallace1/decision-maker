@@ -80,20 +80,23 @@ $(() => {
 
       views_manager.show('none');
       
-      const data = $(this).serialize();
+      const postData = $(this).serialize();
       let uri = null;
       const output = [];
-      submitResponse(data)
+
+      getMyIp()
+        .then(data => postData + '&ip=' + data.ip)
+        .then(modifiedPostData => submitResponse(modifiedPostData))
         .then(data => uri = data[0].results_url)
-        .then(data => getPollByUri(uri))
+        .then(() => getPollByUri(uri))
         .then(data => output.push(data[0]))
-        .then(data => getResponsesByUri(uri))
+        .then(() => getResponsesByUri(uri))
         .then(data => {
           output[0].pollId = output[0].config.id;
           output[0].responses = data[0].responses;
           output[0].scores = data[0].scores;
         })
-        .then(data => {
+        .then(() => {
           polls.addPolls(output, true);
           views_manager.show('polls');
         })
