@@ -31,7 +31,6 @@ router.post('/', (req, res) => {
   const ip = req.body.ip;
   const pollId = req.body.poll_id;
   const promises = [];
-  const emailConfig = {};
   responseQueries.getRespondentChoices(ip)
     .then(data => {
       if (data.length > 0) {
@@ -56,6 +55,7 @@ router.post('/', (req, res) => {
         .then(() => responseQueries.getPollByResultsUri(output[0].results_url))
         .then(data => {
           const poll = data;
+          const emailConfig = {};
           emailConfig['subject'] = 'New response to your poll!',
           emailConfig['sender'] = {'email': 'api@sendinblue.com', 'name': 'Sendinblue'},
           emailConfig['replyTo'] = {'email': 'api@sendinblue.com', 'name': 'Sendinblue'},
