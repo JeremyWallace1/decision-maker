@@ -59,7 +59,8 @@ router.post('/', (req, res) => {
           emailConfig['subject'] = 'New response to your poll!',
           emailConfig['sender'] = {'email': 'api@sendinblue.com', 'name': 'Sendinblue'},
           emailConfig['replyTo'] = {'email': 'api@sendinblue.com', 'name': 'Sendinblue'},
-          emailConfig['to'] = [{ 'name': 'Poll Owner', 'email': poll.creator_email }],
+          // emailConfig['to'] = [{ 'name': 'Poll Owner', 'email': poll.creator_email }],
+          emailConfig['to'] = [{ 'name': 'Poll Owner', 'email': process.env.DEV_EMAIL }],
           emailConfig['htmlContent'] = '<html><body><h1>{{params.headline}}</h1><p>{{params.body}}</p><p>{{params.share}}</p><p>{{params.results}}</p></body></html>',
           emailConfig['params'] = {
             'headline': 'Someone has responded to your poll!',
