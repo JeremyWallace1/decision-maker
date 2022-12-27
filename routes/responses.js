@@ -30,23 +30,34 @@ router.post('/', (req, res) => {
   const ip = req.body.ip;
   const pollId = req.body.poll_id;
   const promises = [];
-
-  for (const choice in req.body.choices) {
-    const data = {};
-    data.poll_id = pollId;
-    data.choice_id = req.body.choices[choice];
-    data.respondent_ip = ip;
-    data.rank_score = countChoices - choice;
-    promises.push(responseQueries.createResponse(data));
-  }
-
-  Promise.all(promises)
-    .then(all => {
-      output[0].responses = all;
-      console.log('database updated!', output);
-      res.send(output);
+  responseQueries.getRespondentChoices(ip)
+    .then(data => {
+      if (data.length > 0) {
+        throw new Error(`IP address ${ip} has already replied to this poll`)
+      }
     })
-    .catch(err => console.log(err.message));
+    .then(() => {
+      for (const choice in req.body.choices) {
+        const data = {};
+        data.poll_id = pollId;
+        data.choice_id = req.body.choices[choice];
+        data.respondent_ip = ip;
+        data.rank_score = countChoices - choice;
+        promises.push(responseQueries.createResponse(data));
+      }
+
+      Promise.all(promises)
+        .then(all => {
+          output[0].responses = all;
+          console.log('database updated!', output);
+          res.send(output);
+        })
+        .catch(err => console.log(err.message));
+    })
+    .catch(error => {
+      console.log(`error output: `, error.message)
+      return res.status(500).send('403 - Forbidden. Your IP address has already been used to reply to this poll.');
+    });
     
 });
 
