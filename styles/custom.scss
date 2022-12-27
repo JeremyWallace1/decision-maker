@@ -4,6 +4,7 @@
 $dkblue: rgb(0,87,119);
 $uberdkblue: rgb(0, 44, 60);
 $ltblue: rgb(0,139,188);
+$uberltblue: rgb(94, 159, 188);
 $yellowgr: rgb(187,188,0);
 $ltyellowgr: rgb(254, 255, 230);
 $uberltyellowgr: rgb(254, 255, 245);
@@ -183,7 +184,7 @@ body {
     margin: 0; 
     padding: 1em;
     margin-bottom: 0.5em;
-    background-color: $ltblue;
+    background-color: $uberltblue;
     border-color: $dkblue;
     color: $ltyellowgr;
     display: inline-block;
