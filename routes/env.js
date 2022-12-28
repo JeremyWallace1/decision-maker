@@ -12,21 +12,17 @@ const axios = require('axios');
 
 // user responds to a poll
 router.get('/ip', (req, res) => {
-  const output = {};
   switch (process.env.ENV_TYPE) {
     case ('development') :
-      output.ip = process.env.DEV_IP;
-      break;
+      res.json({ ip: process.env.DEV_IP });
     case ('staging') :
-      output.ip = process.env.STAGING_IP;
-      break;
+      res.json({ ip: process.env.STAGING_IP });
     case ('production') :
-      axios.get('https://api.ipify.org?format=json')
-        .then(data => output.ip = data.ip)
-        .catch(err => console.log('Error retrieving IP: ', err.message));
+      axios.get('https://api.ipify.org')
+        .then(data => res.json({ ip: data.data }))
+        .catch(err => console.log('Error retrieving IP: ', err.message))
   }
-
-  res.send(output);
+ 
 });
 
 module.exports = router;
