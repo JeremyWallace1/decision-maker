@@ -93,13 +93,11 @@ $(() => {
       views_manager.show('none');
       
       const postData = $(this).serialize();
-      let uri = null;
       const output = [];
+      const modifiedPostData = postData + '&ip=' + user_ip;
+      let uri = null;
 
-      getMyIp()
-        .then(data => postData + '&ip=' + data.ip)
-        // .then(data => postData + '&ip=' + process.env.DEV_IP)
-        .then(modifiedPostData => submitResponse(modifiedPostData))
+      submitResponse(modifiedPostData)
         .then(data => uri = data[0].results_url)
         .then(() => getPollByUri(uri))
         .then(data => output.push(data[0]))
