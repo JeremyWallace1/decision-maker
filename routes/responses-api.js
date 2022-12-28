@@ -17,7 +17,9 @@ router.get('/:uri/:ip', (req, res) => {
   const responsesData = {};
   const outputData = [];
   responsesData.response_url = uri;
-  responseQueries.getRespondentChoices(ip)
+  responseQueries.getPollBySharingUri(uri)
+    .then(data => responsesData.poll_id = data.id)
+    .then(pollId => responseQueries.getRespondentChoices(ip, pollId))
     .then(data => responsesData.responses = data)
     .then(output => outputData.push(responsesData))
     .then(output => res.json(outputData))
