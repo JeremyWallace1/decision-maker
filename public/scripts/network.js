@@ -66,3 +66,10 @@ const getMyIp = () => {
     url: "https://api.ipify.org?format=json",
   });
 };
+
+const getDevIp = () => {
+  return $.ajax({
+    method: "GET",
+    url: "/env/devip",
+  });
+};
