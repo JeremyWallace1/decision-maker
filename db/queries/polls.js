@@ -133,7 +133,7 @@ const getRespondentChoices = (ip, id) => {
     choice_id,
     respondent_ip
   FROM responses
-  WHERE respondent_ip = $1`, [ip])
+  WHERE respondent_ip = $1 AND poll_id = $2`, [ip, id])
     .then(response => {
       return response.rows;
     });
