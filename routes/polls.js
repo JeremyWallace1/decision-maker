@@ -99,7 +99,7 @@ router.post('/',
         'results': 'Results url: http://localhost:8080/?' + poll.results_url
       }
       console.log(emailConfig)
-      return sendEmail(emailConfig);
+      // return sendEmail(emailConfig);
     })
     .then((data) => console.log(data))
     .then(() => res.send(output))
