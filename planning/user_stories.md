@@ -21,6 +21,9 @@
 * randomize poll
 * when a user visits the submission link, they enter their name if required and see a list of the choices for that poll
 * add accessibility fixes, etc.
+* visual indicator of which poll answer is ahead based on current score (for admin view, i.e. /?r12345) (maybe a box around it, or highlighting, etc. -- also needs to handle multiple with the same number)
+* add ability to attach pictures and hyperlinks to description fields
+* indicate (with a line of text?) if user has already responded to the question
 
 ### TABLE NAMES ###
 - polls

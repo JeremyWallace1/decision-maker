@@ -95,11 +95,11 @@ router.post('/',
       emailConfig['params'] = {
         'headline': 'You have successfully created a new poll with Decision Maker!',
         'body': `You want to know, ${poll.question} Please use the links below to view results or share your poll with others.`,
-        'share': 'Sharing url: http://localhost:8080/?' + poll.sharing_url,
-        'results': 'Results url: http://localhost:8080/?' + poll.results_url
+        'share': 'Sharing url: http://' + process.env.SERVER_ADDRESS + ':' + process.env.SERVER_PORT + '/?' + poll.sharing_url,
+        'results': 'Results url: http://' + process.env.SERVER_ADDRESS + ':' + process.env.SERVER_PORT + '/?' + poll.results_url
       }
       console.log(emailConfig)
-      return sendEmail(emailConfig);
+      // return sendEmail(emailConfig);
     })
     .then((data) => console.log(data))
     .then(() => res.send(output))

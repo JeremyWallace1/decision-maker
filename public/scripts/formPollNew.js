@@ -112,6 +112,7 @@ $(() => {
     let uri = null;
     const output = [];
     submitPoll(data)
+    // data in format of "id, creator_email, question, description, results_url, sharing_url and an array of answers"
     .then(data => uri = data[0].results_url)
     .then(data => getPollByUri(uri))
     .then(data => output.push(data[0]))
