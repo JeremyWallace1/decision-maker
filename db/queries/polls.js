@@ -125,7 +125,7 @@ const getPollChoices = (id) => {
     });
 };
 
-const getRespondentChoices = (ip) => {
+const getRespondentChoices = (ip, id) => {
   return db.query(`
   SELECT
     id AS response_id,
