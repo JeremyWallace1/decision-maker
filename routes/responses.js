@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
   const ip = req.body.ip;
   const pollId = req.body.poll_id;
   const promises = [];
-  responseQueries.getRespondentChoices(ip)
+  responseQueries.getRespondentChoices(ip, pollId)
     .then(data => {
       if (data.length > 0) {
         throw new Error(`IP address ${ip} has already replied to this poll`)
