@@ -87,6 +87,7 @@ $(() => {
     <footer class="poll_footer row mb-3">
       <div class="buttons">
         <button type="button" class="button" id="addMoreAnswers"  onclick="addOption();">add options</button>
+        <span class="">&nbsp&nbsp </span>
         <button type="button" class="button" id="removeAnswers" disabled onclick="removeOption();">remove options</button>
       </div>
       <div class="col-12">

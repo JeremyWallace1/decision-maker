@@ -19,6 +19,8 @@
 * As a poll creator, I want to be able to set an end date/time OR max submissions before poll closes, because...
 * authentication/password, etc.
 * randomize poll
+* when a user visits the submission link, they enter their name if required and see a list of the choices for that poll
+* add accessibility fixes, etc.
 
 ### TABLE NAMES ###
 - polls

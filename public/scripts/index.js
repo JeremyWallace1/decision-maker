@@ -97,7 +97,7 @@ $(() => {
       num++;
       $('#moreAnswers').append(
         `
-        <div class="row mb-3">
+        <div class="row mb-3" id="Answer${num}">
           <h5>Answer #${num}:</h5>
           <div class="row mb-3">
             <label for="answer${num}" class="col-md-2 col-form-label">
