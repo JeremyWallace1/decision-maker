@@ -1,6 +1,8 @@
+
 // Client facing scripts here
 window.api = {};
 window.api.data = null;
+window.user_ip = null;
 
 $(() => {
 
@@ -22,9 +24,10 @@ $(() => {
     .then(() => {
       if (output[0].uriType === 'Share') {
         api.data = output[0];
-        return getMyIp()
-        .then(data => getResponsesByIp(data.ip, uri))
-        // .then(data => getResponsesByIp(process.env.DEV_IP, uri))
+        getDevIp()
+        // getMyIp()
+        .then(data => window.user_ip = data.ip)
+        .then(ip => getResponsesByIp(ip, uri))
         .then(data => {
           if (data[0].responses.length === 0) {
             view = 'pollRespond';

@@ -6,7 +6,7 @@ const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8081;
 const app = express();
 
 // app.set('view engine', 'ejs');
@@ -28,6 +28,7 @@ app.use(express.static('public'));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
+const envRoutes = require('./routes/env');
 const pollsApiRoutes = require('./routes/polls-api');
 const responsesApiRoutes = require('./routes/responses-api');
 const pollsRoutes = require('./routes/polls');
@@ -35,6 +36,7 @@ const responsesRoutes = require('./routes/responses');
 
 // Mount all resource routes
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
+app.use('/env', envRoutes);
 app.use('/api/polls', pollsApiRoutes);
 app.use('/api/responses', responsesApiRoutes);
 app.use('/polls', pollsRoutes);
