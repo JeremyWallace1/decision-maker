@@ -21,7 +21,7 @@ router.get('/ip', (req, res) => {
       output.ip = process.env.STAGING_IP;
       break;
     case ('production') :
-      axios.get('https://jsonplaceholder.typicode.com/users')
+      axios.get('https://api.ipify.org?format=json')
         .then(data => output.ip = data.ip)
         .catch(err => console.log('Error retrieving IP: ', err.message));
   }
