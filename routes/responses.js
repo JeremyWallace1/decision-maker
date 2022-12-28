@@ -9,25 +9,16 @@ const { response } = require('express');
 const express = require('express');
 const router  = express.Router();
 const responseQueries = require('../db/queries/polls');
-const sendEmail = require('../lib/emailBuilder.js')
-
-const cookieParser = require('cookie-parser');
+const sendEmail = require('../lib/emailBuilder.js');
 
 // user responds to a poll
 router.post('/', (req, res) => {
-  // const ip = req.cookies["ip"];
-  // For test purposes only, when using curl to POST
+
   const output = [];
   output.push({ results_url: req.body.results_url });
-  // const generateIP = () => {
-  //   const buffer = Array(4).fill(0);
-  //   const ipRanges = buffer.map(element => Math.floor(Math.random() * 255) + 1);
-  //   const joined = ipRanges.join('.');
-  //   return joined;
-  // };
-  // const ip = generateIP();
 
   const countChoices = req.body.choices.length;
+  // TODO: To prevent cURL bypassing of IP restricted responses, get IP from API rather than post body
   const ip = req.body.ip;
   const pollId = req.body.poll_id;
   const promises = [];
