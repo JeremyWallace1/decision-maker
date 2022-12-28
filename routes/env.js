@@ -8,25 +8,24 @@
 const { response } = require('express');
 const express = require('express');
 const router  = express.Router();
+const axios = require('axios');
 
 // user responds to a poll
-router.get('/devip', (req, res) => {
+router.get('/ip', (req, res) => {
+  const output = {};
+  switch (process.env.ENV_TYPE) {
+    case ('development') :
+      output.ip = process.env.DEV_IP;
+      break;
+    case ('staging') :
+      output.ip = process.env.STAGING_IP;
+      break;
+    case ('production') :
+      axios.get('https://jsonplaceholder.typicode.com/users')
+        .then(data => output.ip = data.ip)
+        .catch(err => console.log('Error retrieving IP: ', err.message));
+  }
 
-  // const promiseDevIp = new Promise((resolve, reject) => {
-  //   if (!process.env.DEV_IP) {
-  //     reject(new Error('Development IP address is not set in .env file'));
-  //   }
-  //   const output = { ip: process.env.DEV_IP };
-  //   resolve(output)
-  // })
-
-  // promiseDevIp()
-  //   .then(data => res.send(data))
-  //   .catch(error => {
-  //     console.log(`error output: `, error.message)
-  //     return res.status(500).send('500 - Internal Server Error');
-  //   });
-  const output = { ip: process.env.DEV_IP };
   res.send(output);
 });
 
