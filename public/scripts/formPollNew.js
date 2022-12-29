@@ -28,6 +28,22 @@ $(() => {
 
     <div class="row mb-3">
       <div class="row mb-3">
+        <label for="selectQuestionImage" class="col-md-2 col-form-label">
+          Add Image:
+        </label>
+        <div class="col-md-10">
+          <input
+            class="form-control"
+            id="selectQuestionImage"
+            name="question_image"
+            type="file"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="row mb-3">
         <label for="inputTitle" class="col-md-2 col-form-label">
           Description:
         </label>
