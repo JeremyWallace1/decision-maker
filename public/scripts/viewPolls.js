@@ -33,21 +33,34 @@ $(() => {
     
     for (const pollData of jsonData) {
       const createdPoll = poll.createPoll(pollData, showResults);
-      creator = jsonData[0]['config'].creator_email;
-      console.log(creator);
-      for (let i = 0; i < jsonData[0]['scores'].length; i++) {
-        xVal.push('Answer #' + jsonData[0]['scores'][i].choice_id);
+      // creator = jsonData[0]['config'].creator_email;
+      const length = jsonData[0]['scores'].length;
+      let minNum = Infinity;
+      for (let j = 0; j < length; j++) {
+        if (jsonData[0]['choices'][j].id < minNum) {
+          minNum = jsonData[0]['choices'][j].id;
+        }
+      }
+      for (let i = 0; i < length; i++) {
+        for (let k = 0; k < length; k++) {
+          if (jsonData[0]['scores'][i].choice_id === jsonData[0]['choices'][k].id) {
+            toolTipVal.push(jsonData[0]['choices'][k].title);
+          }
+        }
+        console.log('toolTipVal =', toolTipVal);
+        xVal.push('Answer #' + (jsonData[0]['scores'][i].choice_id - minNum + 1));
         yVal.push(jsonData[0]['scores'][i].scoring);
       }
       if (showResults) {
         const pollWithResults = $(createdPoll).append(`
-          <hr class="major">
-          <div class="row">
-            <canvas id="resultsChart" style="width:100%"></canvas>
-          </div>
           <script src="scripts/chart.js"></script>
+          <script>
+            document.getElementById("resultsArea").hidden = false;
+            document.getElementById("resultsHr").hidden = false;
+          </script>
         `);
         addPoll(pollWithResults)
+
       } else {
         addPoll(createdPoll);
       }

@@ -42,6 +42,20 @@ body {
     flex-wrap: wrap;
     align-items: center;
     align-content: flex-start;
+
+    section {
+      article {
+        header {
+          div.row#resultsArea {
+            height: 400px;
+            canvas#resultsChart {
+              position: relative; 
+              margin-bottom: 20px
+            }
+          }
+        }
+      }
+    }
   }
 
   .navigation {

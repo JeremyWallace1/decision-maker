@@ -29,7 +29,11 @@ $(() => {
           </div>
 
           <hr class="major">
-          
+          <div class="row" id="resultsArea" hidden>
+            <canvas id="resultsChart"></canvas>
+          </div>
+          <hr class="major" id="resultsHr" hidden>
+
         </header>`
     
     // if showResults is true, shows current score below the answer/description, otherwise nothing under it.
