@@ -11,12 +11,12 @@ $uberltyellowgr: rgb(254, 255, 245);
 
 html {
   min-height: 100%; /* Look, it's not fixed anymore! */
-
   display: flex;
   flex-direction: column;
 }
 
 body {
+  // align-self: center;
   background: linear-gradient(
     225deg,
     $ltblue 0%,
@@ -31,6 +31,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-content: center;
   align-items: center;
   flex-grow: 1;
 
@@ -41,16 +42,23 @@ body {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    align-content: flex-start;
+    // align-content: flex-start;
 
     section {
       article {
         header {
+          display: flex;
+          flex-direction: column;
+          align-content: center;
           div.row#resultsArea {
-            height: 400px;
+            height: 450px;
+            width: 450px;
+            align-self: center;
             canvas#resultsChart {
               position: relative; 
-              margin-bottom: 20px
+              margin-bottom: 20px;
+              background-color: $uberdkblue;
+              padding: 1em;
             }
           }
         }
@@ -80,7 +88,7 @@ body {
   }
 
   .polls {
-    width: 430px;
+    width: 100%;
     display:flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -215,7 +223,6 @@ body {
     font-family: inherit;
     cursor: pointer;
     border-style: groove;
-
   }
 
   #sortable li:hover {
@@ -233,19 +240,6 @@ body {
     .navigation {
       width: 580px;
     }
-  
-    form {
-      width: 530px;
-      padding-left: 2em;
-      padding-right: 1em;
-    }
-    
-    .polls {
-      width: 530px;
-      padding-left: 1em;
-      padding-right: 2em;
-    }
-
   }
     
   @media only screen and (min-width: 768px){
@@ -256,19 +250,6 @@ body {
     .navigation {
       width: 748px;
     }
-  
-    form {
-      width: 698px;
-      padding-left: 2em;
-      padding-right: 1em;
-    }
-    
-    .polls {
-      width: 698px;
-      padding-left: 1em;
-      padding-right: 2em;
-    }
-
   }
   
   @media (min-width: 992px){
@@ -278,18 +259,6 @@ body {
   
     .navigation {
       width: 972px;
-    }
-  
-    form {
-      width: 902px;
-      padding-left: 2em;
-      padding-right: 1em;
-    }
-
-    .polls {
-      width: 902px;
-      padding-left: 2em;
-      padding-right: 1em;
     }
   }
 };
