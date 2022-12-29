@@ -36,6 +36,7 @@ $(() => {
             class="form-control"
             id="selectQuestionImage"
             name="question_image"
+            accept="image/*"
             type="file"
           />
         </div>
@@ -123,6 +124,8 @@ $(() => {
 
   $selectQuestionImage.on('change', function (event) {
     console.log('#selectQuestionImage file field has changed!');
+    const fileName = this.files[0].name;
+    console.log('file name is: ', fileName);
   })
 
   $formPollNew.on('submit', function (event) {
