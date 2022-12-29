@@ -124,6 +124,7 @@ $(() => {
     return `
     <div class="row mb-3" id="img-preview-question">
       <img src="${imgData}" class="question img-preview" />
+      <input type="hidden" name="image_question" id="image_question" value="${imgData}" />
     </div>
     `
   };
@@ -133,12 +134,9 @@ $(() => {
   const $selectQuestionImage = $formPollNew.find('#selectQuestionImage');
 
   $selectQuestionImage.on('change', function (event) {
-    console.log('#selectQuestionImage file field has changed!');
     const file = this.files[0];
-    console.log('file name is: ', file.name);
     convertToBase64(file)
     .then(result => $formPollNew.images.question = result)
-    .then(() => console.log($formPollNew.images.question))
     .then(() => {
       $(this).parent().find('#img-preview-question').remove();
       $(this).parent().append(generateQuestionImgHTML($formPollNew.images.question));
@@ -169,6 +167,7 @@ $(() => {
     views_manager.show('none');
 
     const data = $(this).serialize();
+    console.log(data)
     let uri = null;
     const output = [];
     submitPoll(data)
