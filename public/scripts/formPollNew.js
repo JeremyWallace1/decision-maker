@@ -119,6 +119,12 @@ $(() => {
 
   window.$formPollNew = $formPollNew;
 
+  const $selectQuestionImage = $formPollNew.find('#selectQuestionImage');
+
+  $selectQuestionImage.on('change', function (event) {
+    console.log('#selectQuestionImage file field has changed!');
+  })
+
   $formPollNew.on('submit', function (event) {
     event.preventDefault();
 
