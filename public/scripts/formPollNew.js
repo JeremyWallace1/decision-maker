@@ -120,6 +120,13 @@ $(() => {
 
   window.$formPollNew = $formPollNew;
 
+  const $questionImg = `
+    <div class="row mb-3">
+      <img src="" class="question img-preview" />
+      Image data will go here
+    </div>
+  `;
+
   $formPollNew.images = {};
 
   const $selectQuestionImage = $formPollNew.find('#selectQuestionImage');
@@ -131,6 +138,9 @@ $(() => {
     convertToBase64(file)
     .then(result => $formPollNew.images.question = result)
     .then(() => console.log($formPollNew.images.question))
+    .then(() => {
+      $(this).closest('div').after($questionImg)
+    })
     .catch(error => {
       $(this).toggleClass("error", true);
       console.log(error.message);
