@@ -120,6 +120,8 @@ $(() => {
 
   window.$formPollNew = $formPollNew;
 
+  $formPollNew.images = {};
+
   const $selectQuestionImage = $formPollNew.find('#selectQuestionImage');
 
   $selectQuestionImage.on('change', function (event) {
@@ -127,10 +129,10 @@ $(() => {
     const file = this.files[0];
     console.log('file name is: ', file.name);
     convertToBase64(file)
-    .then(result => localStorage.setItem('new_imgBase64_question', result))
-    .then(() => console.log(localStorage.getItem('new_imgBase64_question')))
+    .then(result => $formPollNew.images.question = result)
+    .then(() => console.log($formPollNew.images.question))
     .catch(error => {
-      this.toggleClass("error", true);
+      $(this).toggleClass("error", true);
       console.log(error.message);
     })
   })
@@ -159,7 +161,9 @@ $(() => {
     const output = [];
     submitPoll(data)
     // data in format of "id, creator_email, question, description, results_url, sharing_url and an array of answers"
-    .then(data => uri = data[0].results_url)
+    .then(data => {
+      uri = data[0].results_url;
+    })
     .then(data => getPollByUri(uri))
     .then(data => output.push(data[0]))
     .then(data => getResponsesByUri(uri))
@@ -176,5 +180,6 @@ $(() => {
       console.error(error);
       views_manager.show('pollNew');
     })
+    .finally(delete $formPollNew.images)
   });
 });
