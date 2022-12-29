@@ -124,8 +124,13 @@ $(() => {
 
   $selectQuestionImage.on('change', function (event) {
     console.log('#selectQuestionImage file field has changed!');
-    const fileName = this.files[0].name;
-    console.log('file name is: ', fileName);
+    const files = this.files;
+    console.log('file name is: ', files[0].name);
+    const reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onload = () => {
+      console.log(reader.result);
+    };
   })
 
   $formPollNew.on('submit', function (event) {
