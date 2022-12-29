@@ -120,12 +120,13 @@ $(() => {
 
   window.$formPollNew = $formPollNew;
 
-  const $questionImg = `
+  const generateQuestionImgHTML = (imgData) => {
+    return `
     <div class="row mb-3">
-      <img src="" class="question img-preview" />
-      Image data will go here
+      <img src="${imgData}" class="question img-preview" />
     </div>
-  `;
+    `
+  };
 
   $formPollNew.images = {};
 
@@ -139,7 +140,7 @@ $(() => {
     .then(result => $formPollNew.images.question = result)
     .then(() => console.log($formPollNew.images.question))
     .then(() => {
-      $(this).closest('div').after($questionImg)
+      $(this).closest('div').after(generateQuestionImgHTML($formPollNew.images.question))
     })
     .catch(error => {
       $(this).toggleClass("error", true);
