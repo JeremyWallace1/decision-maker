@@ -21,7 +21,17 @@ $(() => {
               ${poll.config.question}
             </h4>
           </div>
+      `
+      let questionImage = poll.config.image;
+      if (questionImage) {
+        buffer += `
+        <div class="row" id="img-preview-question">
+          <img src="${questionImage}" class="question img-preview" />
+        </div>
+        `
+      }
 
+      buffer += `
           <div class="row">
             <p class="col-md-12" id="description${poll.config.id}">
               ${poll.config.description}
@@ -100,7 +110,7 @@ $(() => {
         </footer>
       </article>
     `;
-
+    console.log(buffer)
     return buffer;
   }
 
