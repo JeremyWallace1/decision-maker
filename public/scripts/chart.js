@@ -13,11 +13,17 @@ new Chart("resultsChart", {
         title: {
           display: true,
           text: `${creator}'s Poll Results`,
-          color: 'rgb(255, 99, 132)'
+          color: 'rgb(187,188,0)',
+          font: {
+            size: 26,
+          }
         },
         display: true,
         labels: {
-          color: 'rgb(255, 99, 132)'
+          color: 'rgb(254, 255, 230)',
+          font: {
+            size: 16,
+          }
         }
       }
     }
