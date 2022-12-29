@@ -94,10 +94,9 @@ $(() => {
       
       const postData = $(this).serialize();
       const output = [];
-      const modifiedPostData = postData + '&ip=' + user_ip;
       let uri = null;
 
-      submitResponse(modifiedPostData)
+      submitResponse(postData)
         .then(data => uri = data[0].results_url)
         .then(() => getPollByUri(uri))
         .then(data => output.push(data[0]))
