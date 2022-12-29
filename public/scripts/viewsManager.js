@@ -15,11 +15,6 @@ $(() => {
         break;
       case 'polls':
         $polls.appendTo($main);
-        console.log(`case ${item} activated...`)
-        // document.getElementById("#chartContainer").innerHTML = `
-        //   blah
-        // `;
-        // $('#chartContainer').clear();
         break
       case 'pollRespond':
         poll_respond.createForm(api.data);
