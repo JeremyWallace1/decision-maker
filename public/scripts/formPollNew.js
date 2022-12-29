@@ -124,14 +124,30 @@ $(() => {
 
   $selectQuestionImage.on('change', function (event) {
     console.log('#selectQuestionImage file field has changed!');
-    const files = this.files;
-    console.log('file name is: ', files[0].name);
-    const reader = new FileReader();
-    reader.readAsDataURL(files[0]);
-    reader.onload = () => {
-      console.log(reader.result);
-    };
+    const file = this.files[0];
+    console.log('file name is: ', file.name);
+    convertToBase64(file)
+    .then(result => localStorage.setItem('new_imgBase64_question', result))
+    .then(() => console.log(localStorage.getItem('new_imgBase64_question')))
+    .catch(error => {
+      this.toggleClass("error", true);
+      console.log(error.message);
+    })
   })
+
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+
+      reader.onError = (error) => {
+        reject(error);
+      };
+    });
+  };
 
   $formPollNew.on('submit', function (event) {
     event.preventDefault();
