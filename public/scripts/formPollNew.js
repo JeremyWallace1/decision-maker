@@ -125,9 +125,8 @@ $(() => {
     return `
     <div class="row my-3" id="img-preview-question">
       <div class="col">  
-        <img src="${imgData}" class="img-fluid img-thumbnail mx-auto d-block question img-preview" />
+        <img src="${imgData}" class="img-fluid img-thumbnail d-block question img-preview" />
         <button class="button my-2" id="remove-img-preview-question">remove image</button>
-        <input type="hidden" name="image_question" id="image_question" value="${imgData}" />
       </div>
     </div>
     `
