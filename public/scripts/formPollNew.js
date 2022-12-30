@@ -137,12 +137,10 @@ $(() => {
 
   $selectQuestionImage.on('change', function (event) {
     const file = this.files[0];
+    const $parentElement = $(this).parent();
     convertToBase64(file)
-    .then(result => $formPollNew.images.question = result)
-    .then(() => {
-      $(this).parent().find('#img-preview-question').remove();
-      $(this).parent().append(generateQuestionImgHTML($formPollNew.images.question));
-    })
+    .then(data => $formPollNew.images.question = data)
+    .then(data => previewImage(data, '#img-preview-question', $parentElement))
     .catch(error => {
       $(this).toggleClass("error", true);
       console.log(error.message);
@@ -162,6 +160,13 @@ $(() => {
       };
     });
   };
+
+  const previewImage = (imgData, newElementId, appendToElementSelector) => {
+    console.log('previewImage started')
+    const html = generateQuestionImgHTML(imgData);
+    $(newElementId).remove();
+    $(appendToElementSelector).append(html);
+  }
 
   $formPollNew.on('submit', function (event) {
     event.preventDefault();
