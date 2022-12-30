@@ -58,8 +58,8 @@ router.post('/', (req, res) => {
           emailConfig['params'] = {
             'headline': 'Someone has responded to your poll!',
             'body': `We have just received a new response to your poll, ${poll.question}. Please use the links below to view results or share your poll with others.`,
-            'share': 'Sharing url: http://' + process.env.SERVER_ADDRESS + ':' + process.env.SERVER_PORT + '/?' + poll.sharing_url,
-            'results': 'Results url: http://' + process.env.SERVER_ADDRESS + ':' + process.env.SERVER_PORT + '/?' + poll.results_url
+            'share': 'Sharing url: ' + process.env.SERVER_ADDRESS + '/?' + poll.sharing_url,
+            'results': 'Results url: ' + process.env.SERVER_ADDRESS + '/?' + poll.results_url
           }
           return sendEmail(emailConfig);
         })
