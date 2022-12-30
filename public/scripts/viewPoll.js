@@ -25,9 +25,9 @@ $(() => {
       let questionImage = poll.config.image;
       if (questionImage) {
         buffer += `
-        <div class="row" id="img-preview-question">
+        <div class="row my-3" id="img-preview-question">
           <div class="col">
-            <img src="${questionImage}" class="question img-preview img-fluid" />
+            <img src="${questionImage}" class="img-fluid img-thumbnail mx-auto d-block question img-preview" />
           </div>
         </div>
         `

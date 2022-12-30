@@ -122,9 +122,9 @@ $(() => {
 
   const generateQuestionImgHTML = (imgData) => {
     return `
-    <div class="row mb-3" id="img-preview-question">
+    <div class="row my-3" id="img-preview-question">
       <div class="col">  
-        <img src="${imgData}" class="question img-preview" />
+        <img src="${imgData}" class="img-fluid img-thumbnail mx-auto d-block question img-preview" />
         <input type="hidden" name="image_question" id="image_question" value="${imgData}" />
       </div>
     </div>
@@ -173,7 +173,6 @@ $(() => {
     if ($formPollNew.images.question) {
       modifiedData += '&image=' + encodeURIComponent($formPollNew.images.question);
     }
-    console.log(modifiedData)
 
     let uri = null;
     const output = [];
