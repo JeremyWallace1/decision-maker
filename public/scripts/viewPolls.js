@@ -56,15 +56,17 @@ $(() => {
         yVal.push(jsonData[0]['scores'][i].scoring);
       }
       if (showResults && length > 0) {
-        const pollWithResults = $(createdPoll).append(`
-          <script src="scripts/chart.js"></script>
-          <script>
-            document.getElementById("resultsArea").hidden = false;
-            document.getElementById("resultsHr").hidden = false;
-          </script>
-        `);
-        addPoll(pollWithResults)
-
+        $.getScript( "scripts/chart.js", function( data, textStatus, jqxhr ) {
+          console.log( data ); // Data returned
+          console.log( textStatus ); // Success
+          console.log( jqxhr.status ); // 200
+          console.log( "Load was performed." );
+          const pollWithResults = $(createdPoll).append(`<script>${data}</script>`);
+          console.log(pollWithResults);
+          $(pollWithResults).find('#resultsArea').removeAttr('hidden');
+          $(pollWithResults).find('#resultsHr').removeAttr('hidden');
+          addPoll(pollWithResults);
+        });
       } else {
         addPoll(createdPoll);
       }
