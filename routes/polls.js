@@ -98,8 +98,7 @@ router.post('/',
         'share': 'Sharing url: http://' + process.env.SERVER_ADDRESS + ':' + process.env.SERVER_PORT + '/?' + poll.sharing_url,
         'results': 'Results url: http://' + process.env.SERVER_ADDRESS + ':' + process.env.SERVER_PORT + '/?' + poll.results_url
       }
-      console.log(emailConfig)
-      // return sendEmail(emailConfig);
+      return sendEmail(emailConfig);
     })
     .then((data) => console.log(data))
     .then(() => res.send(output))

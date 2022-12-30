@@ -9,6 +9,7 @@ const { response } = require('express');
 const express = require('express');
 const router  = express.Router();
 const responseQueries = require('../db/queries/polls');
+const helpers = require('../lib/helpers.js');
 const sendEmail = require('../lib/emailBuilder.js');
 
 // user responds to a poll
@@ -18,11 +19,12 @@ router.post('/', (req, res) => {
   output.push({ results_url: req.body.results_url });
 
   const countChoices = req.body.choices.length;
-  // TODO: To prevent cURL bypassing of IP restricted responses, get IP from API rather than post body
-  const ip = req.body.ip;
+  let ip = null;
   const pollId = req.body.poll_id;
   const promises = [];
-  responseQueries.getRespondentChoices(ip, pollId)
+  helpers.getIP()
+    .then(data => ip = data.ip)
+    .then(() => responseQueries.getRespondentChoices(ip, pollId))
     .then(data => {
       if (data.length > 0) {
         throw new Error(`IP address ${ip} has already replied to this poll`)
@@ -38,7 +40,7 @@ router.post('/', (req, res) => {
         promises.push(responseQueries.createResponse(data));
       }
 
-      Promise.all(promises)
+      return Promise.all(promises)
         .then(all => {
           output[0].responses = all;
           console.log('database updated!', output);
@@ -59,15 +61,18 @@ router.post('/', (req, res) => {
             'share': 'Sharing url: http://' + process.env.SERVER_ADDRESS + ':' + process.env.SERVER_PORT + '/?' + poll.sharing_url,
             'results': 'Results url: http://' + process.env.SERVER_ADDRESS + ':' + process.env.SERVER_PORT + '/?' + poll.results_url
           }
-          // return sendEmail(emailConfig);
+          return sendEmail(emailConfig);
         })
         .then((data) => console.log(data))
         .then(() => res.send(output))
-        .catch(err => console.log(err.message));
+        .catch(error => {
+          console.log(err.message)
+          return error;
+        });
     })
     .catch(error => {
       console.log(`error output: `, error.message)
-      return res.status(500).send('403 - Forbidden. Your IP address has already been used to reply to this poll.');
+      res.status(500).send('403 - Forbidden. ' + error.message);
     });
     
 });
