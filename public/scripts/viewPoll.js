@@ -26,7 +26,9 @@ $(() => {
       if (questionImage) {
         buffer += `
         <div class="row" id="img-preview-question">
-          <img src="${questionImage}" class="question img-preview" />
+          <div class="col">
+            <img src="${questionImage}" class="question img-preview img-fluid" />
+          </div>
         </div>
         `
       }
@@ -110,7 +112,6 @@ $(() => {
         </footer>
       </article>
     `;
-    console.log(buffer)
     return buffer;
   }
 

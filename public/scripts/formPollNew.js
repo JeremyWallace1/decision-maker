@@ -123,8 +123,10 @@ $(() => {
   const generateQuestionImgHTML = (imgData) => {
     return `
     <div class="row mb-3" id="img-preview-question">
-      <img src="${imgData}" class="question img-preview" />
-      <input type="hidden" name="image_question" id="image_question" value="${imgData}" />
+      <div class="col">  
+        <img src="${imgData}" class="question img-preview" />
+        <input type="hidden" name="image_question" id="image_question" value="${imgData}" />
+      </div>
     </div>
     `
   };
@@ -167,10 +169,15 @@ $(() => {
     views_manager.show('none');
 
     const data = $(this).serialize();
-    console.log(data)
+    let modifiedData = data;
+    if ($formPollNew.images.question) {
+      modifiedData += '&image=' + encodeURIComponent($formPollNew.images.question);
+    }
+    console.log(modifiedData)
+
     let uri = null;
     const output = [];
-    submitPoll(data)
+    submitPoll(modifiedData)
     // data in format of "id, creator_email, question, description, results_url, sharing_url and an array of answers"
     .then(data => {
       uri = data[0].results_url;
@@ -191,6 +198,6 @@ $(() => {
       console.error(error);
       views_manager.show('pollNew');
     })
-    .finally(delete $formPollNew.images)
+    .finally(() => delete $formPollNew.images)
   });
 });
