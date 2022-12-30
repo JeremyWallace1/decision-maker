@@ -204,11 +204,12 @@ $(() => {
     .then(data => {
       polls.addPolls(output, true);
       views_manager.show('polls');
+      delete $formPollNew.images
     })
     .catch((error) => {
       console.error(error);
+      delete $formPollNew.images
       views_manager.show('pollNew');
     })
-    .finally(() => delete $formPollNew.images)
   });
 });
