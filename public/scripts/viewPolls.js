@@ -55,7 +55,7 @@ $(() => {
         xVal.push('Answer #' + (jsonData[0]['scores'][i].choice_id - minNum + 1));
         yVal.push(jsonData[0]['scores'][i].scoring);
       }
-      if (showResults) {
+      if (showResults && length > 0) {
         const pollWithResults = $(createdPoll).append(`
           <script src="scripts/chart.js"></script>
           <script>

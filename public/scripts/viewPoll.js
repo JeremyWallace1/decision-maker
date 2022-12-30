@@ -41,8 +41,7 @@ $(() => {
     for (const choice in poll.choices) {
       num++;
       const choiceId = poll.choices[choice].id;
-      // poll.scores = [{choice_id: choiceId, scoring: `${num}`}];
-      // console.log('poll.scores:', JSON.stringify(poll.scores), 'poll.scores.length', poll.scores.length);
+
       let score = 0;
       let target;
       if (poll.scores.length > 0) {
@@ -53,9 +52,7 @@ $(() => {
 
         }
 
-        // console.log(`target is ${JSON.stringify(target)}, target.scoring = ${target.scoring}`);
         score = target.scoring;
-        // console.log(`score is ${score}`);
       }
 
       buffer += `
