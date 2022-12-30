@@ -38,6 +38,7 @@ $(() => {
             name="question_image"
             accept="image/*"
             type="file"
+            capture="user"
           />
         </div>
       </div>
@@ -138,6 +139,7 @@ $(() => {
 
   $selectQuestionImage.on('change', function (event) {
     const file = this.files[0];
+    console.log(file)
     const parentElement = $(this).parent();
     convertToBase64(file)
     .then(data => $formPollNew.images.question = data)
