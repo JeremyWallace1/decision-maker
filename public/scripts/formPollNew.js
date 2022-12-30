@@ -125,6 +125,7 @@ $(() => {
     <div class="row my-3" id="img-preview-question">
       <div class="col">  
         <img src="${imgData}" class="img-fluid img-thumbnail mx-auto d-block question img-preview" />
+        <button class="button my-2" id="remove-img-preview-question">remove image</button>
         <input type="hidden" name="image_question" id="image_question" value="${imgData}" />
       </div>
     </div>
@@ -137,10 +138,10 @@ $(() => {
 
   $selectQuestionImage.on('change', function (event) {
     const file = this.files[0];
-    const $parentElement = $(this).parent();
+    const parentElement = $(this).parent();
     convertToBase64(file)
     .then(data => $formPollNew.images.question = data)
-    .then(data => previewImage(data, '#img-preview-question', $parentElement))
+    .then(data => previewImage(data, '#img-preview-question', parentElement))
     .catch(error => {
       $(this).toggleClass("error", true);
       console.log(error.message);
@@ -162,10 +163,15 @@ $(() => {
   };
 
   const previewImage = (imgData, newElementId, appendToElementSelector) => {
-    console.log('previewImage started')
     const html = generateQuestionImgHTML(imgData);
     $(newElementId).remove();
     $(appendToElementSelector).append(html);
+    $(newElementId).find('#remove-img-preview-question')
+      .on('click', function (event) {
+        event.preventDefault();
+        $(newElementId).remove();
+      }
+    )
   }
 
   $formPollNew.on('submit', function (event) {
