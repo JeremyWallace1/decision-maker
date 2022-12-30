@@ -17,10 +17,10 @@ $(() => {
           <hr>
 
           <div class="row">
-            <h4 class="col-lg-2" id="labelQuestion${poll.config.id}">
+            <h4 class="col-md-2" id="labelQuestion${poll.config.id}">
               Question:
             </h4>
-            <h4 class="col-lg-10" id="question${poll.config.id}">
+            <h4 class="col-md-10" id="question${poll.config.id}">
               ${poll.config.question}
             </h4>
           </div>
@@ -39,7 +39,7 @@ $(() => {
     buffer += `
 
           <div class="row">
-            <p class="col-lg-12" id="description${poll.config.id}">
+            <p class="col-md-12" id="description${poll.config.id}">
               ${poll.config.description}
             </p>
           </div>
@@ -52,7 +52,7 @@ $(() => {
             $( "#sortable" ).sortable();
           });
         </script>
-        <p class="col-lg-12" id="orderInstructions">
+        <p class="col-md-12" id="orderInstructions">
           Please order your choices from top to bottom before submitting.
         </p>
         <ul id="sortable" class="ui-sortable">
@@ -65,9 +65,9 @@ $(() => {
       buffer += `
       <li class="row ui-state-default ui-sortable-handle" id="answer${poll.choices[choice].id}">
         <div class="row">
-          <h5 class="col-lg-2" id="labelAnswer${poll.choices[choice].id}">Answer #${count}:</h5>
-          <h6 class="col-lg-10" id="answer${poll.choices[choice].id}">${poll.choices[choice].title}</h6>
-          <p class="col-lg-12" id="description${poll.choices[choice].id}">${poll.choices[choice].description}</p>
+          <h5 class="col-md-2" id="labelAnswer${poll.choices[choice].id}">Answer #${count}:</h5>
+          <h6 class="col-md-10" id="answer${poll.choices[choice].id}">${poll.choices[choice].title}</h6>
+          <p class="col-md-12" id="description${poll.choices[choice].id}">${poll.choices[choice].description}</p>
           <input type="hidden" name="choices" value="${poll.choices[choice].id}" />
         </div>
 
