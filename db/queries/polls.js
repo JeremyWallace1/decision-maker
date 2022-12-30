@@ -6,14 +6,15 @@ const createPoll = (data) => {
     INSERT INTO polls (
       creator_email,
       question,
+      image,
       description,
       results_url,
       sharing_url
     )
-    VALUES ($1, $2, $3, $4, $5)
+    VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING *
   `,
-    values: [data.email, data.question, data.description, data.results_url, data.sharing_url],
+    values: [data.email, data.question, data.image, data.description, data.results_url, data.sharing_url],
   }
   
   return db.query(query)
@@ -70,6 +71,7 @@ const getPollById = (id) => {
     id,
     creator_email,
     question,
+    polls.image,
     polls.description,
     results_url,
     sharing_url
@@ -86,6 +88,7 @@ const getPollByResultsUri = (uri) => {
     id,
     creator_email,
     question,
+    polls.image,
     polls.description,
     results_url,
     sharing_url
@@ -102,6 +105,7 @@ const getPollBySharingUri = (uri) => {
     id,
     creator_email,
     question,
+    polls.image,
     polls.description,
     results_url,
     sharing_url

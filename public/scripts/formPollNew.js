@@ -28,7 +28,25 @@ $(() => {
 
     <div class="row mb-3">
       <div class="row mb-3">
-        <label for="inputTitle" class="col-lg-2 col-form-label">
+        <label for="selectQuestionImage" class="col-md-2 col-form-label">
+          Add Image:
+        </label>
+        <div class="col-md-10">
+          <input
+            class="form-control"
+            id="selectQuestionImage"
+            name="question_image"
+            accept="image/*"
+            type="file"
+            capture="user"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="row mb-3">
+        <label for="inputTitle" class="col-md-2 col-form-label">
           Description:
         </label>
         <div class="col-lg-10">
@@ -103,17 +121,79 @@ $(() => {
 
   window.$formPollNew = $formPollNew;
 
+  const generateQuestionImgHTML = (imgData) => {
+    return `
+    <div class="row my-3" id="img-preview-question">
+      <div class="col">  
+        <img src="${imgData}" class="img-fluid img-thumbnail mx-auto d-block question img-preview" />
+        <button class="button my-2" id="remove-img-preview-question">remove image</button>
+        <input type="hidden" name="image_question" id="image_question" value="${imgData}" />
+      </div>
+    </div>
+    `
+  };
+
+  $formPollNew.images = {};
+
+  const $selectQuestionImage = $formPollNew.find('#selectQuestionImage');
+
+  $selectQuestionImage.on('change', function (event) {
+    const file = this.files[0];
+    console.log(file)
+    const parentElement = $(this).parent();
+    convertToBase64(file)
+    .then(data => $formPollNew.images.question = data)
+    .then(data => previewImage(data, '#img-preview-question', parentElement))
+    .catch(error => {
+      $(this).toggleClass("error", true);
+      console.log(error.message);
+    })
+  })
+
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+
+      reader.onError = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const previewImage = (imgData, newElementId, appendToElementSelector) => {
+    const html = generateQuestionImgHTML(imgData);
+    $(newElementId).remove();
+    $(appendToElementSelector).append(html);
+    $(newElementId).find('#remove-img-preview-question')
+      .on('click', function (event) {
+        event.preventDefault();
+        $(newElementId).remove();
+      }
+    )
+  }
+
   $formPollNew.on('submit', function (event) {
     event.preventDefault();
 
     views_manager.show('none');
 
     const data = $(this).serialize();
+    let modifiedData = data;
+    if ($formPollNew.images.question) {
+      modifiedData += '&image=' + encodeURIComponent($formPollNew.images.question);
+    }
+
     let uri = null;
     const output = [];
-    submitPoll(data)
+    submitPoll(modifiedData)
     // data in format of "id, creator_email, question, description, results_url, sharing_url and an array of answers"
-    .then(data => uri = data[0].results_url)
+    .then(data => {
+      uri = data[0].results_url;
+    })
     .then(data => getPollByUri(uri))
     .then(data => output.push(data[0]))
     .then(data => getResponsesByUri(uri))
@@ -130,5 +210,6 @@ $(() => {
       console.error(error);
       views_manager.show('pollNew');
     })
+    .finally(() => delete $formPollNew.images)
   });
 });
