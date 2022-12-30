@@ -14,16 +14,16 @@ $(() => {
           <hr>
   
           <div class="row">
-            <h4 class="col-md-2" id="labelQuestion${poll.config.id}">
+            <h4 class="col-lg-2" id="labelQuestion${poll.config.id}">
               Question:
             </h4>
-            <h4 class="col-md-10" id="question${poll.config.id}">
+            <h4 class="col-lg-10" id="question${poll.config.id}">
               ${poll.config.question}
             </h4>
           </div>
 
           <div class="row">
-            <p class="col-md-12" id="description${poll.config.id}">
+            <p class="col-lg-12" id="description${poll.config.id}">
               ${poll.config.description}
             </p>
           </div>
@@ -61,12 +61,12 @@ $(() => {
       buffer += `
       
           <div class="row">
-            <h5 class="col-md-2" id="labelAnswer${poll.choices[choice].id}">Answer #${num}:</h5>
-            <h6 class="col-md-10" id="answer${poll.choices[choice].id}">${poll.choices[choice].title}</h6>
+            <h5 class="col-lg-2" id="labelAnswer${poll.choices[choice].id}">Answer #${num}:</h5>
+            <h6 class="col-lg-10" id="answer${poll.choices[choice].id}">${poll.choices[choice].title}</h6>
           </div>
       
           <div class="row">
-            <p class="col-md-12" id="description${poll.choices[choice].id}">${poll.choices[choice].description}</p>
+            <p class="col-lg-12" id="description${poll.choices[choice].id}">${poll.choices[choice].description}</p>
           </div>
 
           <div class="row mb-12">

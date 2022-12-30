@@ -3,7 +3,6 @@ new Chart("resultsChart", {
   data: {
     labels: toolTipVal,
     datasets: [{
-      // label: toolTipVal,
       backgroundColor: colours,
       data: yVal
     }]
@@ -13,7 +12,6 @@ new Chart("resultsChart", {
       legend: {
         title: {
           display: true,
-          // text: `${creator}'s Poll Results`,
           text: `Poll Results`,
           color: 'rgb(187,188,0)',
           font: {
@@ -25,17 +23,11 @@ new Chart("resultsChart", {
           color: 'rgb(254, 255, 230)',
           font: {
             size: 16,
-          }
+          },
         },
       },
-      // tooltip: {
-      //   enabled: true,
-      //   callbacks: {
-      //     label: (item) => label + ': ' + item.parsed,
-      //     // label: (item) => item.parsed + '%'
-      //   },
-      // },
     },
+    animation: true,
     maintainAspectRatio: false,
   },
 });

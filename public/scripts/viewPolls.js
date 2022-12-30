@@ -1,7 +1,11 @@
 $(() => {
   // this is the creator view after creating a new poll 
   // and same view for returning through admin link
-
+  xVal = [];
+  yVal = [];
+  toolTipVal = [];
+  colours = ['#008BBC', '#BBBC00', '#BC5F00', '#5F00BC', '#005777']; // #BC00BB
+  
   const $polls = $(`
   <section class="polls" id="polls">
     <p>Loading...</p>
