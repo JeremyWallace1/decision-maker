@@ -85,12 +85,24 @@ router.post('/',
     })
     .then(() => {
       const poll = output[0];
+      let recipientEmail = null;
+      switch (process.env.ENV_TYPE) {
+        case ('development') :
+          recipientEmail = process.env.DEV_EMAIL || null;
+          break;
+        case ('staging') :
+          recipientEmail = process.env.STAGING_EMAIL || null;
+          break;
+        case ('production') :
+          recipientEmail = poll.creator_email || null;
+          break;
+      }
+
       const emailConfig = {};
       emailConfig['subject'] = 'New Decision Maker poll created!',
       emailConfig['sender'] = {'email': 'api@sendinblue.com', 'name': 'Sendinblue'},
+      emailConfig['to'] = [{ 'name': 'Poll Owner', 'email': recipientEmail }];
       emailConfig['replyTo'] = {'email': 'api@sendinblue.com', 'name': 'Sendinblue'},
-      // emailConfig['to'] = [{ 'name': 'Poll Owner', 'email': poll.creator_email }],
-      emailConfig['to'] = [{ 'name': 'Poll Owner', 'email': process.env.DEV_EMAIL }],
       emailConfig['htmlContent'] = '<html><body><h1>{{params.headline}}</h1><p>{{params.body}}</p><p>{{params.share}}</p><p>{{params.results}}</p></body></html>',
       emailConfig['params'] = {
         'headline': 'You have successfully created a new poll with Decision Maker!',
@@ -98,18 +110,11 @@ router.post('/',
         'share': 'Sharing url: ' + process.env.SERVER_ADDRESS + '/?' + poll.sharing_url,
         'results': 'Results url: ' + process.env.SERVER_ADDRESS + '/?' + poll.results_url
       }
+    
       return sendEmail(emailConfig);
     })
     .then((data) => console.log(data))
     .then(() => res.send(output))
-    // .then(data => {
-    //   console.log(data);
-    //   res.send(data);
-    // })
-    // .then(data => {
-    //   const pollId = data[0].poll_id;
-    //   return res.redirect(`/polls/${pollId}`);
-    // })
     .catch(error => {
       console.log(`error output: `, error.message)
       return res.status(500).send('500 - Internal Server Error');
