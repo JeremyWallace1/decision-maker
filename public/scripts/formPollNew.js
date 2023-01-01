@@ -209,6 +209,6 @@ $(() => {
       console.error(error);
       views_manager.show('pollNew');
     })
-    .finally(() => delete $formPollNew.images)
+    .then(() => delete $formPollNew.images)
   });
 });
