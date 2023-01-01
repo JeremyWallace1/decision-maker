@@ -15,7 +15,7 @@ router.get('/ip', (req, res) => {
     .then(data => res.json(data))
     .catch(err => {
       return res.status(500)
-          .json({ error: err.message });
+        .send('500 - Internal Server Error. ' + err.message);
     });
 });
 
