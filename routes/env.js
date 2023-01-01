@@ -8,10 +8,10 @@
 const { response } = require('express');
 const express = require('express');
 const router  = express.Router();
-const helpers = require('../lib/helpers.js');
+const { getIp } = require('../lib/helpers.js');
 
 router.get('/ip', (req, res) => {
-  helpers.getIP()
+  getIp()
     .then(data => res.json(data))
     .catch(err => {
       return res.status(500)
