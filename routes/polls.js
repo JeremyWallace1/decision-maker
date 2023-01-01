@@ -84,6 +84,10 @@ router.post('/',
       console.log(output);
     })
     .then(() => {
+      const referer = req.headers.referer;
+      const indexOriginEnd = referer.indexOf('/', 8) + 1;
+      const origin = referer.slice(0, indexOriginEnd);
+
       const poll = output[0];
       let recipientEmail = null;
       switch (process.env.ENV_TYPE) {
@@ -107,8 +111,8 @@ router.post('/',
       emailConfig['params'] = {
         'headline': 'You have successfully created a new poll with Decision Maker!',
         'body': `You want to know, ${poll.question} Please use the links below to view results or share your poll with others.`,
-        'share': 'Sharing url: ' + process.env.SERVER_ADDRESS + '/?' + poll.sharing_url,
-        'results': 'Results url: ' + process.env.SERVER_ADDRESS + '/?' + poll.results_url
+        'share': 'Sharing url: ' + origin + '?' + poll.sharing_url,
+        'results': 'Results url: ' + origin + '?' + poll.results_url
       }
     
       return sendEmail(emailConfig);
