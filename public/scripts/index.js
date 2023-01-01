@@ -25,7 +25,7 @@ $(() => {
       if (output[0].uriType === 'Share') {
         api.data = output[0];
         return getMyIp()
-        .then(data => window.user_ip = data.ip)
+        .then(ip => window.user_ip = ip)
         .then(ip => getResponsesByIp(ip, uri))
         .then(data => {
           if (data[0].responses.length === 0) {
