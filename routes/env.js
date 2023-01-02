@@ -8,14 +8,14 @@
 const { response } = require('express');
 const express = require('express');
 const router  = express.Router();
-const helpers = require('../lib/helpers.js');
+const { getIP } = require('../lib/helpers.js');
 
 router.get('/ip', (req, res) => {
-  helpers.getIP()
+  getIP(req)
     .then(data => res.json(data))
     .catch(err => {
       return res.status(500)
-          .json({ error: err.message });
+        .json({ error: err.message });
     });
 });
 

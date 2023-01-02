@@ -47,20 +47,37 @@ router.post('/', (req, res) => {
         })
         .then(() => responseQueries.getPollByResultsUri(output[0].results_url))
         .then(data => {
+          const referer = req.headers.referer;
+          const indexOriginEnd = referer.indexOf('/', 8) + 1;
+          const origin = referer.slice(0, indexOriginEnd);
+        
           const poll = data;
+          let recipientEmail = null;
+          switch (process.env.ENV_TYPE) {
+            case ('development') :
+              recipientEmail = process.env.DEV_EMAIL || null;
+              break;
+            case ('staging') :
+              recipientEmail = process.env.STAGING_EMAIL || null;
+              break;
+            case ('production') :
+              recipientEmail = poll.creator_email || null;
+              break;
+          }
+
           const emailConfig = {};
           emailConfig['subject'] = 'New response to your poll!',
           emailConfig['sender'] = {'email': 'api@sendinblue.com', 'name': 'Sendinblue'},
           emailConfig['replyTo'] = {'email': 'api@sendinblue.com', 'name': 'Sendinblue'},
-          // emailConfig['to'] = [{ 'name': 'Poll Owner', 'email': poll.creator_email }],
-          emailConfig['to'] = [{ 'name': 'Poll Owner', 'email': process.env.DEV_EMAIL }],
+          emailConfig['to'] = [{ 'name': 'Poll Owner', 'email': recipientEmail }];
           emailConfig['htmlContent'] = '<html><body><h1>{{params.headline}}</h1><p>{{params.body}}</p><p>{{params.share}}</p><p>{{params.results}}</p></body></html>',
           emailConfig['params'] = {
             'headline': 'Someone has responded to your poll!',
             'body': `We have just received a new response to your poll, ${poll.question}. Please use the links below to view results or share your poll with others.`,
-            'share': 'Sharing url: ' + process.env.SERVER_ADDRESS + '/?' + poll.sharing_url,
-            'results': 'Results url: ' + process.env.SERVER_ADDRESS + '/?' + poll.results_url
+            'share': 'Sharing url: ' + origin + '?' + poll.sharing_url,
+            'results': 'Results url: ' + origin + '?' + poll.results_url
           }
+
           return sendEmail(emailConfig);
         })
         .then((data) => console.log(data))
