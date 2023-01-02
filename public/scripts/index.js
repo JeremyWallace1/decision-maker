@@ -118,7 +118,13 @@ $(() => {
               <textarea rows="3" class="form-control" id="answer${num}_description" name="answer${num}_description" placeholder="optional"></textarea>
             </div>
           </div>
-          <button type="button" class="button-link" id="addDescription${num}"  onclick="addDescription(${num});">+ description</button>
+          <div class="row mb-1">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-10">
+              <button type="button" class="button-link" id="addDescription${num}"  onclick="addDescription(${num});"><i class="fa-solid fa-plus">&nbsp</i>add description</button>
+            </div>
+          </div>
         </div>
         `
       );

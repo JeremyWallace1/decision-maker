@@ -74,7 +74,13 @@ $(() => {
             <textarea rows="3" class="form-control" id="answer1_description" name="answer1_description" placeholder="optional"></textarea>
           </div>
         </div>
-          <button type="button" class="button-link" id="addDescription1"  onclick="addDescription(1);">+ description</button>
+        <div class="row mb-1">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-10">
+            <button type="button" class="button-link" id="addDescription1"  onclick="addDescription(1);"><i class="fa-solid fa-plus">&nbsp</i>add description</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -97,11 +103,15 @@ $(() => {
             <textarea rows="3" class="form-control" id="answer2_description" name="answer2_description" placeholder="optional"></textarea>
           </div>
         </div>
-        <button type="button" class="button-link" id="addDescription2"  onclick="addDescription(2);">+ description</button>
-
+        <div class="row mb-1">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-10">
+            <button type="button" class="button-link" id="addDescription2"  onclick="addDescription(2);"><i class="fa-solid fa-plus">&nbsp</i>add description</button>
+          </div>
+        </div>
       </div>
     </div>
-
     <div id="moreAnswers"></div>
 
     
