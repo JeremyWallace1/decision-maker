@@ -11,7 +11,7 @@ const router  = express.Router();
 const { getIP } = require('../lib/helpers.js');
 
 router.get('/ip', (req, res) => {
-  getIP()
+  getIP(req)
     .then(data => res.json(data))
     .catch(err => {
       return res.status(500)
