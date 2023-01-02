@@ -56,19 +56,7 @@ $(() => {
       for (const choice in poll.choices) {
         num++;
         const choiceId = poll.choices[choice].id;
-  
-        let score = 0;
-        let target;
-        if (poll.scores.length > 0) {
-          for (let i in poll.scores) {
-            if (poll.scores[i].choice_id === choiceId) {
-              target = {choice_id: choiceId, scoring: poll.scores[i].scoring}
-            }
-  
-          }
-  
-          score = target.scoring;
-        }
+        const score = getScore(choiceId, poll.scores)
   
         buffer += `
         
@@ -130,4 +118,11 @@ $(() => {
   }
 
   window.poll.createPoll = createPoll;
+
+  const getScore = (choiceId = 0, data) => {
+    const scoreData = data.filter(scoreData => scoreData.choice_id === choiceId);
+    const score = scoreData[0].scoring ? scoreData[0].scoring : 0;
+    return score;
+  }
+
 });
