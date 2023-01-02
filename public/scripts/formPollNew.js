@@ -66,7 +66,7 @@ $(() => {
             <input type="text" class="form-control" id="answer1" name="answer1_title" required>
           </div>
         </div>
-        <div class="row mb-3">
+        <div class="row mb-3" id="description1" hidden>
           <label for="answer1_description" class="col-md-2 col-form-label">
             Description:
           </label>
@@ -88,7 +88,7 @@ $(() => {
             <input type="text" class="form-control" id="answer2" aria-describedby="answer2Feedback" name="answer2_title" required>
           </div>
         </div>
-        <div class="row mb-3">
+        <div class="row mb-3" id="description1" hidden>
           <label for="answer2_description" class="col-md-2 col-form-label">
             Description:
           </label>
