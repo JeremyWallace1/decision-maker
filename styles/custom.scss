@@ -165,6 +165,23 @@ body {
     min-width: auto;
   }
 
+  .button-link {
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0em 0.5em;
+    max-width: 160px;
+    color: $yellowgr;
+    text-decoration: underline;
+  }
+
+  .button-link:hover {
+    color: $uberltblue;
+  }
+
+  .fa-plus {
+    font-size: 1.5em;
+  }
+
   .titling {
     background-color: $uberdkblue;
     padding: 0.5em 1em;

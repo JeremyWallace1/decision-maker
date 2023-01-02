@@ -9,7 +9,7 @@ const { response } = require('express');
 const express = require('express');
 const router  = express.Router();
 const responseQueries = require('../db/queries/polls');
-const helpers = require('../lib/helpers.js');
+const { getIP } = require('../lib/helpers.js');
 const sendEmail = require('../lib/emailBuilder.js');
 
 // user responds to a poll
@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
   let ip = null;
   const pollId = req.body.poll_id;
   const promises = [];
-  helpers.getIP()
+  getIP(req)
     .then(data => ip = data.ip)
     .then(() => responseQueries.getRespondentChoices(ip, pollId))
     .then(data => {
