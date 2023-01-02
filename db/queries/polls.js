@@ -30,12 +30,13 @@ const createChoice = (data) => {
     INSERT INTO poll_choices (
       poll_id,
       title,
+      image,
       description
     )
-    VALUES ($1, $2, $3)
+    VALUES ($1, $2, $3, $3)
     RETURNING *
   `,
-    values: [data.poll_id, data.title, data.description],
+    values: [data.poll_id, data.title, data.image, data.description],
   }
   
   return db.query(query)
@@ -121,6 +122,7 @@ const getPollChoices = (id) => {
   SELECT
     id,
     title,
+    image,
     description
   FROM poll_choices
   WHERE poll_id = $1`, [id])
