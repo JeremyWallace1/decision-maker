@@ -2,20 +2,21 @@ $(() => {
 
   const $formPollNew = $(`
   <form action="/polls" method="POST" class="col-12" id="create-poll">
-    <div class="row mb-3">
-      <div class="row mb-3">
+    <div class="row mb-0">
+      <div class="row mb-0">
         <label for="inputEmail" class="col-md-2 col-form-label">Your email:</label>
         <div class="col-md-10">
           <input type="email" class="form-control" id="inputEmail" name="email" required>
         </div>
       </div>
     </div>
+    <hr class="minor">
 
     <div class="row mb-3">
       <h3>What do you want to ask?</h3>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-0">
       <div class="row mb-3">
         <label for="inputQuestion" class="col-md-2 col-form-label">
           Question:
@@ -26,7 +27,7 @@ $(() => {
       </div>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-0">
       <div class="row mb-3">
         <label for="selectQuestionImage" class="col-md-2 col-form-label">
           Add Image:
@@ -44,16 +45,24 @@ $(() => {
       </div>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-3" id="description0" style="display: none">
       <div class="row mb-3">
         <label for="inputTitle" class="col-md-2 col-form-label">
           Description:
         </label>
         <div class="col-md-10">
-          <textarea class="form-control" id="inputTitle" name="description" placeholder="optional"></textarea>
+          <textarea rows="3" class="form-control" id="inputTitle" name="description" placeholder="optional"></textarea>
         </div>
       </div>
     </div>
+    <div class="row mb-3">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-10">
+        <button type="button" class="button-link" id="addDescription0"  onclick="addDescription(0);"><i class="fa-solid fa-plus">&nbsp</i>add description</button>
+      </div>
+    </div>
+    <hr class="minor">
 
     <div id="Answer1">
       <div class="row mb-3 answerOne">
@@ -66,12 +75,19 @@ $(() => {
             <input type="text" class="form-control" id="answer1" name="answer1_title" required>
           </div>
         </div>
-        <div class="row mb-3">
+        <div class="row mb-3" id="description1" style="display: none">
           <label for="answer1_description" class="col-md-2 col-form-label">
             Description:
           </label>
           <div class="col-md-10">
             <textarea rows="3" class="form-control" id="answer1_description" name="answer1_description" placeholder="optional"></textarea>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-10">
+            <button type="button" class="button-link" id="addDescription1"  onclick="addDescription(1);"><i class="fa-solid fa-plus">&nbsp</i>add description</button>
           </div>
         </div>
       </div>
@@ -88,7 +104,7 @@ $(() => {
             <input type="text" class="form-control" id="answer2" aria-describedby="answer2Feedback" name="answer2_title" required>
           </div>
         </div>
-        <div class="row mb-3">
+        <div class="row mb-3" id="description2" style="display: none">
           <label for="answer2_description" class="col-md-2 col-form-label">
             Description:
           </label>
@@ -96,9 +112,15 @@ $(() => {
             <textarea rows="3" class="form-control" id="answer2_description" name="answer2_description" placeholder="optional"></textarea>
           </div>
         </div>
+        <div class="row mb-1">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-10">
+            <button type="button" class="button-link" id="addDescription2"  onclick="addDescription(2);"><i class="fa-solid fa-plus">&nbsp</i>add description</button>
+          </div>
+        </div>
       </div>
     </div>
-
     <div id="moreAnswers"></div>
 
     

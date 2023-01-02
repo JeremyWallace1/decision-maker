@@ -110,12 +110,19 @@ $(() => {
               aria-describedby="answer${num}Feedback" name="answer${num}_title" required>
             </div>
           </div>
-          <div class="row mb-3">
+          <div class="row mb-3" id="description${num}" style="display: none">
             <label for="answer${num}_description" class="col-md-2 col-form-label">
               Description:
             </label>
             <div class="col-md-10">
               <textarea rows="3" class="form-control" id="answer${num}_description" name="answer${num}_description" placeholder="optional"></textarea>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-10">
+              <button type="button" class="button-link" id="addDescription${num}"  onclick="addDescription(${num});"><i class="fa-solid fa-plus">&nbsp</i>add description</button>
             </div>
           </div>
         </div>
@@ -131,6 +138,17 @@ $(() => {
       toggleButtons();
     }
   };
+
+  addDescription = (num) => {
+    console.log(`clicked on #description${num}'s add description button...`)
+    $(`#addDescription${num}`).hide(300);
+    $(`#description${num}`).show(300);
+  };
+
+  // removeDescription = (num) => {
+  //   console.log(`clicked on #description${num}'s remove description button...`)
+  //   $(`#description${num}`).hide(500);
+  // }
 
   copyUrl = (url) => {
     navigator.clipboard.writeText(url);
