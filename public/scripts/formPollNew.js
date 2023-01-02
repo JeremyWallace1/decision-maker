@@ -27,7 +27,7 @@ $(() => {
       </div>
     </div>
 
-    <div class="row mb-0">
+    <div class="row mb-0" id="descriptionImage0" style="display: none">
       <div class="row mb-3">
         <label for="selectQuestionImage" class="col-md-2 col-form-label">
           Add Image:
@@ -44,9 +44,17 @@ $(() => {
         </div>
       </div>
     </div>
+    <div class="row mb-0">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-10">
+        <button type="button" class="button-link" id="addDescriptionImage0"  onclick="addDescription('Image0');"><i class="fa-solid fa-plus">&nbsp</i>add image</button>
+      </div>
+    </div>
 
-    <div class="row mb-3" id="description0" style="display: none">
-      <div class="row mb-3">
+
+    <div class="row mb-0" id="description0" style="display: none">
+      <div class="row mb-0">
         <label for="inputTitle" class="col-md-2 col-form-label">
           Description:
         </label>
