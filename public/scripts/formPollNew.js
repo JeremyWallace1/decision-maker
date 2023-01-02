@@ -66,7 +66,7 @@ $(() => {
             <input type="text" class="form-control" id="answer1" name="answer1_title" required>
           </div>
         </div>
-        <div class="row mb-3" id="description1" hidden>
+        <div class="row mb-3" id="description1" style="display: none">
           <label for="answer1_description" class="col-md-2 col-form-label">
             Description:
           </label>
@@ -74,6 +74,7 @@ $(() => {
             <textarea rows="3" class="form-control" id="answer1_description" name="answer1_description" placeholder="optional"></textarea>
           </div>
         </div>
+          <button type="button" class="button-link" id="addDescription1"  onclick="addDescription(1);">+ description</button>
       </div>
     </div>
 
@@ -88,7 +89,7 @@ $(() => {
             <input type="text" class="form-control" id="answer2" aria-describedby="answer2Feedback" name="answer2_title" required>
           </div>
         </div>
-        <div class="row mb-3" id="description1" hidden>
+        <div class="row mb-3" id="description2" style="display: none">
           <label for="answer2_description" class="col-md-2 col-form-label">
             Description:
           </label>
@@ -96,6 +97,8 @@ $(() => {
             <textarea rows="3" class="form-control" id="answer2_description" name="answer2_description" placeholder="optional"></textarea>
           </div>
         </div>
+        <button type="button" class="button-link" id="addDescription2"  onclick="addDescription(2);">+ description</button>
+
       </div>
     </div>
 
