@@ -120,7 +120,7 @@ $(() => {
           output[0].scores = data[0].scores;
         })
         .then(() => {
-          polls.addPolls(output, false);
+          polls.addPolls(output, false, false);
           views_manager.show('polls');
         })
     });

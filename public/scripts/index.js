@@ -35,7 +35,7 @@ $(() => {
           output[0].pollId = output[0].config.id;
           output[0].responses = data[0].responses;
           output[0].scores = [];
-          polls.addPolls(output, false);
+          polls.addPolls(output, false, false);
           view = 'polls';
           return Promise.reject('end promise chain');
         })
@@ -46,7 +46,7 @@ $(() => {
       output[0].pollId = output[0].config.id;
       output[0].responses = data[0].responses;
       output[0].scores = data[0].scores;
-      polls.addPolls(output, true);
+      polls.addPolls(output, true, false);
       view = 'polls';
       return Promise.reject('end promise chain');
     })
