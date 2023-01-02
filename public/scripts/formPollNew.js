@@ -232,7 +232,7 @@ $(() => {
       output[0].scores = data[0].scores;
     })
     .then(data => {
-      polls.addPolls(output, true);
+      polls.addPolls(output, true, true);
       views_manager.show('polls');
     })
     .catch((error) => {
