@@ -48,7 +48,7 @@ $(() => {
       <div class="col-md-2">
       </div>
       <div class="col-md-10">
-        <button type="button" class="button-link" id="addDescriptionImage0"  onclick="addDescription('Image0');"><i class="fa-solid fa-plus">&nbsp</i>add image</button>
+        <button type="button" class="button-link" id="addDescriptionImage0"  onclick="addDescription('Image0');"><i class="fa-regular fa-image">&nbsp</i>add image</button>
       </div>
     </div>
 
