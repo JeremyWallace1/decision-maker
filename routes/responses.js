@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
   let ip = null;
   const pollId = req.body.poll_id;
   const promises = [];
-  helpers.getIP()
+  helpers.getIP(req)
     .then(data => ip = data.ip)
     .then(() => responseQueries.getRespondentChoices(ip, pollId))
     .then(data => {
