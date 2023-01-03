@@ -49,6 +49,7 @@ router.post('/',
           }
 
           const poll_id = output[0].id;
+          const image = output[0].image;
           const description = req.body[`answer${countChoice}_description`];
           let title = req.body[`answer${countChoice}_title`];
           
@@ -70,11 +71,10 @@ router.post('/',
             continue;
           }
           
-          const choiceData = { poll_id, title, description };
+          const choiceData = { poll_id, title, image, description };
 
           choicePromises.push(pollQueries.createChoice(choiceData));
         }
-        
         return Promise.all(choicePromises)
       }
     )
@@ -114,7 +114,11 @@ router.post('/',
         'share': 'Sharing url: ' + origin + '?' + poll.sharing_url,
         'results': 'Results url: ' + origin + '?' + poll.results_url
       }
-    
+      
+      const sendReceipt = process.env.SENDINBLUE_ENABLE;
+      if (!sendReceipt || sendReceipt === 'false') {
+        return {};
+      }
       return sendEmail(emailConfig);
     })
     .then((data) => console.log(data))
