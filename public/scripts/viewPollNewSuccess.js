@@ -12,15 +12,9 @@ $(() => {
     const sharingUrl = origin.concat('/?', poll.config.sharing_url);
     const resultsUrl = origin.concat('/?', poll.config.results_url);
     let buffer = `
-    <h3 class="titling">
+    <h1 class="display-4">
       Your new poll was created successfully!
     </h3>
-
-    <div class="row">
-      <h1 class="display-4" id="question${poll.config.id}">
-        ${poll.config.question}
-      </h1>
-    </div>
 
     <article class="poll" id="poll_${poll.config.id}">
       <header class="poll_heading">
@@ -32,6 +26,11 @@ $(() => {
       <hr>
       
       <footer class="poll_footer row mb-3">
+      <div class="row">
+        <h1 class="" id="question${poll.config.id}">
+          ${poll.config.question}
+        </h1>
+      </div>
         <h6 class="poll_share_url">
           Share poll: &nbsp;&nbsp;<a href='${sharingUrl}' class="shareUrl" title='share this poll'>${sharingUrl}</a>
           <button type="button" class="button button-small" id="copyShareUrl" onclick="copyUrl('${sharingUrl}')"><i class="fa-solid fa-copy fa-lg"></i></i></button>
