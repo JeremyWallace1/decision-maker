@@ -27,15 +27,15 @@ $(() => {
       </div>
     </div>
 
-    <div class="row mb-0" id="descriptionImage0" style="display: none">
+    <div class="row mb-0" id="containerImage0" style="display: none">
       <div class="row mb-3">
-        <label for="inputDescriptionImage0" class="col-md-2 col-form-label">
+        <label for="inputImage0" class="col-md-2 col-form-label">
           Add Image:
         </label>
         <div class="col-md-10">
           <input
             class="form-control"
-            id="inputDescriptionImage0"
+            id="inputImage0"
             name="question_image"
             accept="image/*"
             type="file"
@@ -48,7 +48,7 @@ $(() => {
       <div class="col-md-2">
       </div>
       <div class="col-md-10">
-        <button type="button" class="button-link" id="addDescriptionImage0"  onclick="addDescription('Image0');"><i class="fa-regular fa-image fa-lg">&nbsp</i>add image</button>
+        <button type="button" class="button-link" id="addImage0"  onclick="addDescription('Image0');"><i class="fa-regular fa-image fa-lg">&nbsp</i>add image</button>
       </div>
     </div>
 
@@ -158,10 +158,10 @@ $(() => {
 
   const generateQuestionImgHTML = (imgData) => {
     return `
-    <div class="row my-3" id="previewDescriptionImage0">
+    <div class="row my-3" id="previewImage0">
       <div class="col">  
         <img src="${imgData}" class="img-fluid img-thumbnail d-block question img-preview" />
-        <button class="button my-2" id="removeDescriptionImage0">remove image</button>
+        <button class="button my-2" id="removeImage0">remove image</button>
       </div>
     </div>
     `
@@ -169,14 +169,14 @@ $(() => {
 
   $formPollNew.images = {};
 
-  const $inputDescriptionImage0 = $formPollNew.find('#inputDescriptionImage0');
+  const $inputImage0 = $formPollNew.find('#inputImage0');
 
-  $inputDescriptionImage0.on('change', function (event) {
+  $inputImage0.on('change', function (event) {
     const file = this.files[0];
     console.log(file)
     convertToBase64(file)
-    .then(data => $formPollNew.images.DescriptionImage0 = data)
-    .then(data => previewImage(data, 'DescriptionImage0'))
+    .then(data => $formPollNew.images.Image0 = data)
+    .then(data => previewImage(data, 'Image0'))
     .catch(error => {
       $(this).toggleClass("error", true);
       console.log(error.message);
@@ -223,8 +223,8 @@ $(() => {
   
       const data = $(this).serialize();
       let modifiedData = data;
-      if ($formPollNew.images.DescriptionImage0) {
-        modifiedData += '&image=' + encodeURIComponent($formPollNew.images.DescriptionImage0);
+      if ($formPollNew.images.Image0) {
+        modifiedData += '&image=' + encodeURIComponent($formPollNew.images.Image0);
       }
   
       let uri = null;
