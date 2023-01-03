@@ -142,7 +142,7 @@ $(() => {
         <hr>
       </div>
       <div class="buttons">
-        <button type="submit" class="button button-large col-12">
+        <button type="submit" class="button button-large col-12" id="submitButton">
           <span class="spinner-border spinner-border-lg" id="loadingSpinner" role="status" style="display: none">
           </span>
           <span id="createPollText">Create Poll</span>

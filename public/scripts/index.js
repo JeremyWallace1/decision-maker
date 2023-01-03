@@ -149,6 +149,7 @@ $(() => {
     $(`#createPollText`).hide(0);
     $(`#loadingText`).show(0);
     $(`#loadingSpinner`).show(0);
+    document.querySelector('#submitButton').disabled = true;
   }
 
   copyUrl = (url) => {
