@@ -78,7 +78,7 @@ router.post('/', (req, res) => {
             'results': 'Results url: ' + origin + '?' + poll.results_url
           }
 
-          // return sendEmail(emailConfig);
+          return sendEmail(emailConfig);
         })
         .then((data) => console.log(data))
         .then(() => res.send(output))
