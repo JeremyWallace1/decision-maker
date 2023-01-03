@@ -29,13 +29,13 @@ $(() => {
 
     <div class="row mb-0" id="descriptionImage0" style="display: none">
       <div class="row mb-3">
-        <label for="selectQuestionImage" class="col-md-2 col-form-label">
+        <label for="inputDescriptionImage0" class="col-md-2 col-form-label">
           Add Image:
         </label>
         <div class="col-md-10">
           <input
             class="form-control"
-            id="selectQuestionImage"
+            id="inputDescriptionImage0"
             name="question_image"
             accept="image/*"
             type="file"
@@ -158,10 +158,10 @@ $(() => {
 
   const generateQuestionImgHTML = (imgData) => {
     return `
-    <div class="row my-3" id="img-preview-question">
+    <div class="row my-3" id="previewDescriptionImage0">
       <div class="col">  
         <img src="${imgData}" class="img-fluid img-thumbnail d-block question img-preview" />
-        <button class="button my-2" id="remove-img-preview-question">remove image</button>
+        <button class="button my-2" id="removeDescriptionImage0">remove image</button>
       </div>
     </div>
     `
@@ -169,15 +169,14 @@ $(() => {
 
   $formPollNew.images = {};
 
-  const $selectQuestionImage = $formPollNew.find('#selectQuestionImage');
+  const $inputDescriptionImage0 = $formPollNew.find('#inputDescriptionImage0');
 
-  $selectQuestionImage.on('change', function (event) {
+  $inputDescriptionImage0.on('change', function (event) {
     const file = this.files[0];
     console.log(file)
-    const parentElement = $(this).parent();
     convertToBase64(file)
-    .then(data => $formPollNew.images.question = data)
-    .then(data => previewImage(data, '#img-preview-question', parentElement))
+    .then(data => $formPollNew.images.DescriptionImage0 = data)
+    .then(data => previewImage(data, 'DescriptionImage0'))
     .catch(error => {
       $(this).toggleClass("error", true);
       console.log(error.message);
@@ -198,18 +197,20 @@ $(() => {
     });
   };
 
-  const previewImage = (imgData, newElementId, appendToElementSelector) => {
+  const previewImage = (imgData, id) => {
     const html = generateQuestionImgHTML(imgData);
-    $(newElementId).remove();
-    $(appendToElementSelector).append(html);
-    $(newElementId).find('#remove-img-preview-question')
-      .on('click', function (event) {
-        event.preventDefault();
-        $(newElementId).remove();
-      }
-    )
+    $(`#preview${id}`).remove();
+    $(`#input${id}`).parent().append(html);
+    attachListenerToRemoveButton(id);
   }
 
+  const attachListenerToRemoveButton = (id) => {
+    $(`#remove${id}`).on('click', function (event) {
+      event.preventDefault();
+      $(`#preview${id}`).remove();
+      $(`#input${id}`).val('');
+    });
+  }
 
   $formPollNew.on('submit', function (event) {
     event.preventDefault();
@@ -222,8 +223,8 @@ $(() => {
   
       const data = $(this).serialize();
       let modifiedData = data;
-      if ($formPollNew.images.question) {
-        modifiedData += '&image=' + encodeURIComponent($formPollNew.images.question);
+      if ($formPollNew.images.DescriptionImage0) {
+        modifiedData += '&image=' + encodeURIComponent($formPollNew.images.DescriptionImage0);
       }
   
       let uri = null;
