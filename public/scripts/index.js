@@ -82,15 +82,25 @@ $(() => {
   let num = 2;
   const max = 5;
   const toggleButtons = () => {
+    // if (num > 2) {
+    //   $('#removeAnswers').prop('disabled', false);
+    // } else {
+    //   $('#removeAnswers').prop('disabled', true);
+    // }
+    // if (num === max) {
+    //   $('#addMoreAnswers').prop('disabled', true);
+    // } else {
+    //   $('#addMoreAnswers').prop('disabled', false);
+    // }
     if (num > 2) {
-      $('#removeAnswers').prop('disabled', false);
+      $('#removeAnswers').show();
     } else {
-      $('#removeAnswers').prop('disabled', true);
+      $('#removeAnswers').hide();
     }
     if (num === max) {
-      $('#addMoreAnswers').prop('disabled', true);
+      $('#addMoreAnswers').hide();
     } else {
-      $('#addMoreAnswers').prop('disabled', false);
+      $('#addMoreAnswers').show();
     }
   };
 

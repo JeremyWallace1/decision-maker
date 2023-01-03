@@ -136,7 +136,7 @@ $(() => {
       <div class="buttons">
         <button type="button" class="button" id="addMoreAnswers"  onclick="addOption();">add options</button>
         <span class="">&nbsp&nbsp </span>
-        <button type="button" class="button" id="removeAnswers" disabled onclick="removeOption();">remove options</button>
+        <button type="button" class="button" id="removeAnswers" onclick="removeOption();" style="display: none">remove options</button>
       </div>
       <div class="col-12">
         <hr>
