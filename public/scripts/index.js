@@ -145,10 +145,11 @@ $(() => {
     $(`#description${num}`).show(300);
   };
 
-  // removeDescription = (num) => {
-  //   console.log(`clicked on #description${num}'s remove description button...`)
-  //   $(`#description${num}`).hide(500);
-  // }
+  loadingButton = () => {
+    $(`#createPollText`).hide(0);
+    $(`#loadingText`).show(0);
+    $(`#loadingSpinner`).show(0);
+  }
 
   copyUrl = (url) => {
     navigator.clipboard.writeText(url);

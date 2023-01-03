@@ -79,7 +79,12 @@ $(() => {
       </ul>
       <footer class="poll_footer row mb-3">
           <div class="buttons">
-            <button type="submit" class="button button-large col-12">Submit Choices</button>
+            <button type="submit" class="button button-large col-12">
+              <span class="spinner-border spinner-border-lg" id="loadingSpinner" role="status" style="display: none">
+              </span>
+              <span id="createPollText">Submit Choices</span>
+              <span id="loadingText" class="visually-hidden" style="display: none">Submitting...</span>
+            </button>
             <input type="hidden" name="poll_id" value="${poll.config.id}" />
             <input type="hidden" name="results_url" value="${poll.config.results_url}" />
           </div>
@@ -102,6 +107,8 @@ $(() => {
     $element.on('submit', function (event) {
 
       event.preventDefault();
+      //change to loading spinner
+      loadingButton();
 
       views_manager.show('none');
       

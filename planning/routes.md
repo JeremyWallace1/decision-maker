@@ -20,10 +20,10 @@ Delete    --    --
 * change to put/patch/delete
 * edit with no responses so far...
 * view other polls created by that email address (on browse GET /polls)
-* picture polls! (add picture to description or clickable url)
-* poll options change to bar w/ weighting
+* DONE: picture polls! (add picture to description or clickable url)
+* DONE: (done as pie chart) poll options change to bar w/ weighting
 * DONE: copy button (copies to clipboard)
-* email link(s) button
+* DONE: email link(s) button
 * you have already replied to this on <date>
 * responsive to screen sizes
 * works on mobile... (jquery UI draggable)
