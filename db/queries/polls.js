@@ -33,7 +33,7 @@ const createChoice = (data) => {
       image,
       description
     )
-    VALUES ($1, $2, $3, $3)
+    VALUES ($1, $2, $3, $4)
     RETURNING *
   `,
     values: [data.poll_id, data.title, data.image, data.description],
