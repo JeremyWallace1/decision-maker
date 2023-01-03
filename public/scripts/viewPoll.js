@@ -90,35 +90,45 @@ $(() => {
   const generateAnswersHTML = (poll, showResults) => {
     const imagePoll = isImagePoll(poll);
     let buffer = '';
+
     let num = 0;
     for (const choice in poll.choices) {
-      num++;
-      const choiceId = poll.choices[choice].id;
-      const score = getScore(choiceId, poll.scores)
+      num ++;
+      const choiceData = {};
+      choiceData.data = poll.choices[choice];
+      choiceData.config = {
+        label: `Answer #${num}`,
+        showScore: showResults,
+      }
+      choiceData.score = getScore(choiceData.data.id, poll.scores);
 
-      buffer += `
-      
-      <div class="row">
-        <h5 class="col-md-2" id="labelAnswer${poll.choices[choice].id}">Answer #${num}:</h5>
-        <h6 class="col-md-10" id="answer${poll.choices[choice].id}">${poll.choices[choice].title}</h6>
-      </div>
-  
-      <div class="row">
-        <p class="col-md-12" id="description${poll.choices[choice].id}">${poll.choices[choice].description}</p>
-      </div>
-
-      <div class="row mb-12">
-        ${showResults ? 
-          `<h6>Current score: ${score}</h6>` 
-          : ``}
-      </div>
-
-      <hr class="minor">
-
-      `
+      if (!imagePoll) {
+        buffer += generateTextAnswerHtml(choiceData);
+      } else {
+        // buffer += generateImageAnswerHtml(choiceData);
+      }
     }
 
     return buffer;
+  }
+
+  const generateTextAnswerHtml = (choice) => {
+    return ` 
+      <div class="row">
+        <h5 class="col-md-2" id="labelAnswer${choice.data.id}">Answer #${choice.config.label}:</h5>
+        <h6 class="col-md-10" id="answer${choice.data.id}">${choice.data.title}</h6>
+      </div>
+
+      <div class="row">
+        <p class="col-md-12" id="description${choice.data.id}">${choice.data.description}</p>
+      </div>
+      ${choice.config.showScore ? 
+        `<div class="row mb-12">
+          <h6>Current score: ${choice.score}</h6>
+        </div>` : ''}
+
+      <hr class="minor">
+    `
   }
 
   const generateLinkHTML = (linkType, data) => {
