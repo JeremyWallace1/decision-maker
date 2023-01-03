@@ -68,7 +68,7 @@ $(() => {
   
 
   const redirectButton = () => {
-    if ($('#inputEmail').val() || $('#inputQuestion').val() || $('#inputQuestion').val() || $('#answer1').val() || $('#answer2').val()) {
+    if ($('#inputEmail').val() || $('#inputQuestion').val() || $('#inputQuestion').val() || $('#choice1').val() || $('#choice2').val()) {
       if (confirm('This will start a new poll and remove the current form\'s data.\nAre you sure?')) {
         $(location).attr('href', '/');
       }
@@ -83,49 +83,49 @@ $(() => {
   const max = 5;
   const toggleButtons = () => {
     // if (num > 2) {
-    //   $('#removeAnswers').prop('disabled', false);
+    //   $('#removeChoices').prop('disabled', false);
     // } else {
-    //   $('#removeAnswers').prop('disabled', true);
+    //   $('#removeChoices').prop('disabled', true);
     // }
     // if (num === max) {
-    //   $('#addMoreAnswers').prop('disabled', true);
+    //   $('#addMoreChoices').prop('disabled', true);
     // } else {
-    //   $('#addMoreAnswers').prop('disabled', false);
+    //   $('#addMoreChoices').prop('disabled', false);
     // }
     if (num > 2) {
-      $('#removeAnswers').show();
+      $('#removeChoices').show();
     } else {
-      $('#removeAnswers').hide();
+      $('#removeChoices').hide();
     }
     if (num === max) {
-      $('#addMoreAnswers').hide();
+      $('#addMoreChoices').hide();
     } else {
-      $('#addMoreAnswers').show();
+      $('#addMoreChoices').show();
     }
   };
 
-  addOption = () => {
+  addChoices = () => {
     if (num < max) {
       num++;
-      $('#moreAnswers').append(
+      $('#moreChoices').append(
         `
-        <div class="row mb-3" id="Answer${num}">
-          <h5>Answer #${num}:</h5>
+        <div class="row mb-3" id="Choice${num}">
+          <h5>Choice #${num}:</h5>
           <div class="row mb-3">
-            <label for="answer${num}" class="col-md-2 col-form-label">
-              Answer:
+            <label for="choice${num}" class="col-md-2 col-form-label">
+              Choice:
             </label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="answer${num}" 
-              aria-describedby="answer${num}Feedback" name="answer${num}_title" required>
+              <input type="text" class="form-control" id="choice${num}" 
+              aria-describedby="choice${num}Feedback" name="choice${num}_title" required>
             </div>
           </div>
           <div class="row mb-3" id="description${num}" style="display: none">
-            <label for="answer${num}_description" class="col-md-2 col-form-label">
+            <label for="choice${num}_description" class="col-md-2 col-form-label">
               Description:
             </label>
             <div class="col-md-10">
-              <textarea rows="3" class="form-control" id="answer${num}_description" name="answer${num}_description" placeholder="optional"></textarea>
+              <textarea rows="3" class="form-control" id="choice${num}_description" name="choice${num}_description" placeholder="optional"></textarea>
             </div>
           </div>
           <div class="row mb-1">
@@ -141,9 +141,9 @@ $(() => {
       toggleButtons();
     } 
   };
-  removeOption = () => {
+  removeChoices = () => {
     if (num > 2) {
-      $(`#Answer${num}`).remove();
+      $(`#Choice${num}`).remove();
       num--;
       toggleButtons();
     }

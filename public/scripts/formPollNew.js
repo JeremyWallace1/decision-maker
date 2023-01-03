@@ -72,23 +72,23 @@ $(() => {
     </div>
     <hr class="minor">
 
-    <div id="Answer1">
-      <div class="row mb-3 answerOne">
-        <h5>Answer #1:</h5>
+    <div id="Choice1">
+      <div class="row mb-3 choiceOne">
+        <h5>Choice #1:</h5>
         <div class="row mb-3">
-          <label for="answer1" class="col-md-2 col-form-label">
-            Answer:
+          <label for="choice1" class="col-md-2 col-form-label">
+            Choice:
           </label>
           <div class="col-md-10">
-            <input type="text" class="form-control" id="answer1" name="answer1_title" required>
+            <input type="text" class="form-control" id="choice1" name="choice1_title" required>
           </div>
         </div>
         <div class="row mb-3" id="description1" style="display: none">
-          <label for="answer1_description" class="col-md-2 col-form-label">
+          <label for="choice1_description" class="col-md-2 col-form-label">
             Description:
           </label>
           <div class="col-md-10">
-            <textarea rows="3" class="form-control" id="answer1_description" name="answer1_description" placeholder="optional"></textarea>
+            <textarea rows="3" class="form-control" id="choice1_description" name="choice1_description" placeholder="optional"></textarea>
           </div>
         </div>
         <div class="row mb-1">
@@ -101,23 +101,23 @@ $(() => {
       </div>
     </div>
 
-    <div id="Answer2">
+    <div id="Choice2">
       <div class="row mb-3">
-        <h5>Answer #2:</h5>
+        <h5>Choice #2:</h5>
         <div class="row mb-3">
-          <label for="answer2" class="col-md-2 col-form-label">
-            Answer:
+          <label for="choice2" class="col-md-2 col-form-label">
+            Choice:
           </label>
           <div class="col-md-10">
-            <input type="text" class="form-control" id="answer2" aria-describedby="answer2Feedback" name="answer2_title" required>
+            <input type="text" class="form-control" id="choice2" aria-describedby="choice2Feedback" name="choice2_title" required>
           </div>
         </div>
         <div class="row mb-3" id="description2" style="display: none">
-          <label for="answer2_description" class="col-md-2 col-form-label">
+          <label for="choice2_description" class="col-md-2 col-form-label">
             Description:
           </label>
           <div class="col-md-10">
-            <textarea rows="3" class="form-control" id="answer2_description" name="answer2_description" placeholder="optional"></textarea>
+            <textarea rows="3" class="form-control" id="choice2_description" name="choice2_description" placeholder="optional"></textarea>
           </div>
         </div>
         <div class="row mb-1">
@@ -129,14 +129,14 @@ $(() => {
         </div>
       </div>
     </div>
-    <div id="moreAnswers"></div>
+    <div id="moreChoices"></div>
 
     
     <footer class="poll_footer row mb-3">
       <div class="buttons">
-        <button type="button" class="button" id="addMoreAnswers"  onclick="addOption();">add options</button>
+        <button type="button" class="button" id="addMoreChoices"  onclick="addChoices();">add choices</button>
         <span class="">&nbsp&nbsp </span>
-        <button type="button" class="button" id="removeAnswers" onclick="removeOption();" style="display: none">remove options</button>
+        <button type="button" class="button" id="removeChoices" onclick="removeChoices();" style="display: none">remove choices</button>
       </div>
       <div class="col-12">
         <hr>
@@ -229,7 +229,7 @@ $(() => {
       let uri = null;
       const output = [];
       submitPoll(modifiedData)
-      // data in format of "id, creator_email, question, description, results_url, sharing_url and an array of answers"
+      // data in format of "id, creator_email, question, description, results_url, sharing_url and an array of choices"
       .then(data => {
         uri = data[0].results_url;
       })

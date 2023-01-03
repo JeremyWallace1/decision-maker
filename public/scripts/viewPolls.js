@@ -56,7 +56,7 @@ $(() => {
           }
         }
         // console.log('toolTipVal =', toolTipVal);
-        xVal.push('Answer #' + (jsonData[0]['scores'][i].choice_id - minNum + 1));
+        xVal.push('Choice #' + (jsonData[0]['scores'][i].choice_id - minNum + 1));
         yVal.push(jsonData[0]['scores'][i].scoring);
       }
       if (showResults && length > 0) {

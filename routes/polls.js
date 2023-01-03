@@ -44,19 +44,19 @@ router.post('/',
         let countChoice = 0;
         while (true) {
           countChoice += 1;
-          if (!req.body[`answer${countChoice}_title`] && countChoice > 2) {
+          if (!req.body[`choice${countChoice}_title`] && countChoice > 2) {
             break;
           }
 
           const poll_id = output[0].id;
           const image = output[0].image;
-          const description = req.body[`answer${countChoice}_description`];
-          let title = req.body[`answer${countChoice}_title`];
+          const description = req.body[`choice${countChoice}_description`];
+          let title = req.body[`choice${countChoice}_title`];
           
           if (!title) {
             choicePromises.push(
               Promise.reject(
-                new Error(`answer${countChoice}_title cannot be empty`)
+                new Error(`choice${countChoice}_title cannot be empty`)
               )
             );
             continue;
@@ -65,7 +65,7 @@ router.post('/',
           if (title.length > 255) {
             choicePromises.push(
               Promise.reject(
-                new Error(`answer${countChoice}_title is too long`)
+                new Error(`choice${countChoice}_title is too long`)
               )
             );
             continue;
@@ -79,8 +79,8 @@ router.post('/',
       }
     )
     .then(all => {
-      output[0].answers = [];
-      all.forEach(element => output[0].answers.push(element));
+      output[0].choices = [];
+      all.forEach(element => output[0].choices.push(element));
       console.log(output);
     })
     .then(() => {

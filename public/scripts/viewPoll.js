@@ -52,7 +52,7 @@ $(() => {
 
         </header>
       
-        ${generateAnswersHTML(poll, showResults)}
+        ${generateChoicesHTML(poll, showResults)}
 
         <footer class="poll_footer row mb-3">
           ${generateLinkHTML('share', pollUrlData.sharing)}
@@ -84,7 +84,7 @@ $(() => {
     `
   };
 
-  const generateAnswersHTML = (poll, showResults) => {
+  const generateChoicesHTML = (poll, showResults) => {
     const imagePoll = isImagePoll(poll);
     let buffer = '';
 
@@ -98,10 +98,10 @@ $(() => {
       if (!imagePoll) {
         buffer += `
         <div class="row">
-          ${generateTextAnswerHTML(choiceData)}
+          ${generateTextChoiceHTML(choiceData)}
         </div>`;
       } else {
-        buffer += generateImageAnswerHTML(choiceData);
+        buffer += generateImageChoiceHTML(choiceData);
       }
     }
 
@@ -115,10 +115,10 @@ $(() => {
     return buffer;
   }
 
-  const generateTextAnswerHTML = (data) => {
+  const generateTextChoiceHTML = (data) => {
     return ` 
       <div class="col">
-        <h3 id="answer${data.id}">${data.title}</h3>
+        <h3 id="choice${data.id}">${data.title}</h3>
         <p id="description${data.id}">${data.description}</p>
         ${data.showScore ? `<h6>Current score: ${data.score}</h6>` : ''}
       </div>
@@ -126,7 +126,7 @@ $(() => {
     `;
   }
 
-  const generateImageAnswerHTML = (data) => {
+  const generateImageChoiceHTML = (data) => {
     let imageHTML = '';
     if (!data.image) {
       imageHTML += `

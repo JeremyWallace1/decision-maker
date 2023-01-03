@@ -63,10 +63,10 @@ $(() => {
     for (const choice in poll.choices) {
       count++;
       buffer += `
-      <li class="row ui-state-default ui-sortable-handle" id="answer${poll.choices[choice].id}">
+      <li class="row ui-state-default ui-sortable-handle" id="choice${poll.choices[choice].id}">
         <div class="row">
-          <h5 class="col-md-2" id="labelAnswer${poll.choices[choice].id}">Answer #${count}:</h5>
-          <h6 class="col-md-10" id="answer${poll.choices[choice].id}">${poll.choices[choice].title}</h6>
+          <h5 class="col-md-2" id="labelChoice${poll.choices[choice].id}">Choice #${count}:</h5>
+          <h6 class="col-md-10" id="choice${poll.choices[choice].id}">${poll.choices[choice].title}</h6>
           <p class="col-md-12" id="description${poll.choices[choice].id}">${poll.choices[choice].description}</p>
           <input type="hidden" name="choices" value="${poll.choices[choice].id}" />
         </div>
