@@ -78,6 +78,10 @@ router.post('/', (req, res) => {
             'results': 'Results url: ' + origin + '?' + poll.results_url
           }
 
+          const sendReceipt = process.env.SENDINBLUE_ENABLE;
+          if (!sendReceipt || sendReceipt === 'false') {
+            return {};
+          }
           return sendEmail(emailConfig);
         })
         .then((data) => console.log(data))
