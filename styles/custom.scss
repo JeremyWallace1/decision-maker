@@ -4,7 +4,7 @@
 $dkblue: rgb(0,87,119);
 $uberdkblue: rgb(0, 44, 60);
 $ltblue: rgb(0,139,188);
-$uberltblue: rgb(94, 159, 188);
+$uberltblue: rgb(131, 185, 188);
 $yellowgr: rgb(187,188,0);
 $ltyellowgr: rgb(254, 255, 230);
 $uberltyellowgr: rgb(254, 255, 245);
@@ -150,7 +150,7 @@ body {
 
   .button:disabled {
     background-color: $dkblue;
-    color: $ltblue;
+    color: $uberltblue;
     cursor: auto;
     box-shadow: none;
   }
