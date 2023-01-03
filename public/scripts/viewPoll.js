@@ -88,16 +88,12 @@ $(() => {
     const imagePoll = isImagePoll(poll);
     let buffer = '';
 
-    let num = 0;
     for (const choice in poll.choices) {
-      num ++;
-      const choiceData = {};
-      choiceData.data = poll.choices[choice];
-      choiceData.config = {
-        label: `Answer #${num}`,
-        showScore: showResults,
-      }
-      choiceData.score = getScore(choiceData.data.id, poll.scores);
+      // Make a deep copy of the choices object
+      const choiceData = JSON.parse(JSON.stringify(poll.choices[choice]));
+      const score = getScore(choiceData.id, poll.scores);
+      choiceData.score = score;
+      choiceData.showScore = showResults;
 
       if (!imagePoll) {
         buffer += `
@@ -119,22 +115,22 @@ $(() => {
     return buffer;
   }
 
-  const generateTextAnswerHTML = (choice) => {
+  const generateTextAnswerHTML = (data) => {
     return ` 
       <div class="col">
-        <h3 id="answer${choice.data.id}">${choice.data.title}</h3>
-        <p id="description${choice.data.id}">${choice.data.description}</p>
-        ${choice.config.showScore ? `<h6>Current score: ${choice.score}</h6>` : ''}
+        <h3 id="answer${data.id}">${data.title}</h3>
+        <p id="description${data.id}">${data.description}</p>
+        ${data.showScore ? `<h6>Current score: ${data.score}</h6>` : ''}
       </div>
       <hr class="minor">
     `;
   }
 
-  const generateImageAnswerHTML = (choice) => {
+  const generateImageAnswerHTML = (data) => {
     return `
       <div class="col-sm-4 col-md-3">
-        ${choice.data.image ? 
-          `<img src="${choice.data.image}" class="img-fluid img-thumbnail mx-auto d-block question img-preview" />` :
+        ${data.image ? 
+          `<img src="${data.image}" class="img-fluid img-thumbnail mx-auto d-block question img-preview" />` :
           `<i class="fa-solid fa-image"></i>`}
       </div>
     `;
