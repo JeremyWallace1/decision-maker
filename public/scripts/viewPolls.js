@@ -26,7 +26,7 @@ $(() => {
   window.polls.clearPolls = clearPolls;
 
   // add all the polls by this creator
-  function addPolls(jsonData, showResults = false) {
+  function addPolls(jsonData, showResults = false, alreadyAnswered = false) {
     clearPolls();
     console.log('jsonData[0]',jsonData[0]);
     
@@ -39,7 +39,8 @@ $(() => {
     // }
 
     for (const pollData of jsonData) {
-      const createdPoll = poll.createPoll(pollData, showResults);
+      console.log('pollData is:', pollData);
+      const createdPoll = poll.createPoll(pollData, showResults, alreadyAnswered = true);
 
       // creator = jsonData[0]['config'].creator_email;
       const length = jsonData[0]['scores'].length;
