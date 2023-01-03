@@ -146,7 +146,7 @@ $(() => {
           <span class="spinner-border spinner-border-lg" id="loadingSpinner" role="status" style="display: none">
           </span>
           <span id="createPollText">Create Poll</span>
-          <span id="loadingText" class="visually-hidden" style="display: none">Creating Poll...</span>
+          <span id="loadingText" style="display: none">Creating Poll...</span>
         </button> 
       </div>
     </footer>
@@ -210,43 +210,45 @@ $(() => {
     )
   }
 
-  function delay(t, v) {
-    return new Promise(resolve => setTimeout(resolve, t, v));
-  }
 
   $formPollNew.on('submit', function (event) {
     event.preventDefault();
+    // loading button when it's taking it's time
+    loadingButton();
+    // adding artificial delay 
+    delay(4000).then(() => {
 
-    views_manager.show('none');
-
-    const data = $(this).serialize();
-    let modifiedData = data;
-    if ($formPollNew.images.question) {
-      modifiedData += '&image=' + encodeURIComponent($formPollNew.images.question);
-    }
-
-    let uri = null;
-    const output = [];
-    submitPoll(modifiedData)
-    // data in format of "id, creator_email, question, description, results_url, sharing_url and an array of answers"
-    .then(data => {
-      uri = data[0].results_url;
-    })
-    .then((data) => getPollByUri(uri))
-    .then(data => output.push(data[0]))
-    .then(data => getResponsesByUri(uri))
-    .then(data => {
-      output[0].pollId = output[0].config.id;
-      output[0].responses = data[0].responses;
-      output[0].scores = data[0].scores;
-    })
-    .then(() => {
-      window.api.data = output[0];
-      views_manager.show('pollNewSuccess');
-    })
-    .catch((error) => {
-      console.error(error);
-      views_manager.show('pollNew');
+      views_manager.show('none');
+  
+      const data = $(this).serialize();
+      let modifiedData = data;
+      if ($formPollNew.images.question) {
+        modifiedData += '&image=' + encodeURIComponent($formPollNew.images.question);
+      }
+  
+      let uri = null;
+      const output = [];
+      submitPoll(modifiedData)
+      // data in format of "id, creator_email, question, description, results_url, sharing_url and an array of answers"
+      .then(data => {
+        uri = data[0].results_url;
+      })
+      .then((data) => getPollByUri(uri))
+      .then(data => output.push(data[0]))
+      .then(data => getResponsesByUri(uri))
+      .then(data => {
+        output[0].pollId = output[0].config.id;
+        output[0].responses = data[0].responses;
+        output[0].scores = data[0].scores;
+      })
+      .then(() => {
+        window.api.data = output[0];
+        views_manager.show('pollNewSuccess');
+      })
+      .catch((error) => {
+        console.error(error);
+        views_manager.show('pollNew');
+      })
     })
   })
 });

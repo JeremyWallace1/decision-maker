@@ -157,4 +157,8 @@ $(() => {
     alert(`Copied the text '${url}' to the clipboard.`);
   };
 
+  delay = (t, v) => {
+    return new Promise(resolve => setTimeout(resolve, t, v));
+  }
+
 });

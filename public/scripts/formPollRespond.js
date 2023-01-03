@@ -83,7 +83,7 @@ $(() => {
               <span class="spinner-border spinner-border-lg" id="loadingSpinner" role="status" style="display: none">
               </span>
               <span id="createPollText">Submit Choices</span>
-              <span id="loadingText" class="visually-hidden" style="display: none">Submitting...</span>
+              <span id="loadingText" style="display: none">Submitting...</span>
             </button>
             <input type="hidden" name="poll_id" value="${poll.config.id}" />
             <input type="hidden" name="results_url" value="${poll.config.results_url}" />
@@ -107,29 +107,32 @@ $(() => {
     $element.on('submit', function (event) {
 
       event.preventDefault();
-      //change to loading spinner
+      // loading button when it's taking it's time
       loadingButton();
+      // adding artificial delay 
+      delay(4000).then(() => {
 
-      views_manager.show('none');
-      
-      const postData = $(this).serialize();
-      const output = [];
-      let uri = null;
+        views_manager.show('none');
+        
+        const postData = $(this).serialize();
+        const output = [];
+        let uri = null;
 
-      submitResponse(postData)
-        .then(data => uri = data[0].results_url)
-        .then(() => getPollByUri(uri))
-        .then(data => output.push(data[0]))
-        .then(() => getResponsesByUri(uri))
-        .then(data => {
-          output[0].pollId = output[0].config.id;
-          output[0].responses = data[0].responses;
-          output[0].scores = data[0].scores;
-        })
-        .then(() => {
-          polls.addPolls(output, false, false);
-          views_manager.show('polls');
-        })
+        submitResponse(postData)
+          .then(data => uri = data[0].results_url)
+          .then(() => getPollByUri(uri))
+          .then(data => output.push(data[0]))
+          .then(() => getResponsesByUri(uri))
+          .then(data => {
+            output[0].pollId = output[0].config.id;
+            output[0].responses = data[0].responses;
+            output[0].scores = data[0].scores;
+          })
+          .then(() => {
+            polls.addPolls(output, false, false);
+            views_manager.show('polls');
+          })
+      })
     });
 
   }
