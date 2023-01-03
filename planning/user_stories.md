@@ -12,18 +12,7 @@
 * As a poll user, I should only be permitted to respond one time to each poll, because each users response needs to be weighted equally.
 * As a poll user, I should only be permitted to see the poll that was shared with me, for the privacy of the poll creator and other users is important.
 
-#### STRETCH ####
-- send the result_link to friends
-- do you want to allow others to be able to view the results?
-  - after specific date/time or anytime?
-* As a poll creator, I want to be able to set an end date/time OR max submissions before poll closes, because...
-* authentication/password, etc.
-* randomize poll
-* when a user visits the submission link, they enter their name if required and see a list of the choices for that poll
-* add accessibility fixes, etc.
-* visual indicator of which poll answer is ahead based on current score (for admin view, i.e. /?r12345) (maybe a box around it, or highlighting, etc. -- also needs to handle multiple with the same number)
-* add ability to attach pictures and hyperlinks to description fields
-* indicate (with a line of text?) if user has already responded to the question
+
 
 ### TABLE NAMES ###
 - polls
