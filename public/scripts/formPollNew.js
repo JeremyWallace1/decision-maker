@@ -231,9 +231,9 @@ $(() => {
       output[0].responses = data[0].responses;
       output[0].scores = data[0].scores;
     })
-    .then(data => {
-      polls.addPolls(output, true, true);
-      views_manager.show('polls');
+    .then(() => {
+      window.api.data = output[0];
+      views_manager.show('pollNewSuccess');
     })
     .catch((error) => {
       console.error(error);
