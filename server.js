@@ -56,5 +56,5 @@ app.use('/responses', responsesRoutes);
 // });
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
+  console.log(`The Decision Maker app is listening on port ${PORT}`);
 });

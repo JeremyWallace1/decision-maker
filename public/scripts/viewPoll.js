@@ -1,128 +1,62 @@
 $(() => {
   window.poll = {};
   // TO DO: toggle whether email should show as part of the poll info
-  const createPoll = (poll, showResults, successMessage = false) => { 
+  const createPoll = (poll, showResults) => { 
     // console.log(`poll info: ${JSON.stringify(poll.config)}`);
     const origin = window.location.origin;
-    let buffer = ``;
-    if (!successMessage) {
-      buffer += `
-        <article class="poll" id="poll_${poll.config.id}">
-        <header class="poll_heading">
-          <div class="row mb-2"></div>
-            <div class="row mb-3">
-              <h5 id="email${poll.config.id}">${poll.config.creator_email} has asked a question...</h5>
-            </div>
-  
-            <hr>
+    const sharingUrl = origin.concat('/?', poll.config.sharing_url);
+    const resultsUrl = origin.concat('/?', poll.config.results_url);
     
-            <div class="row">
-              <h4 class="col-md-2" id="labelQuestion${poll.config.id}">
-                Question:
-              </h4>
-              <h4 class="col-md-10" id="question${poll.config.id}">
-                ${poll.config.question}
-              </h4>
-            </div>
-        `
-        let questionImage = poll.config.image;
-        if (questionImage) {
-          buffer += `
-          <div class="row my-3" id="img-preview-question">
-            <div class="col">
-              <img src="${questionImage}" class="img-fluid img-thumbnail mx-auto d-block question img-preview" />
-            </div>
-          </div>
-          `
-        }
-  
-        buffer += `
-            <div class="row">
-              <p class="col-md-12" id="description${poll.config.id}">
-                ${poll.config.description}
-              </p>
-            </div>
-  
-            <hr class="major">
-            <div class="row" id="resultsArea" hidden>
-              <canvas id="resultsChart"></canvas>
-            </div>
-            <hr class="major" id="resultsHr" hidden>
-  
-          </header>`
-      
-      // if showResults is true, shows current score below the answer/description, otherwise nothing under it.
-      let num = 0;
-      for (const choice in poll.choices) {
-        num++;
-        const choiceId = poll.choices[choice].id;
-  
-        let score = 0;
-        let target;
-        if (poll.scores.length > 0) {
-          for (let i in poll.scores) {
-            if (poll.scores[i].choice_id === choiceId) {
-              target = {choice_id: choiceId, scoring: poll.scores[i].scoring}
-            }
-  
-          }
-  
-          score = target.scoring;
-        }
-  
-        buffer += `
-        
-            <div class="row">
-              <h5 class="col-md-2" id="labelAnswer${poll.choices[choice].id}">Answer #${num}:</h5>
-              <h6 class="col-md-10" id="answer${poll.choices[choice].id}">${poll.choices[choice].title}</h6>
-            </div>
-        
-            <div class="row">
-              <p class="col-md-12" id="description${poll.choices[choice].id}">${poll.choices[choice].description}</p>
-            </div>
-  
-            <div class="row mb-12">
-              ${showResults ? 
-                `<h6>Current score: ${score}</h6>` 
-                : ``}
-            </div>
-  
-            <hr class="minor">
-  
-        `
-      }  
-    } else {
-      buffer += `
+    const pollUrlData = {};
+    pollUrlData.sharing = {
+      title: 'Share poll',
+      url: sharingUrl,
+      enable: true,
+    };
+    pollUrlData.results = {
+      title: 'View poll results',
+      url: resultsUrl,
+      enable: showResults,
+    };
+    
+    let buffer = ``;
+    buffer += `
       <article class="poll" id="poll_${poll.config.id}">
       <header class="poll_heading">
-      <div class="row mb-2"></div>
-      <div class="row mb-3">
-        <h5 id="email${poll.config.id}">An email with the below links has been sent to: ${poll.config.creator_email}</h5>
-      </div>
+        <div class="row mb-2"></div>
+          <div class="row mb-3">
+            <h5 id="email${poll.config.id}">${poll.config.creator_email} has asked a question...</h5>
+          </div>
 
-      <hr>
-      `;
-    }
-    const sharingUrl = origin.concat('/?', poll.config.sharing_url);
-    buffer += `
-    <footer class="poll_footer row mb-3">
-      <h6 class="poll_share_url">
-        Share poll: &nbsp;&nbsp;<a href='${sharingUrl}' class="shareUrl" title='share this poll'>${sharingUrl}</a>
-        <button type="button" class="button button-small" id="copyShareUrl" onclick="copyUrl('${sharingUrl}')"><i class="fa-solid fa-copy"></i></i></button>
-      </h6>
-    `;
-    
-    const resultsUrl = origin.concat('/?', poll.config.results_url);
-    if (showResults) {
-      buffer += 
-      `<h6 class="poll_results_url">
-        View poll results: &nbsp;&nbsp;<a href='${resultsUrl}' class="shareUrl" title='view poll results'>${resultsUrl}</a>
-        <button type="button" class="button button-small" id="copyResultsUrl" onclick="copyUrl('${resultsUrl}')"><i class="fa-solid fa-copy"></i></i></button>
-      </h6>
-      `
-    }
-    
-    buffer += `
+          <hr>
+  
+          <div class="row">
+            <h1 class="display-4" id="question${poll.config.id}">
+              ${poll.config.question}
+            </h1>
+          </div>
+      
+          ${generateQuestionImgHTML(poll.config.image)}
+  
+          <div class="row">
+            <p class="col-md-12" id="description${poll.config.id}">
+              ${poll.config.description}
+            </p>
+          </div>
+
+          <hr class="major">
+          <div class="row" id="resultsArea" hidden>
+            <canvas id="resultsChart"></canvas>
+          </div>
+          <hr class="major" id="resultsHr" hidden>
+
+        </header>
+      
+        ${generateAnswersHTML(poll, showResults)}
+
+        <footer class="poll_footer row mb-3">
+          ${generateLinkHTML('share', pollUrlData.sharing)}
+          ${generateLinkHTML('results', pollUrlData.results)}
         </footer>
       </article>
     `;
@@ -130,4 +64,106 @@ $(() => {
   }
 
   window.poll.createPoll = createPoll;
+
+  const getScore = (choiceId = 0, data) => {
+    const scoreData = data.filter(scoreData => scoreData.choice_id === choiceId);
+    const score = scoreData[0] ? scoreData[0].scoring : 0;
+    return score;
+  }
+
+  const generateQuestionImgHTML = (imageSrc) => {
+    if (!imageSrc) {
+      return '';
+    }
+    return `
+    <div class="row my-3" id="img-preview-question">
+      <div class="col">
+        <img src="${imageSrc}" class="img-fluid img-thumbnail mx-auto d-block question img-preview" />
+      </div>
+    </div>
+    `
+  };
+
+  const generateAnswersHTML = (poll, showResults) => {
+    const imagePoll = isImagePoll(poll);
+    let buffer = '';
+
+    for (const choice in poll.choices) {
+      // Make a deep copy of the choices object
+      const choiceData = JSON.parse(JSON.stringify(poll.choices[choice]));
+      const score = getScore(choiceData.id, poll.scores);
+      choiceData.score = score;
+      choiceData.showScore = showResults;
+
+      if (!imagePoll) {
+        buffer += `
+        <div class="row">
+          ${generateTextAnswerHTML(choiceData)}
+        </div>`;
+      } else {
+        buffer += generateImageAnswerHTML(choiceData);
+      }
+    }
+
+    if (imagePoll) {
+      buffer = `
+        <div class="d-flex flex-wrap align-items-stretch">
+          ${buffer}
+        </div>`;
+    }
+
+    return buffer;
+  }
+
+  const generateTextAnswerHTML = (data) => {
+    return ` 
+      <div class="col">
+        <h3 id="answer${data.id}">${data.title}</h3>
+        <p id="description${data.id}">${data.description}</p>
+        ${data.showScore ? `<h6>Current score: ${data.score}</h6>` : ''}
+      </div>
+      <hr class="minor">
+    `;
+  }
+
+  const generateImageAnswerHTML = (data) => {
+    let imageHTML = '';
+    if (!data.image) {
+      imageHTML += `
+        <div class="flex-grow-1 d-flex justify-content-center align-items-center">
+          <i class="fa-solid fa-image fa-3x"></i>
+        </div>`;
+    } else {
+      imageHTML += `<img src="${data.image}" class="w-100 flex-grow-1 overflow-hidden rounded" />`;
+    }
+
+    return `
+      <div class="d-flex item-outer col-sm-4 col-md-3">
+        <div class="item-inner d-flex flex-column mx-2 my-2 p-1 rounded bg-light text-dark text-center w-100">
+          ${imageHTML}
+          <h6 class="mb-0">${data.title}</h6>
+        </div>
+      </div>
+    `;
+  }
+
+  const generateLinkHTML = (linkType, data) => {
+    if (!data.enable) {
+      return '';
+    }
+    const linkTypeCapitalized = linkType[0].toUpperCase() + linkType.substring(1).toLowerCase();
+    return `
+      <h6 class="poll_${linkType}_url">
+        ${data.title}: &nbsp;&nbsp;<a href='${data.url}' class="${linkType}Url" title='${data.title}'>${data.url}</a>
+        <button type="button" class="button button-small" id="copy${linkTypeCapitalized}Url" onclick="copyUrl('${data.url}')"><i class="fa-solid fa-copy"></i></i></button>
+      </h6>
+    `;
+  }
+
+  const isImagePoll = (poll) => {
+    const images = poll.choices.filter(element => element.image);
+    const foundImages = images.length > 0;
+    return foundImages;
+  }
+
 });

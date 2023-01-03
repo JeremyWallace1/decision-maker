@@ -216,41 +216,37 @@ $(() => {
 
   $formPollNew.on('submit', function (event) {
     event.preventDefault();
-    // change to loading spinner
-    loadingButton();
-    // add delay to see spinner
-    delay(2000).then( () => {
-      views_manager.show('none');
-      const data = $(this).serialize();
-      let modifiedData = data;
-      if ($formPollNew.images.question) {
-        modifiedData += '&image=' + encodeURIComponent($formPollNew.images.question);
-      }
-  
-      let uri = null;
-      const output = [];
-      submitPoll(modifiedData)
-      // data in format of "id, creator_email, question, description, results_url, sharing_url and an array of answers"
-      .then(data => {
-        uri = data[0].results_url;
-      })
-      .then((data) => getPollByUri(uri))
-      .then(data => output.push(data[0]))
-      .then(data => getResponsesByUri(uri))
-      .then(data => {
-        output[0].pollId = output[0].config.id;
-        output[0].responses = data[0].responses;
-        output[0].scores = data[0].scores;
-      })
-      .then(data => {
-        polls.addPolls(output, true, true);
-        views_manager.show('polls');
-      })
-      .catch((error) => {
-        console.error(error);
-        views_manager.show('pollNew');
-      })
-      .then(() => delete $formPollNew.images)
+
+    views_manager.show('none');
+
+    const data = $(this).serialize();
+    let modifiedData = data;
+    if ($formPollNew.images.question) {
+      modifiedData += '&image=' + encodeURIComponent($formPollNew.images.question);
+    }
+
+    let uri = null;
+    const output = [];
+    submitPoll(modifiedData)
+    // data in format of "id, creator_email, question, description, results_url, sharing_url and an array of answers"
+    .then(data => {
+      uri = data[0].results_url;
+    })
+    .then((data) => getPollByUri(uri))
+    .then(data => output.push(data[0]))
+    .then(data => getResponsesByUri(uri))
+    .then(data => {
+      output[0].pollId = output[0].config.id;
+      output[0].responses = data[0].responses;
+      output[0].scores = data[0].scores;
+    })
+    .then(() => {
+      window.api.data = output[0];
+      views_manager.show('pollNewSuccess');
+    })
+    .catch((error) => {
+      console.error(error);
+      views_manager.show('pollNew');
     })
   })
 });
