@@ -31,12 +31,9 @@ $(() => {
           <hr>
   
           <div class="row">
-            <h4 class="col-md-2" id="labelQuestion${poll.config.id}">
-              Question:
-            </h4>
-            <h4 class="col-md-10" id="question${poll.config.id}">
+            <h1 class="display-4" id="question${poll.config.id}">
               ${poll.config.question}
-            </h4>
+            </h1>
           </div>
       
           ${generateQuestionImgHTML(poll.config.image)}
@@ -103,32 +100,44 @@ $(() => {
       choiceData.score = getScore(choiceData.data.id, poll.scores);
 
       if (!imagePoll) {
-        buffer += generateTextAnswerHtml(choiceData);
+        buffer += `
+        <div class="row">
+          ${generateTextAnswerHTML(choiceData)}
+        </div>`;
       } else {
-        // buffer += generateImageAnswerHtml(choiceData);
+        buffer += generateImageAnswerHTML(choiceData);
       }
+    }
+
+    if (imagePoll) {
+      buffer = `
+        <div class="d-flex flex-row flex-wrap">
+          ${buffer}
+        </div>`;
     }
 
     return buffer;
   }
 
-  const generateTextAnswerHtml = (choice) => {
+  const generateTextAnswerHTML = (choice) => {
     return ` 
-      <div class="row">
-        <h5 class="col-md-2" id="labelAnswer${choice.data.id}">Answer #${choice.config.label}:</h5>
-        <h6 class="col-md-10" id="answer${choice.data.id}">${choice.data.title}</h6>
+      <div class="col">
+        <h3 id="answer${choice.data.id}">${choice.data.title}</h3>
+        <p id="description${choice.data.id}">${choice.data.description}</p>
+        ${choice.config.showScore ? `<h6>Current score: ${choice.score}</h6>` : ''}
       </div>
-
-      <div class="row">
-        <p class="col-md-12" id="description${choice.data.id}">${choice.data.description}</p>
-      </div>
-      ${choice.config.showScore ? 
-        `<div class="row mb-12">
-          <h6>Current score: ${choice.score}</h6>
-        </div>` : ''}
-
       <hr class="minor">
-    `
+    `;
+  }
+
+  const generateImageAnswerHTML = (choice) => {
+    return `
+      <div class="col-sm-4 col-md-3">
+        ${choice.data.image ? 
+          `<img src="${choice.data.image}" class="img-fluid img-thumbnail mx-auto d-block question img-preview" />` :
+          `<i class="fa-solid fa-image"></i>`}
+      </div>
+    `;
   }
 
   const generateLinkHTML = (linkType, data) => {
