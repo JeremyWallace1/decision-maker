@@ -140,7 +140,7 @@ $(() => {
   };
 
   addDescription = (num) => {
-    console.log(`clicked on #description${num}'s add description button...`)
+    // console.log(`clicked on #description${num}'s add description button...`)
     $(`#addDescription${num}`).hide(300);
     $(`#description${num}`).show(300);
   };
