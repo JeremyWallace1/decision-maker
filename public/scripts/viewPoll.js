@@ -71,6 +71,8 @@ $(() => {
   };
 
   const generateAnswersHTML = (poll, showResults) => {
+    const imagePoll = isImagePoll(poll);
+    console.log('image poll? ', imagePoll)
     let buffer = '';
     let num = 0;
     for (const choice in poll.choices) {
@@ -101,6 +103,12 @@ $(() => {
     }
 
     return buffer;
+  }
+
+  const isImagePoll = (poll) => {
+    const images = poll.choices.filter(element => element.image);
+    const foundImages = images.length > 0;
+    return foundImages;
   }
 
 });
