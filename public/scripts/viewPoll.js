@@ -4,8 +4,22 @@ $(() => {
   const createPoll = (poll, showResults) => { 
     // console.log(`poll info: ${JSON.stringify(poll.config)}`);
     const origin = window.location.origin;
+    const sharingUrl = origin.concat('/?', poll.config.sharing_url);
+    const resultsUrl = origin.concat('/?', poll.config.results_url);
+    
+    const pollUrlData = {};
+    pollUrlData.sharing = {
+      title: 'Share poll',
+      url: sharingUrl,
+      enable: true,
+    };
+    pollUrlData.results = {
+      title: 'View poll results',
+      url: resultsUrl,
+      enable: showResults,
+    };
+    
     let buffer = ``;
-
     buffer += `
       <article class="poll" id="poll_${poll.config.id}">
       <header class="poll_heading">
@@ -43,6 +57,9 @@ $(() => {
       
         ${generateAnswersHTML(poll, showResults)}
 
+        <footer class="poll_footer row mb-3">
+          ${generatePollLinkHTML('share', pollUrlData.sharing)}
+          ${generatePollLinkHTML('results', pollUrlData.results)}
         </footer>
       </article>
     `;
@@ -72,7 +89,7 @@ $(() => {
 
   const generateAnswersHTML = (poll, showResults) => {
     const imagePoll = isImagePoll(poll);
-    console.log('image poll? ', imagePoll)
+    console.log('image poll? ', imagePoll);
     let buffer = '';
     let num = 0;
     for (const choice in poll.choices) {
@@ -105,10 +122,29 @@ $(() => {
     return buffer;
   }
 
+  const generatePollLinkHTML = (linkType, data) => {
+    if (!data.enable) {
+      return '';
+    }
+    const linkTypeCapitalized = linkType[0].toUpperCase() + linkType.substring(1).toLowerCase();;
+    return `
+      <h6 class="poll_${linkType}_url">
+        ${data.title}: &nbsp;&nbsp;<a href='${data.url}' class="${linkType}Url" title='${data.title}'>${data.url}</a>
+        <button type="button" class="button button-small" id="copy${linkTypeCapitalized}Url" onclick="copyUrl('${data.url}')"><i class="fa-solid fa-copy"></i></i></button>
+      </h6>
+    `;
+  }
+
   const isImagePoll = (poll) => {
     const images = poll.choices.filter(element => element.image);
     const foundImages = images.length > 0;
     return foundImages;
+  }
+
+  const capitalize = (string) => {
+    const lowerCaseWord = string.toLowerCase();
+    const upperCaseFirstLetter = string[0].toUpperCase();
+    return upperCaseFirstLetter + lowerCaseWord.slice(1);
   }
 
 });
