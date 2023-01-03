@@ -20,3 +20,4 @@
 * jquery 3.6.3.min (CDN)
 * jquery-ui 1.13.2 (CDN) (for drag&drop)
 * chart.js 3.9.1 (CDN)
+* jQuery touch-punch 0.2.3 (CDN) (for mobile use of sortable)
