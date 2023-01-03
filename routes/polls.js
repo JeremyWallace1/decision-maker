@@ -49,7 +49,7 @@ router.post('/',
           }
 
           const poll_id = output[0].id;
-          const image = output[0].image;
+          const image = req.body[`choice${countChoice}_image`];
           const description = req.body[`choice${countChoice}_description`];
           let title = req.body[`choice${countChoice}_title`];
           
