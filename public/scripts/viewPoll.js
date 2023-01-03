@@ -24,19 +24,9 @@ $(() => {
               ${poll.config.question}
             </h4>
           </div>
-      `
-      let questionImage = poll.config.image;
-      if (questionImage) {
-        buffer += `
-        <div class="row my-3" id="img-preview-question">
-          <div class="col">
-            <img src="${questionImage}" class="img-fluid img-thumbnail mx-auto d-block question img-preview" />
-          </div>
-        </div>
-        `
-      }
+      
+          ${generateQuestionImgHTML(poll.config.image)}
   
-      buffer += `
           <div class="row">
             <p class="col-md-12" id="description${poll.config.id}">
               ${poll.config.description}
@@ -94,5 +84,18 @@ $(() => {
     const score = scoreData[0] ? scoreData[0].scoring : 0;
     return score;
   }
+
+  const generateQuestionImgHTML = (imageSrc) => {
+    if (!imageSrc) {
+      return '';
+    }
+    return `
+    <div class="row my-3" id="img-preview-question">
+      <div class="col">
+        <img src="${imageSrc}" class="img-fluid img-thumbnail mx-auto d-block question img-preview" />
+      </div>
+    </div>
+    `
+  };
 
 });
