@@ -39,38 +39,10 @@ $(() => {
           </div>
           <hr class="major" id="resultsHr" hidden>
 
-        </header>`
+        </header>
       
-      // if showResults is true, shows current score below the answer/description, otherwise nothing under it.
-      let num = 0;
-      for (const choice in poll.choices) {
-        num++;
-        const choiceId = poll.choices[choice].id;
-        const score = getScore(choiceId, poll.scores)
-  
-        buffer += `
-        
-        <div class="row">
-          <h5 class="col-md-2" id="labelAnswer${poll.choices[choice].id}">Answer #${num}:</h5>
-          <h6 class="col-md-10" id="answer${poll.choices[choice].id}">${poll.choices[choice].title}</h6>
-        </div>
-    
-        <div class="row">
-          <p class="col-md-12" id="description${poll.choices[choice].id}">${poll.choices[choice].description}</p>
-        </div>
+        ${generateAnswersHTML(poll, showResults)}
 
-        <div class="row mb-12">
-          ${showResults ? 
-            `<h6>Current score: ${score}</h6>` 
-            : ``}
-        </div>
-
-        <hr class="minor">
-
-        `
-      }
-
-    buffer += `
         </footer>
       </article>
     `;
@@ -97,5 +69,38 @@ $(() => {
     </div>
     `
   };
+
+  const generateAnswersHTML = (poll, showResults) => {
+    let buffer = '';
+    let num = 0;
+    for (const choice in poll.choices) {
+      num++;
+      const choiceId = poll.choices[choice].id;
+      const score = getScore(choiceId, poll.scores)
+
+      buffer += `
+      
+      <div class="row">
+        <h5 class="col-md-2" id="labelAnswer${poll.choices[choice].id}">Answer #${num}:</h5>
+        <h6 class="col-md-10" id="answer${poll.choices[choice].id}">${poll.choices[choice].title}</h6>
+      </div>
+  
+      <div class="row">
+        <p class="col-md-12" id="description${poll.choices[choice].id}">${poll.choices[choice].description}</p>
+      </div>
+
+      <div class="row mb-12">
+        ${showResults ? 
+          `<h6>Current score: ${score}</h6>` 
+          : ``}
+      </div>
+
+      <hr class="minor">
+
+      `
+    }
+
+    return buffer;
+  }
 
 });
