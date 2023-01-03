@@ -1,7 +1,7 @@
 $(() => {
   window.poll = {};
   // TO DO: toggle whether email should show as part of the poll info
-  const createPoll = (poll, showResults, successMessage = false) => { 
+  const createPoll = (poll, showResults) => { 
     // console.log(`poll info: ${JSON.stringify(poll.config)}`);
     const origin = window.location.origin;
     let buffer = ``;
