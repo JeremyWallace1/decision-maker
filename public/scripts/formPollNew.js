@@ -216,7 +216,7 @@ $(() => {
     // loading button when it's taking it's time
     loadingButton();
     // adding artificial delay 
-    delay(4000).then(() => {
+    delay(2500).then(() => {
 
       views_manager.show('none');
   

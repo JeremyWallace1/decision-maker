@@ -16,6 +16,12 @@ $(() => {
       Your new poll was created successfully!
     </h3>
 
+    <div class="row">
+      <h1 class="display-4" id="question${poll.config.id}">
+        ${poll.config.question}
+      </h1>
+    </div>
+
     <article class="poll" id="poll_${poll.config.id}">
       <header class="poll_heading">
       <div class="row mb-2"></div>

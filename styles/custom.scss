@@ -190,10 +190,11 @@ body {
     background-color: $uberdkblue;
     padding: 0.5em 1em;
     display: flex;
+    width: 100%;
     flex-wrap: wrap;
     align-items: center;
     align-content: center;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   hr {

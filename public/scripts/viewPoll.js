@@ -23,12 +23,6 @@ $(() => {
     buffer += `
       <article class="poll" id="poll_${poll.config.id}">
       <header class="poll_heading">
-        <div class="row mb-2"></div>
-          <div class="row mb-3">
-            <h5 id="email${poll.config.id}">${poll.config.creator_email} has asked a question...</h5>
-          </div>
-
-          <hr>
   
           <div class="row">
             <h1 class="display-4" id="question${poll.config.id}">

@@ -9,21 +9,14 @@ $(() => {
     let buffer = `
       <form action="/responses/${poll.config.id}" method="POST" id="poll-response" class="polls">
         <header class="poll_heading">
-          <div class="row mb-2"></div>
-          <div class="row mb-3">
-            <h5 id="email${poll.config.id}">${poll.config.creator_email} has asked a question...</h5>
-          </div>
 
-          <hr>
 
-          <div class="row">
-            <h4 class="col-md-2" id="labelQuestion${poll.config.id}">
-              Question:
-            </h4>
-            <h4 class="col-md-10" id="question${poll.config.id}">
-              ${poll.config.question}
-            </h4>
-          </div>
+        <div class="row">
+        <h1 class="display-4" id="question${poll.config.id}">
+          ${poll.config.question}
+        </h1>
+      </div>
+
           `
     let questionImage = poll.config.image;
     if (questionImage) {
@@ -110,7 +103,7 @@ $(() => {
       // loading button when it's taking it's time
       loadingButton();
       // adding artificial delay 
-      delay(4000).then(() => {
+      delay(2500).then(() => {
 
         views_manager.show('none');
         

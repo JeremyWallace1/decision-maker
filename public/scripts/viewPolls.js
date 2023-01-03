@@ -30,13 +30,13 @@ $(() => {
     clearPolls();
     console.log('jsonData[0]',jsonData[0]);
     
-    if (showResults) {
-      $polls.append( `
-        <h2 class="titling">
-          ${jsonData[0]['config'].creator_email}'s Polls
-        </h2>
-      `);
-    }
+    // if (showResults) {
+    //   $polls.append( `
+    //     <h2 class="titling">
+    //       ${jsonData[0]['config'].creator_email}'s Polls
+    //     </h2>
+    //   `);
+    // }
 
     for (const pollData of jsonData) {
       const createdPoll = poll.createPoll(pollData, showResults);
