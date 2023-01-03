@@ -107,7 +107,7 @@ $(() => {
 
     if (imagePoll) {
       buffer = `
-        <div class="d-flex flex-row flex-wrap">
+        <div class="d-flex flex-wrap align-items-stretch">
           ${buffer}
         </div>`;
     }
@@ -127,11 +127,22 @@ $(() => {
   }
 
   const generateImageAnswerHTML = (data) => {
+    let imageHTML = '';
+    if (!data.image) {
+      imageHTML += `
+        <div class="flex-grow-1 d-flex justify-content-center align-items-center">
+          <i class="fa-solid fa-image fa-3x"></i>
+        </div>`;
+    } else {
+      imageHTML += `<img src="${data.image}" class="w-100 flex-grow-1 overflow-hidden rounded" />`;
+    }
+
     return `
-      <div class="col-sm-4 col-md-3">
-        ${data.image ? 
-          `<img src="${data.image}" class="img-fluid img-thumbnail mx-auto d-block question img-preview" />` :
-          `<i class="fa-solid fa-image"></i>`}
+      <div class="d-flex item-outer col-sm-4 col-md-3">
+        <div class="item-inner d-flex flex-column mx-2 my-2 p-1 rounded bg-light text-dark text-center w-100">
+          ${imageHTML}
+          <h6 class="mb-0">${data.title}</h6>
+        </div>
       </div>
     `;
   }
