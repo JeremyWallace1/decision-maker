@@ -150,9 +150,13 @@ $(() => {
   };
 
   addDescription = (num) => {
-    // console.log(`clicked on #description${num}'s add description button...`)
     $(`#addDescription${num}`).hide(300);
-    $(`#description${num}`).show(300);
+    $(`#containerDescription${num}`).show(300);
+  };
+
+  addImage = (num) => {
+    $(`#addImage${num}`).hide(300);
+    $(`#containerImage${num}`).show(300);
   };
 
   loadingButton = () => {

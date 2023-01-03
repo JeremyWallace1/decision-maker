@@ -48,12 +48,12 @@ $(() => {
       <div class="col-md-2">
       </div>
       <div class="col-md-10">
-        <button type="button" class="button-link" id="addImage0"  onclick="addDescription('Image0');"><i class="fa-regular fa-image fa-lg">&nbsp</i>add image</button>
+        <button type="button" class="button-link" id="addImage0"  onclick="addImage('0');"><i class="fa-regular fa-image fa-lg">&nbsp</i>add image</button>
       </div>
     </div>
 
 
-    <div class="row mb-0" id="description0" style="display: none">
+    <div class="row mb-0" if="containerDescription0" style="display: none">
       <div class="row mb-0">
         <label for="inputTitle" class="col-md-2 col-form-label">
           Description:
@@ -83,7 +83,7 @@ $(() => {
             <input type="text" class="form-control" id="choice1" name="choice1_title" required>
           </div>
         </div>
-        <div class="row mb-3" id="description1" style="display: none">
+        <div class="row mb-3" if="containerDescription1" style="display: none">
           <label for="choice1_description" class="col-md-2 col-form-label">
             Description:
           </label>
@@ -112,7 +112,7 @@ $(() => {
             <input type="text" class="form-control" id="choice2" aria-describedby="choice2Feedback" name="choice2_title" required>
           </div>
         </div>
-        <div class="row mb-3" id="description2" style="display: none">
+        <div class="row mb-3" if="containerDescription2" style="display: none">
           <label for="choice2_description" class="col-md-2 col-form-label">
             Description:
           </label>
