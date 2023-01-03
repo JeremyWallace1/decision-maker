@@ -48,7 +48,7 @@ $(() => {
       <div class="col-md-2">
       </div>
       <div class="col-md-10">
-        <button type="button" class="button-link" id="addDescriptionImage0"  onclick="addDescription('Image0');"><i class="fa-regular fa-image">&nbsp</i>add image</button>
+        <button type="button" class="button-link" id="addDescriptionImage0"  onclick="addDescription('Image0');"><i class="fa-regular fa-image fa-lg">&nbsp</i>add image</button>
       </div>
     </div>
 
@@ -67,7 +67,7 @@ $(() => {
       <div class="col-md-2">
       </div>
       <div class="col-md-10">
-        <button type="button" class="button-link" id="addDescription0"  onclick="addDescription(0);"><i class="fa-solid fa-plus">&nbsp</i>add description</button>
+        <button type="button" class="button-link" id="addDescription0"  onclick="addDescription(0);"><i class="fa-solid fa-plus fa-lg">&nbsp</i>add description</button>
       </div>
     </div>
     <hr class="minor">
@@ -95,7 +95,7 @@ $(() => {
           <div class="col-md-2">
           </div>
           <div class="col-md-10">
-            <button type="button" class="button-link" id="addDescription1"  onclick="addDescription(1);"><i class="fa-solid fa-plus">&nbsp</i>add description</button>
+            <button type="button" class="button-link" id="addDescription1"  onclick="addDescription(1);"><i class="fa-solid fa-plus fa-lg">&nbsp</i>add description</button>
           </div>
         </div>
       </div>
@@ -124,7 +124,7 @@ $(() => {
           <div class="col-md-2">
           </div>
           <div class="col-md-10">
-            <button type="button" class="button-link" id="addDescription2"  onclick="addDescription(2);"><i class="fa-solid fa-plus">&nbsp</i>add description</button>
+            <button type="button" class="button-link" id="addDescription2"  onclick="addDescription(2);"><i class="fa-solid fa-plus fa-lg">&nbsp</i>add description</button>
           </div>
         </div>
       </div>

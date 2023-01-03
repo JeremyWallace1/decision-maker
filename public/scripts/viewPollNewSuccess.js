@@ -28,12 +28,12 @@ $(() => {
       <footer class="poll_footer row mb-3">
         <h6 class="poll_share_url">
           Share poll: &nbsp;&nbsp;<a href='${sharingUrl}' class="shareUrl" title='share this poll'>${sharingUrl}</a>
-          <button type="button" class="button button-small" id="copyShareUrl" onclick="copyUrl('${sharingUrl}')"><i class="fa-solid fa-copy"></i></i></button>
+          <button type="button" class="button button-small" id="copyShareUrl" onclick="copyUrl('${sharingUrl}')"><i class="fa-solid fa-copy fa-lg"></i></i></button>
         </h6>
    
         <h6 class="poll_results_url">
           View poll results: &nbsp;&nbsp;<a href='${resultsUrl}' class="shareUrl" title='view poll results'>${resultsUrl}</a>
-          <button type="button" class="button button-small" id="copyResultsUrl" onclick="copyUrl('${resultsUrl}')"><i class="fa-solid fa-copy"></i></i></button>
+          <button type="button" class="button button-small" id="copyResultsUrl" onclick="copyUrl('${resultsUrl}')"><i class="fa-solid fa-copy fa-lg"></i></i></button>
         </h6>
       
       </footer>

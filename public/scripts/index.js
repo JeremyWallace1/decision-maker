@@ -132,7 +132,7 @@ $(() => {
             <div class="col-md-2">
             </div>
             <div class="col-md-10">
-              <button type="button" class="button-link" id="addDescription${num}"  onclick="addDescription(${num});"><i class="fa-solid fa-plus">&nbsp</i>add description</button>
+              <button type="button" class="button-link" id="addDescription${num}"  onclick="addDescription(${num});"><i class="fa-solid fa-plus fa-lg">&nbsp</i>add description</button>
             </div>
           </div>
         </div>
