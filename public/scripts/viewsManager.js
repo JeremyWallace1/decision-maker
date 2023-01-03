@@ -8,6 +8,7 @@ $(() => {
     $formPollNew.detach();
     $formPollRespond.detach();
     $polls.detach();
+    $newPollSuccessMessage.detach();
 
     switch (item) {
       case 'pollNew':
@@ -16,10 +17,13 @@ $(() => {
       case 'polls':
         $polls.appendTo($main);
         break
+      case 'pollNewSuccess':
+        poll_new_success.createSuccessMessage(api.data);
+        $newPollSuccessMessage.appendTo($main);
+        break
       case 'pollRespond':
         poll_respond.createForm(api.data);
         $formPollRespond.appendTo($main);
-        console.log(`case ${item} activated...`)
         break
       case 'error': {
         const $error = $(`<p>${arguments[1]}</p>`);
