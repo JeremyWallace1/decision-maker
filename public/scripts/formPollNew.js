@@ -105,8 +105,10 @@ $(() => {
   `);
 
   const choiceRegularHTML = (`
-  <div class="choice choice-regular" id="containerChoice:id:">
-    <div class="form-group row mb-3" id="containerChoiceTitle:id:">
+  <div class="choice choice-regular" id="container:id:">
+    
+    <!-- TITLE INPUT -->
+    <div class="form-group row mb-3" id="containerTitle:id:">
       <label for="choice_title:id:" class="col-md-2 col-form-label" id="labelChoiceTitle:id:">
         Choice:
       </label>
@@ -114,19 +116,47 @@ $(() => {
         <input type="text" class="form-control" id="inputChoiceTitle:id:" name="choice:id:_title" required>
       </div>
     </div>
-    <div class="form-group row mb-3" id="containerDescription:id:" style="display: none">
-      <label for="choice:id:_description" class="col-md-2 col-form-label" id="labelChoiceDescription:id:">
+
+    <!-- IMAGE INPUT -->
+    <div class="form-group row mb-3 justify-content-end" id="containerImage:id:">
+      <label for="choice:id:_image" class="col-md-2 col-form-label">
+        Add Image:
+      </label>
+      <div class="col-md-10">
+        <input
+          class="form-control"
+          id="inputChoiceImage:id:"
+          name="choice:id:_image"
+          accept="image/*"
+          type="file"
+          capture="user"
+        />
+      </div>
+      <div class="col-md-10 mt-3" id="previewChoiceImage:id:">
+        <img src="" class="img-fluid img-thumbnail d-block question img-preview" id="imgChoiceImage:id:" />
+        <button class="button my-2" id="buttonRemoveImage:id:">remove image</button>
+      </div>
+    </div>
+
+    <!-- DESCRIPTION INPUT -->
+    <div class="form-group row mb-3" id="containerDescription:id:">
+      <label for="choice:id:_description" class="col-md-2 col-form-label" id="labelDescription:id:">
         Description:
       </label>
       <div class="col-md-10">
         <textarea rows="3" class="form-control" id="inputDescription:id:" name="choice:id:_description" placeholder="optional"></textarea>
       </div>
     </div>
+
+    <!-- SHOW DESCRIPTION -->
     <div class="row  mb-3 justify-content-end" id="containerAddDescription:id:">
       <div class="col-md-10">
         <button type="button" class="button-link" id="buttonAddDescription:id:"><i class="fa-solid fa-plus fa-lg">&nbsp</i>add description</button>
       </div>
     </div>
+
+    <!-- SHOW IMAGE -->
+
   </div>
   `);
 
@@ -184,11 +214,14 @@ $(() => {
     const countChoice = totalChoices + 1;
     const parsedHTML = choiceHTML.replaceAll(':id:', countChoice);
     const $choice = $(parsedHTML);
+    
+    $choice.find(`#containerDescription${countChoice}`)
+      .hide(0);
 
     $choice.find(`#buttonAddDescription${countChoice}`)
       .on('click', function() {
         $choice.find(`#containerDescription${countChoice}`).show(300);
-        $c$choice.find(`#containerAddDescription${countChoice}`).hide(300);
+        $choice.find(`#containerAddDescription${countChoice}`).hide(300);
       }
     )
     
