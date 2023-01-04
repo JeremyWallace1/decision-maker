@@ -21,8 +21,8 @@ router.get('/:uri/:ip', (req, res) => {
     .then(data => responsesData.poll_id = data.id)
     .then(pollId => responseQueries.getRespondentChoices(ip, pollId))
     .then(data => responsesData.responses = data)
-    .then(output => outputData.push(responsesData))
-    .then(output => res.json(outputData))
+    .then(outputData.push(responsesData))
+    .then(res.json(outputData))
     .catch(err => {
       res.status(500)
       .json({ error: err.message });
@@ -36,35 +36,16 @@ router.get('/:uri', (req, res) => {
   const outputData = [];
   responseQueries.getPollByResultsUri(uri)
     .then(data => responsesData.poll_id = data.id)
-    .then(data => responseQueries.getPollResponses(responsesData.poll_id))
+    .then(responseQueries.getPollResponses(responsesData.poll_id))
     .then(data => responsesData.responses = data)
-    .then(data => responseQueries.sumResponseScores(responsesData.poll_id))
+    .then(responseQueries.sumResponseScores(responsesData.poll_id))
     .then(scores => responsesData.scores = scores)
-    .then(output => outputData.push(responsesData))
-    .then(output => res.json(outputData))
+    .then(outputData.push(responsesData))
+    .then(res.json(outputData))
     .catch(err => {
       res.status(500)
       .json({ error: err.message });
     });
 });
-
-
-// user views poll and values and can modify selections before posting
-// router.get('/:id', (req, res) => {
-//   const pollId = Number(req.params.id);
-//   const responsesData = {};
-//   const outputData = [];
-//   responsesData.pollId = pollId;
-//   responseQueries.getPollResponses(pollId)
-//     .then(pollResponses => responsesData.responses = pollResponses)
-//     .then(pollResponses => responseQueries.sumResponseScores(pollId))
-//     .then(scores => responsesData.scores = scores)
-//     .then(output => outputData.push(responsesData))
-//     .then(output => res.json(outputData))
-//     .catch(err => {
-//       res.status(500)
-//         .json({ error: err.message });
-//     });
-// });
 
 module.exports = router;
