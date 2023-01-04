@@ -87,59 +87,12 @@ $(() => {
 
       <hr class="minor">
 
-      <div id="Choice1">
-        <div class="row mb-3 choiceOne">
-          <h5>Choice #1:</h5>
-          <div class="row mb-3">
-            <label for="choice1" class="col-md-2 col-form-label">
-              Choice:
-            </label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="choice1" name="choice1_title" required>
-            </div>
-          </div>
-          <div class="row mb-3" id="containerDescription1" style="display: none">
-            <label for="choice1_description" class="col-md-2 col-form-label">
-              Description:
-            </label>
-            <div class="col-md-10">
-              <textarea rows="3" class="form-control" id="choice1_description" name="choice1_description" placeholder="optional"></textarea>
-            </div>
-          </div>
-          <div class="row justify-content-end">
-            <div class="col-md-10">
-              <button type="button" class="button-link" id="addDescription1"  onclick="addDescription(1);"><i class="fa-solid fa-plus fa-lg">&nbsp</i>add description</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="Choice2">
+      <section id="choices">
         <div class="row mb-3">
-          <h5>Choice #2:</h5>
-          <div class="row mb-3">
-            <label for="choice2" class="col-md-2 col-form-label">
-              Choice:
-            </label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="choice2" aria-describedby="choice2Feedback" name="choice2_title" required>
-            </div>
-          </div>
-          <div class="row mb-3" id="containerDescription2" style="display: none">
-            <label for="choice2_description" class="col-md-2 col-form-label">
-              Description:
-            </label>
-            <div class="col-md-10">
-              <textarea rows="3" class="form-control" id="choice2_description" name="choice2_description" placeholder="optional"></textarea>
-            </div>
-          </div>
-          <div class="row justify-content-end">
-            <div class="col-md-10">
-              <button type="button" class="button-link" id="addDescription2"  onclick="addDescription(2);"><i class="fa-solid fa-plus fa-lg">&nbsp</i>add description</button>
-            </div>
-          </div>
+          <h3 class="col">Define poll choices</h3>
         </div>
-      </div>
+      </section>
+
       <div id="moreChoices"></div>
 
       
@@ -163,6 +116,34 @@ $(() => {
       </footer>
 
     </form>
+  `);
+
+  const choiceRegularHTML = (`
+  <div class="choice choice-regular" id="containerChoice">
+    <div class="row mb-3">
+      <div class="row mb-3">
+        <label for="choice_title" class="col-md-2 col-form-label" id="labelChoiceTitle">
+          Choice:
+        </label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" id="inputChoiceTitle" name="choice_title" required>
+        </div>
+      </div>
+      <div class="row mb-3" id="containerDescription" style="display: none">
+        <label for="choice_description" class="col-md-2 col-form-label" id="labelChoiceDescription">
+          Description:
+        </label>
+        <div class="col-md-10">
+          <textarea rows="3" class="form-control" id="inputDescription" name="choice_description" placeholder="optional"></textarea>
+        </div>
+      </div>
+      <div class="row justify-content-end" id="addDescription">
+        <div class="col-md-10">
+          <button type="button" class="button-link"><i class="fa-solid fa-plus fa-lg">&nbsp</i>add description</button>
+        </div>
+      </div>
+    </div>
+  </div>
   `);
 
   $formPollNew.images = {};
@@ -211,6 +192,47 @@ $(() => {
       console.log(error.message);
     })
   });
+
+  const $choices = $formPollNew.find('#choices');
+
+  const createRegularChoice = (choiceHTML) => {
+    const $choice = $(choiceHTML);
+    const totalChoices = $choices.children(`.choice-regular`).length;
+    const countChoice = totalChoices + 1;
+    
+    $choice.attr('id', `containerChoice${countChoice}`);
+    $choice.find(`#labelChoiceTitle`)
+      .attr('id', `labelChoice${countChoice}`)
+      .attr('for', `choice${countChoice}_title`)
+      .text(`Choice #${countChoice}`)
+    $choice.find(`#inputChoiceTitle`)
+      .attr('id', `inputChoiceTitle${countChoice}`)
+      .attr('name', `choice${countChoice}_title`)
+
+    $choice.find(`#containerDescription`)
+      .attr('id', `containerDescription${countChoice}`)
+      .hide();
+    $choice.find(`#labelChoiceDescription`)
+      .attr('id', `labelChoiceDescription${countChoice}`)
+      .attr('for', `choice${countChoice}_description`)
+      .text(`Choice #${countChoice}`)
+    $choice.find(`#inputDescription`)
+      .attr('id', `inputDescription${countChoice}`)
+      .attr('name', `choice${countChoice}_description`)
+
+    $choice.find(`#addDescription`)
+      .attr('id', `addDescription${countChoice}`)
+      .on('click', function() {
+        $choice.find(`#containerDescription${countChoice}`).show(300);
+        $(this).hide(300);
+      })
+    
+    return $choice;
+  }
+
+  $choices.append(createRegularChoice(choiceRegularHTML));
+  $choices.append(createRegularChoice(choiceRegularHTML));
+  $choices.append(createRegularChoice(choiceRegularHTML));
   
   window.$formPollNew = $formPollNew;
 
