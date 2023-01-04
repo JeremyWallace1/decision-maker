@@ -113,7 +113,7 @@ $(() => {
         Choice:
       </label>
       <div class="col-md-10">
-        <input type="text" class="form-control" id="inputChoiceTitle:id:" name="choice:id:_title" required>
+        <input type="text" class="form-control" id="inputTitle:id:" name="choice:id:_title" required>
       </div>
     </div>
 
@@ -125,15 +125,15 @@ $(() => {
       <div class="col-md-10">
         <input
           class="form-control"
-          id="inputChoiceImage:id:"
+          id="inputImage:id:"
           name="choice:id:_image"
           accept="image/*"
           type="file"
           capture="user"
         />
       </div>
-      <div class="col-md-10 mt-3" id="previewChoiceImage:id:">
-        <img src="" class="img-fluid img-thumbnail d-block question img-preview" id="imgChoiceImage:id:" />
+      <div class="col-md-10 mt-3" id="containerPreviewImage:id:">
+        <img src="" class="img-fluid img-thumbnail d-block question img-preview" id="imgPreviewImage:id:" />
         <button class="button my-2" id="buttonRemoveImage:id:">remove image</button>
       </div>
     </div>
@@ -148,14 +148,19 @@ $(() => {
       </div>
     </div>
 
-    <!-- SHOW DESCRIPTION -->
-    <div class="row  mb-3 justify-content-end" id="containerAddDescription:id:">
-      <div class="col-md-10">
-        <button type="button" class="button-link" id="buttonAddDescription:id:"><i class="fa-solid fa-plus fa-lg">&nbsp</i>add description</button>
+    <!-- SHOW INPUTS -->
+    <div class="row mb-3 justify-content-end" id="containerAddInput:id:">
+      
+      <!-- SHOW IMAGE INPUT -->
+      <div class="col-md-10" id="containerAddInputImage:id:">
+        <button type="button" class="button-link" id="buttonAddInputImage:id:"><i class="fa-regular fa-image fa-lg">&nbsp</i>add image</button>
+      </div>
+
+      <!-- SHOW DESCRIPTION INPUT -->
+      <div class="col-md-10" id="containerAddInputDescription:id:">
+        <button type="button" class="button-link" id="buttonAddInputDescription:id:"><i class="fa-solid fa-plus fa-lg">&nbsp</i>add description</button>
       </div>
     </div>
-
-    <!-- SHOW IMAGE -->
 
   </div>
   `);
@@ -188,14 +193,14 @@ $(() => {
 
   $removeImage0.on('click', function(event) {
     event.preventDefault();
-    $formPollNew.images.Image0 = null;
+    $formPollNew.images.image0 = null;
     $previewImage0.hide(300);
   });
 
   $inputImage0.on('change', function (event) {
     const file = this.files[0];
     convertToBase64(file)
-    .then(data => $formPollNew.images.Image0 = data)
+    .then(data => $formPollNew.images.image0 = data)
     .then(data => {
       $imgImage0.attr('src', data);
       $previewImage0.show(300);
@@ -215,16 +220,46 @@ $(() => {
     const parsedHTML = choiceHTML.replaceAll(':id:', countChoice);
     const $choice = $(parsedHTML);
     
+    // Hide elements that should not be shown initially
     $choice.find(`#containerDescription${countChoice}`)
       .hide(0);
+    $choice.find(`#containerImage${countChoice}`)
+      .hide(0);
+    $choice.find(`#containerPreviewImage${countChoice}`)
+      .hide(0);
 
-    $choice.find(`#buttonAddDescription${countChoice}`)
+    // Add event listeners to elements that require them
+    $choice.find(`#buttonAddInputImage${countChoice}`)
       .on('click', function() {
-        $choice.find(`#containerDescription${countChoice}`).show(300);
-        $choice.find(`#containerAddDescription${countChoice}`).hide(300);
+        $choice.find(`#containerImage${countChoice}`).show(300);
+        $choice.find(`#containerAddInputImage${countChoice}`).hide(300);
       }
     )
-    
+    $choice.find(`#buttonAddInputDescription${countChoice}`)
+      .on('click', function() {
+        $choice.find(`#containerDescription${countChoice}`).show(300);
+        $choice.find(`#containerAddInputDescription${countChoice}`).hide(300);
+      }
+    )
+    $choice.find(`#inputImage${countChoice}`)
+      .on('change', function (event) {
+        const file = this.files[0];
+        convertToBase64(file)
+        .then(data => {
+          // Store image data, so it can be used by the form POST
+          $formPollNew.images[`image${countChoice}`] = data;
+          // Preview image on display, and clear input
+          $choice.find(`#imgPreviewImage${countChoice}`)
+          .attr('src', data)
+          $choice.find(`#containerPreviewImage${countChoice}`)
+            .show(300);
+        })
+        .catch(error => {
+          $(this).toggleClass("error", true);
+          console.log(error.message);
+        })
+      }
+    );
     return $choice;
   }
 
@@ -259,8 +294,8 @@ $(() => {
   
       const data = $(this).serialize();
       let modifiedData = data;
-      if ($formPollNew.images.Image0) {
-        modifiedData += '&image=' + encodeURIComponent($formPollNew.images.Image0);
+      if ($formPollNew.images.image0) {
+        modifiedData += '&image=' + encodeURIComponent($formPollNew.images.image0);
       }
   
       let uri = null;
