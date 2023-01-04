@@ -62,21 +62,25 @@ $(() => {
       
       <hr class="minor">
 
-      <div class="row mb-3">
-        <h3 class="col">Configure poll</h3>
-      </div>  
+      <section id="choices">
+        <div class="row mb-3">
+          <h3 class="col">Define poll choices</h3>
+        </div>
+      </section>
 
-      <div class="row mb-3">
-        <label for="poll_type" class="col-md-2 col-form-label">
-          Poll type:
-        </label>
-        <div class="col-sm-10">
-          <select name="poll_type" id="selectPollType" class="form-select" aria-label="Select a poll type">
-            <option value="standard" selected>Standard Poll</option>
-            <option value="image">Image Poll</option>
-          </select>
+      <div class="row mb-3" id="moreChoices">
+        <div class="col">
+          <button type="button" class="button" id="addMoreChoices"  onclick="addChoices();">add choices</button>
+          <span class="">&nbsp&nbsp </span>
+          <button type="button" class="button" id="removeChoices" onclick="removeChoices();" style="display: none">remove choices</button>
         </div>
       </div>
+
+      <hr class="minor">
+
+      <div class="row mb-3">
+        <h3 class="col">Tell us about yourself</h3>
+      </div>  
 
       <div class="row mb-3">
         <label for="inputEmail" class="col-md-2 col-form-label">Your email:</label>
@@ -85,27 +89,9 @@ $(() => {
         </div>
       </div>
 
-      <hr class="minor">
-
-      <section id="choices">
-        <div class="row mb-3">
-          <h3 class="col">Define poll choices</h3>
-        </div>
-      </section>
-
-      <div id="moreChoices"></div>
-
-      
       <footer class="poll_footer row mb-3">
-        <div class="buttons">
-          <button type="button" class="button" id="addMoreChoices"  onclick="addChoices();">add choices</button>
-          <span class="">&nbsp&nbsp </span>
-          <button type="button" class="button" id="removeChoices" onclick="removeChoices();" style="display: none">remove choices</button>
-        </div>
-        <div class="col-12">
+        <div class="col">
           <hr>
-        </div>
-        <div class="buttons">
           <button type="submit" class="button button-large col-12" id="submitButton">
             <span class="spinner-border spinner-border-lg" id="loadingSpinner" role="status" style="display: none">
             </span>
@@ -205,7 +191,8 @@ $(() => {
       .on('click', function() {
         $choice.find(`#containerDescription${countChoice}`).show(300);
         $(this).hide(300);
-      })
+      }
+    )
     
     return $choice;
   }
