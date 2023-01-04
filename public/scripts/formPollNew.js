@@ -224,60 +224,64 @@ $(() => {
     const countChoice = totalChoices + 1;
     const parsedHTML = choiceHTML.replaceAll(':id:', countChoice);
     const $choice = $(parsedHTML);
+    const $containerDescription = $choice.find(`#containerDescription${countChoice}`);
+    const $containerImage = $choice.find(`#containerImage${countChoice}`);
+    const $containerPreviewImage = $choice.find(`#containerPreviewImage${countChoice}`);
+    const $containerAddInputImage = $choice.find(`#containerAddInputImage${countChoice}`);
+    const $buttonAddInputImage = $choice.find(`#buttonAddInputImage${countChoice}`);
+    const $buttonRemoveImage = $choice.find(`#buttonRemoveImage${countChoice}`);
+    const $buttonAddInputDescription = $choice.find(`#buttonAddInputDescription${countChoice}`);
+    const $imgPreviewImage = $choice.find(`#imgPreviewImage${countChoice}`);
+    const $inputImage = $choice.find(`#inputImage${countChoice}`);
+    
     $formPollNew.images[`image${countChoice}`] = null;
     
     // Hide elements that should not be shown initially
-    $choice.find(`#containerDescription${countChoice}`).hide();
-    $choice.find(`#containerImage${countChoice}`).hide();
-    $choice.find(`#containerPreviewImage${countChoice}`).hide();
+    $containerDescription.hide();
+    $containerImage.hide();
+    $containerPreviewImage.hide();
 
     // Add event listeners
     // Button press: Add image
-    $choice.find(`#buttonAddInputImage${countChoice}`)
-      .on('click', function(event) {
-        event.preventDefault();
-        $choice.find(`#containerImage${countChoice}`).show(300);
-        $choice.find(`#containerAddInputImage${countChoice}`).hide(300);
-      }
-    )
+    $buttonAddInputImage.on('click', function(event) {
+      event.preventDefault();
+      $containerImage.show(300);
+      $containerAddInputImage.hide(300);
+    })
     // Button press: Add description
-    $choice.find(`#buttonAddInputDescription${countChoice}`)
-      .on('click', function(event) {
-        event.preventDefault();
-        $choice.find(`#containerDescription${countChoice}`).show(300);
-        $choice.find(`#containerAddInputDescription${countChoice}`).hide(300);
-      }
-    )
+    $buttonAddInputDescription.on('click', function(event) {
+      event.preventDefault();
+      $containerDescription.show(300);
+      $choice.find(`#containerAddInputDescription${countChoice}`).hide(300);
+    })
     // Button press: Remove image
-    $choice.find(`#buttonRemoveImage${countChoice}`)
-      .on('click', function(event) {
-        event.preventDefault();
-        $formPollNew.images[`image${countChoice}`] = null;
-        $choice.find(`#containerPreviewImage${countChoice}`).hide(300);
-        $choice.find(`#imgPreviewImage${countChoice}`).attr('src', '');
-        $choice.find(`#inputImage${countChoice}`).val('');
-      }
-    )
+    $buttonRemoveImage.on('click', function(event) {
+      event.preventDefault();
+      $formPollNew.images[`image${countChoice}`] = null;
+      $containerPreviewImage.hide(100);
+      setTimeout(() => $imgPreviewImage.attr('src', ''), 100);
+      $inputImage.val('');
+    })
     // Input change: Choose image file
-    $choice.find(`#inputImage${countChoice}`)
-      .on('change', function (event) {
-        const file = this.files[0];
-        convertToBase64(file)
-        .then(data => {
-          // Store image data, so it can be used by the form POST
-          $formPollNew.images[`image${countChoice}`] = data;
-          // Preview image on display, and clear input
-          $choice.find(`#imgPreviewImage${countChoice}`)
-          .attr('src', data)
-          $choice.find(`#containerPreviewImage${countChoice}`)
-            .show(300);
-        })
-        .catch(error => {
-          $(this).toggleClass("error", true);
-          console.log(error.message);
-        })
-      }
-    );
+    $inputImage.on('change', function (event) {
+      const file = this.files[0];
+      convertToBase64(file)
+      .then(data => {
+        // Store image data, so it can be used by the form POST
+        $formPollNew.images[`image${countChoice}`] = data;
+        // Preview image on display
+        $containerPreviewImage.hide(100);
+        setTimeout(() => {
+          $imgPreviewImage.attr('src', '');
+          $imgPreviewImage.attr('src', data);
+          $containerPreviewImage.show(300);
+        }, 300);
+      })
+      .catch(error => {
+        $(this).toggleClass("error", true);
+        console.log(error.message);
+      })
+    });
     return $choice;
   }
 
