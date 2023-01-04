@@ -33,8 +33,8 @@ router.get('/:uri', (req, res) => {
     })
     .then(pollId => pollQueries.getPollChoices(pollId))
     .then(choices => pollData.choices = choices)
-    .then(() => outputData.push(pollData))
-    .then(() => res.json(outputData))
+    .then(outputData.push(pollData))
+    .then(res.json(outputData))
     .catch(err => {
       if (err.message === 'Poll not found!') {
         return res.status(404)
