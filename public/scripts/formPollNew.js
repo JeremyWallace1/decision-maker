@@ -105,25 +105,25 @@ $(() => {
   `);
 
   const choiceRegularHTML = (`
-  <div class="choice choice-regular" id="containerChoice:n:">
+  <div class="choice choice-regular" id="containerChoice:id:">
     <div class="row mb-3">
       <div class="row mb-3">
-        <label for="choice_title:n:" class="col-md-2 col-form-label" id="labelChoiceTitle:n:">
+        <label for="choice_title:id:" class="col-md-2 col-form-label" id="labelChoiceTitle:id:">
           Choice:
         </label>
         <div class="col-md-10">
-          <input type="text" class="form-control" id="inputChoiceTitle:n:" name="choice:n:_title" required>
+          <input type="text" class="form-control" id="inputChoiceTitle:id:" name="choice:id:_title" required>
         </div>
       </div>
-      <div class="row mb-3" id="containerDescription:n:" style="display: none">
-        <label for="choice:n:_description" class="col-md-2 col-form-label" id="labelChoiceDescription:n:">
+      <div class="row mb-3" id="containerDescription:id:" style="display: none">
+        <label for="choice:id:_description" class="col-md-2 col-form-label" id="labelChoiceDescription:id:">
           Description:
         </label>
         <div class="col-md-10">
-          <textarea rows="3" class="form-control" id="inputDescription:n:" name="choice:n:_description" placeholder="optional"></textarea>
+          <textarea rows="3" class="form-control" id="inputDescription:id:" name="choice:id:_description" placeholder="optional"></textarea>
         </div>
       </div>
-      <div class="row justify-content-end" id="addDescription:n:">
+      <div class="row justify-content-end" id="addDescription:id:">
         <div class="col-md-10">
           <button type="button" class="button-link"><i class="fa-solid fa-plus fa-lg">&nbsp</i>add description</button>
         </div>
@@ -184,7 +184,7 @@ $(() => {
   const createRegularChoice = (choiceHTML) => {
     const totalChoices = $choices.children(`.choice-regular`).length;
     const countChoice = totalChoices + 1;
-    const parsedHTML = choiceHTML.replaceAll(':n:', countChoice);
+    const parsedHTML = choiceHTML.replaceAll(':id:', countChoice);
     const $choice = $(parsedHTML);
 
     $choice.find(`#addDescription${countChoice}`)
