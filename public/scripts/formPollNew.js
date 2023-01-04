@@ -119,25 +119,25 @@ $(() => {
   `);
 
   const choiceRegularHTML = (`
-  <div class="choice choice-regular" id="containerChoice">
+  <div class="choice choice-regular" id="containerChoice:n:">
     <div class="row mb-3">
       <div class="row mb-3">
-        <label for="choice_title" class="col-md-2 col-form-label" id="labelChoiceTitle">
+        <label for="choice_title:n:" class="col-md-2 col-form-label" id="labelChoiceTitle:n:">
           Choice:
         </label>
         <div class="col-md-10">
-          <input type="text" class="form-control" id="inputChoiceTitle" name="choice_title" required>
+          <input type="text" class="form-control" id="inputChoiceTitle:n:" name="choice:n:_title" required>
         </div>
       </div>
-      <div class="row mb-3" id="containerDescription" style="display: none">
-        <label for="choice_description" class="col-md-2 col-form-label" id="labelChoiceDescription">
+      <div class="row mb-3" id="containerDescription:n:" style="display: none">
+        <label for="choice:n:_description" class="col-md-2 col-form-label" id="labelChoiceDescription:n:">
           Description:
         </label>
         <div class="col-md-10">
-          <textarea rows="3" class="form-control" id="inputDescription" name="choice_description" placeholder="optional"></textarea>
+          <textarea rows="3" class="form-control" id="inputDescription:n:" name="choice:n:_description" placeholder="optional"></textarea>
         </div>
       </div>
-      <div class="row justify-content-end" id="addDescription">
+      <div class="row justify-content-end" id="addDescription:n:">
         <div class="col-md-10">
           <button type="button" class="button-link"><i class="fa-solid fa-plus fa-lg">&nbsp</i>add description</button>
         </div>
@@ -196,32 +196,12 @@ $(() => {
   const $choices = $formPollNew.find('#choices');
 
   const createRegularChoice = (choiceHTML) => {
-    const $choice = $(choiceHTML);
     const totalChoices = $choices.children(`.choice-regular`).length;
     const countChoice = totalChoices + 1;
-    
-    $choice.attr('id', `containerChoice${countChoice}`);
-    $choice.find(`#labelChoiceTitle`)
-      .attr('id', `labelChoice${countChoice}`)
-      .attr('for', `choice${countChoice}_title`)
-      .text(`Choice #${countChoice}`)
-    $choice.find(`#inputChoiceTitle`)
-      .attr('id', `inputChoiceTitle${countChoice}`)
-      .attr('name', `choice${countChoice}_title`)
+    const parsedHTML = choiceHTML.replaceAll(':n:', countChoice);
+    const $choice = $(parsedHTML);
 
-    $choice.find(`#containerDescription`)
-      .attr('id', `containerDescription${countChoice}`)
-      .hide();
-    $choice.find(`#labelChoiceDescription`)
-      .attr('id', `labelChoiceDescription${countChoice}`)
-      .attr('for', `choice${countChoice}_description`)
-      .text(`Choice #${countChoice}`)
-    $choice.find(`#inputDescription`)
-      .attr('id', `inputDescription${countChoice}`)
-      .attr('name', `choice${countChoice}_description`)
-
-    $choice.find(`#addDescription`)
-      .attr('id', `addDescription${countChoice}`)
+    $choice.find(`#addDescription${countChoice}`)
       .on('click', function() {
         $choice.find(`#containerDescription${countChoice}`).show(300);
         $(this).hide(300);
