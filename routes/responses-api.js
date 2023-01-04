@@ -21,8 +21,8 @@ router.get('/:uri/:ip', (req, res) => {
     .then(data => responsesData.poll_id = data.id)
     .then(pollId => responseQueries.getRespondentChoices(ip, pollId))
     .then(data => responsesData.responses = data)
-    .then(outputData.push(responsesData))
-    .then(res.json(outputData))
+    .then(() => outputData.push(responsesData))
+    .then(() => res.json(outputData))
     .catch(err => {
       res.status(500)
       .json({ error: err.message });
@@ -38,10 +38,10 @@ router.get('/:uri', (req, res) => {
     .then(data => responsesData.poll_id = data.id)
     .then(responseQueries.getPollResponses(responsesData.poll_id))
     .then(data => responsesData.responses = data)
-    .then(responseQueries.sumResponseScores(responsesData.poll_id))
+    .then(() => responseQueries.sumResponseScores(responsesData.poll_id))
     .then(scores => responsesData.scores = scores)
-    .then(outputData.push(responsesData))
-    .then(res.json(outputData))
+    .then(() => outputData.push(responsesData))
+    .then(() => res.json(outputData))
     .catch(err => {
       res.status(500)
       .json({ error: err.message });
