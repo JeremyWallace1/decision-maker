@@ -149,12 +149,6 @@ $(() => {
     </form>
   `);
 
-  const generateImagePreviewHTML = (imgData) => {
-    return `
-    
-    `;
-  };
-
   $formPollNew.images = {};
 
   const $containerDescription0 = $formPollNew.find('#containerDescription0');
