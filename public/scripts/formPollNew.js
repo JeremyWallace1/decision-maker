@@ -247,6 +247,8 @@ $(() => {
       })
       .catch((error) => {
         console.error(error);
+        console.log('something went wrong!');
+        stopLoadingButton();
         views_manager.show('pollNew');
       })
     })

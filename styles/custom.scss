@@ -257,11 +257,48 @@ body {
     box-shadow: 0 0 0 0.4em $ltblue;
   }
 
+  .choiceRow {
+    display: flex;
+    min-height: 120px;
+    max-height: 120px;
+    overflow: hidden;
+    align-items: center;
+  }
+
+  .choiceTitle {
+    overflow: hidden;
+  }
+  
+  .choiceDescription {
+    overflow: hidden;
+  }
+
+  .imageBox {
+    display: flex;
+    align-content: flex-end;
+  }
+  .choiceImage {
+    max-width: 100%;
+    max-height: 120px;
+    object-fit: scale-down;
+    // padding-bottom: 1em;
+    // align-self: flex-end;
+  }
+
   @media only screen and (min-width: 400px){
     .navigation {
       padding: 0.5em 1em;
     }
+    .choiceRow {
+      min-height: 120px;
+      max-height: 120px;
+    }
+    // .choiceImage{
+    //   max-height: 120px;
+    // }
   }
+
+  // @media only screen and (min-width: 576px) {
 
   @media only screen and (min-width: 600px){
     main {

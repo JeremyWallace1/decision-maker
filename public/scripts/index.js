@@ -162,6 +162,13 @@ $(() => {
     document.querySelector('#submitButton').disabled = true;
   }
 
+  stopLoadingButton = () => {
+    $(`#createPollText`).show(0);
+    $(`#loadingText`).hide(0);
+    $(`#loadingSpinner`).hide(0);
+    document.querySelector('#submitButton').disabled = false;
+  }
+
   copyUrl = (url) => {
     navigator.clipboard.writeText(url);
     // Alert the copied text
