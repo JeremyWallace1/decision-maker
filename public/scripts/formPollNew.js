@@ -1,7 +1,7 @@
 $(() => {
 
   const $formPollNew = $(`
-    <form action="/polls" method="POST" class="col-12" id="create-poll">
+    <form action="" method="POST" class="col-12" id="create-poll">
       
       <div class="row mb-0">
         <label for="inputEmail" class="col-md-2 col-form-label">Your email:</label>
@@ -150,6 +150,8 @@ $(() => {
   `);
 
   $formPollNew.images = {};
+
+  $formPollNew.attr('action', '/polls');
 
   const $containerDescription0 = $formPollNew.find('#containerDescription0');
   const $addDescription0 = $formPollNew.find('#addDescription0');
