@@ -90,6 +90,7 @@ const getPollByResultsUri = (uri) => {
   SELECT
     id,
     creator_email,
+    poll_type,
     question,
     polls.image,
     polls.description,
