@@ -154,11 +154,6 @@ $(() => {
     $(`#containerDescription${num}`).show(300);
   };
 
-  addImage = (num) => {
-    $(`#addImage${num}`).hide(300);
-    $(`#containerImage${num}`).show(300);
-  };
-
   loadingButton = () => {
     $(`#createPollText`).hide(0);
     $(`#loadingText`).show(0);
