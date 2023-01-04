@@ -216,21 +216,6 @@ $(() => {
     });
   };
 
-  const previewImage = (imgData, id) => {
-    const html = generateImagePreviewHTML(imgData);
-    $(`#preview${id}`).remove();
-    $(`#input${id}`).parent().append(html);
-    attachListenerToRemoveButton(id);
-  }
-
-  const attachListenerToRemoveButton = (id) => {
-    $(`#remove${id}`).on('click', function (event) {
-      event.preventDefault();
-      $(`#preview${id}`).remove();
-      $(`#input${id}`).val('');
-    });
-  }
-
   $formPollNew.on('submit', function (event) {
     event.preventDefault();
     // loading button when it's taking it's time
