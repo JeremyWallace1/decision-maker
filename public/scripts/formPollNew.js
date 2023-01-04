@@ -106,27 +106,25 @@ $(() => {
 
   const choiceRegularHTML = (`
   <div class="choice choice-regular" id="containerChoice:id:">
-    <div class="row mb-3">
-      <div class="row mb-3">
-        <label for="choice_title:id:" class="col-md-2 col-form-label" id="labelChoiceTitle:id:">
-          Choice:
-        </label>
-        <div class="col-md-10">
-          <input type="text" class="form-control" id="inputChoiceTitle:id:" name="choice:id:_title" required>
-        </div>
+    <div class="form-group row mb-3" id="containerChoiceTitle:id:">
+      <label for="choice_title:id:" class="col-md-2 col-form-label" id="labelChoiceTitle:id:">
+        Choice:
+      </label>
+      <div class="col-md-10">
+        <input type="text" class="form-control" id="inputChoiceTitle:id:" name="choice:id:_title" required>
       </div>
-      <div class="row mb-3" id="containerDescription:id:" style="display: none">
-        <label for="choice:id:_description" class="col-md-2 col-form-label" id="labelChoiceDescription:id:">
-          Description:
-        </label>
-        <div class="col-md-10">
-          <textarea rows="3" class="form-control" id="inputDescription:id:" name="choice:id:_description" placeholder="optional"></textarea>
-        </div>
+    </div>
+    <div class="form-group row mb-3" id="containerDescription:id:" style="display: none">
+      <label for="choice:id:_description" class="col-md-2 col-form-label" id="labelChoiceDescription:id:">
+        Description:
+      </label>
+      <div class="col-md-10">
+        <textarea rows="3" class="form-control" id="inputDescription:id:" name="choice:id:_description" placeholder="optional"></textarea>
       </div>
-      <div class="row justify-content-end" id="addDescription:id:">
-        <div class="col-md-10">
-          <button type="button" class="button-link"><i class="fa-solid fa-plus fa-lg">&nbsp</i>add description</button>
-        </div>
+    </div>
+    <div class="row  mb-3 justify-content-end" id="containerAddDescription:id:">
+      <div class="col-md-10">
+        <button type="button" class="button-link" id="buttonAddDescription:id:"><i class="fa-solid fa-plus fa-lg">&nbsp</i>add description</button>
       </div>
     </div>
   </div>
@@ -187,10 +185,10 @@ $(() => {
     const parsedHTML = choiceHTML.replaceAll(':id:', countChoice);
     const $choice = $(parsedHTML);
 
-    $choice.find(`#addDescription${countChoice}`)
+    $choice.find(`#buttonAddDescription${countChoice}`)
       .on('click', function() {
         $choice.find(`#containerDescription${countChoice}`).show(300);
-        $(this).hide(300);
+        $c$choice.find(`#containerAddDescription${countChoice}`).hide(300);
       }
     )
     
