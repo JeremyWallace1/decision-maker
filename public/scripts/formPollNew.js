@@ -2,15 +2,6 @@ $(() => {
 
   const $formPollNew = $(`
     <form action="" method="POST" class="col-12" id="create-poll">
-      
-      <div class="row mb-0">
-        <label for="inputEmail" class="col-md-2 col-form-label">Your email:</label>
-        <div class="col-md-10">
-          <input type="email" class="form-control" id="inputEmail" name="email" required>
-        </div>
-      </div>
-
-      <hr class="minor">
 
       <div class="row mb-3">
         <h3 class="col">What do you want to ask?</h3>
@@ -69,6 +60,31 @@ $(() => {
         </div>
       </div>
       
+      <hr class="minor">
+
+      <div class="row mb-3">
+        <h3 class="col">Configure poll</h3>
+      </div>  
+
+      <div class="row mb-3">
+        <label for="poll_type" class="col-md-2 col-form-label">
+          Poll type:
+        </label>
+        <div class="col-sm-10">
+          <select name="poll_type" id="selectPollType" class="form-select" aria-label="Select a poll type">
+            <option value="standard" selected>Standard Poll</option>
+            <option value="image">Image Poll</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label for="inputEmail" class="col-md-2 col-form-label">Your email:</label>
+        <div class="col-md-10">
+          <input type="email" class="form-control" id="inputEmail" name="email" required>
+        </div>
+      </div>
+
       <hr class="minor">
 
       <div id="Choice1">
