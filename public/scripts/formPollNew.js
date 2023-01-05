@@ -294,29 +294,26 @@ $(() => {
       const finalPostData = submittedPostData + appendPostData;
       let uri = null;
       const output = [];
-      console.log(submittedPostData)
-      console.log(appendPostData)
-      console.log(finalPostData)
-      // submitPoll(finalPostData)
-      // .then(data => {
-      //   uri = data[0].results_url;
-      // })
-      // .then(() => getPollByUri(uri))
-      // .then(data => output.push(data[0]))
-      // .then(() => getResponsesByUri(uri))
-      // .then(data => {
-      //   output[0].pollId = output[0].config.id;
-      //   output[0].responses = data[0].responses;
-      //   output[0].scores = data[0].scores;
-      // })
-      // .then(() => {
-      //   window.api.data = output[0];
-      //   views_manager.show('pollNewSuccess');
-      // })
-      // .catch((error) => {
-      //   console.error(error);
-      //   views_manager.show('pollNew');
-      // })
+      submitPoll(finalPostData)
+      .then(data => {
+        uri = data[0].results_url;
+      })
+      .then(() => getPollByUri(uri))
+      .then(data => output.push(data[0]))
+      .then(() => getResponsesByUri(uri))
+      .then(data => {
+        output[0].pollId = output[0].config.id;
+        output[0].responses = data[0].responses;
+        output[0].scores = data[0].scores;
+      })
+      .then(() => {
+        window.api.data = output[0];
+        views_manager.show('pollNewSuccess');
+      })
+      .catch((error) => {
+        console.error(error);
+        views_manager.show('pollNew');
+      })
     })
   })
 });
