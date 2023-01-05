@@ -278,10 +278,7 @@ $(() => {
     // loading button when it's taking it's time
     loadingButton();
     // adding artificial delay 
-    delay(2000).then(() => {
-
-      views_manager.show('none');
-  
+    delay(0).then(() => {
       const submittedPostData = $(this).serialize();
       let appendPostData = '';
       for (const imageKey in $formPollNew.images) {
