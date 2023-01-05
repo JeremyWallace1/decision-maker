@@ -62,11 +62,9 @@ $(() => {
       
       <hr class="minor">
 
-      <section id="choices">
-        <div class="row mb-3">
-          <h3 class="col">Define poll choices</h3>
-        </div>
-      </section>
+      <div class="row mb-3" id="choices">
+        <h3 class="col">Define poll choices</h3>
+      </div>
 
       <div class="row mb-3 align-items-start" id="manageChoices">
         <div class="col-sm-6 col-md-3 col-lg-2">
@@ -172,75 +170,20 @@ $(() => {
   </div>
   `);
 
-  $formPollNew.images = {};
-
-  $formPollNew.attr('action', '/polls');
-
-  const $containerDescription0 = $formPollNew.find('#containerDescription0');
-  const $addDescription0 = $formPollNew.find('#addDescription0');
-  $addDescription0.on('click', function() {
-    $containerDescription0.show(300);
-    $addDescription0.hide(300);
-  })
-
-  const $containerImage0 = $formPollNew.find('#containerImage0');
-  const $previewImage0 = $containerImage0.find('#previewImage0');
-  const $inputImage0 = $containerImage0.find('#inputImage0');
-  const $imgImage0 = $containerImage0.find('#imgImage0');
-  const $removeImage0 = $containerImage0.find('#removeImage0');
-  const $addImage0 = $formPollNew.find('#addImage0');
-  
-  $containerImage0.hide();
-  $previewImage0.hide();
-
-  $addImage0.on('click', function(event) {
-    $containerImage0.show(300);
-    $addImage0.hide(300);
-  });
-
-  $removeImage0.on('click', function(event) {
-    event.preventDefault();
-    $formPollNew.images.image0 = null;
-    $previewImage0.hide(300);
-  });
-
-  $inputImage0.on('change', function (event) {
-    const file = this.files[0];
-    convertToBase64(file)
-    .then(data => $formPollNew.images.image0 = data)
-    .then(data => {
-      $imgImage0.attr('src', data);
-      $previewImage0.show(300);
-      $inputImage0.val('');
-    })
-    .catch(error => {
-      $(this).toggleClass("error", true);
-      console.log(error.message);
-    })
-  });
-
-  const $choices = $formPollNew.find('#choices');
-
-  const countChoicesInDOM = () => {
-    return $choices.children(`.choice-regular`).length;
-  }
-
-  const createRegularChoice = (choiceHTML) => {
-    const totalChoicesInDOM = countChoicesInDOM();
-    const countChoice = totalChoicesInDOM + 1;
-    const parsedHTML = choiceHTML.replaceAll(':id:', countChoice);
+  const createRegularChoice = (choiceHTML, id) => {
+    const parsedHTML = choiceHTML.replaceAll(':id:', id);
     const $choice = $(parsedHTML);
-    const $containerDescription = $choice.find(`#containerDescription${countChoice}`);
-    const $containerImage = $choice.find(`#containerImage${countChoice}`);
-    const $containerPreviewImage = $choice.find(`#containerPreviewImage${countChoice}`);
-    const $containerAddInputImage = $choice.find(`#containerAddInputImage${countChoice}`);
-    const $buttonAddInputImage = $choice.find(`#buttonAddInputImage${countChoice}`);
-    const $buttonRemoveImage = $choice.find(`#buttonRemoveImage${countChoice}`);
-    const $buttonAddInputDescription = $choice.find(`#buttonAddInputDescription${countChoice}`);
-    const $imgPreviewImage = $choice.find(`#imgPreviewImage${countChoice}`);
-    const $inputImage = $choice.find(`#inputImage${countChoice}`);
+    const $containerDescription = $choice.find(`#containerDescription${id}`);
+    const $containerImage = $choice.find(`#containerImage${id}`);
+    const $containerPreviewImage = $choice.find(`#containerPreviewImage${id}`);
+    const $containerAddInputImage = $choice.find(`#containerAddInputImage${id}`);
+    const $buttonAddInputImage = $choice.find(`#buttonAddInputImage${id}`);
+    const $buttonRemoveImage = $choice.find(`#buttonRemoveImage${id}`);
+    const $buttonAddInputDescription = $choice.find(`#buttonAddInputDescription${id}`);
+    const $imgPreviewImage = $choice.find(`#imgPreviewImage${id}`);
+    const $inputImage = $choice.find(`#inputImage${id}`);
     
-    $formPollNew.images[`image${countChoice}`] = null;
+    $formPollNew.images[`image${id}`] = null;
     
     // Hide elements that should not be shown initially
     $containerDescription.hide();
@@ -258,12 +201,12 @@ $(() => {
     $buttonAddInputDescription.on('click', function(event) {
       event.preventDefault();
       $containerDescription.show(300);
-      $choice.find(`#containerAddInputDescription${countChoice}`).hide(300);
+      $choice.find(`#containerAddInputDescription${id}`).hide(300);
     })
     // Button press: Remove image
     $buttonRemoveImage.on('click', function(event) {
       event.preventDefault();
-      $formPollNew.images[`image${countChoice}`] = null;
+      $formPollNew.images[`image${id}`] = null;
       $containerPreviewImage.hide(100);
       setTimeout(() => $imgPreviewImage.attr('src', ''), 100);
       $inputImage.val('');
@@ -274,7 +217,7 @@ $(() => {
       convertToBase64(file)
       .then(data => {
         // Store image data, so it can be used by the form POST
-        $formPollNew.images[`image${countChoice}`] = data;
+        $formPollNew.images[`image${id}`] = data;
         // Preview image on display
         $containerPreviewImage.hide(100);
         setTimeout(() => {
@@ -291,34 +234,71 @@ $(() => {
     return $choice;
   }
 
-  $choices.append(createRegularChoice(choiceRegularHTML));
-  $choices.append(createRegularChoice(choiceRegularHTML));
-  $choices.append(createRegularChoice(choiceRegularHTML));
-
-  const $manageChoices = $formPollNew.find('#manageChoices');
-  const $buttonAddChoice = $manageChoices.find('#buttonAddChoice');
-  const $buttonRemoveChoice = $manageChoices.find('#buttonRemoveChoice');
-  $buttonAddChoice.on('click', function(event) {
-    event.preventDefault();
-    const $choice = createRegularChoice(choiceRegularHTML);
-    $choices.append($choice);
-    $choice.hide().show(300);
-    $buttonRemoveChoice.show(300);
-  });
-  $buttonRemoveChoice.on('click', function(event) {
-    event.preventDefault();
-    const countChoice = countChoicesInDOM();
-    const $choice = $choices.find(`#container${countChoice}`);
-    $choice.hide(100);
-    $formPollNew.images[`image${countChoice}`] = null;
-    setTimeout(() => {
-      $choice.remove();
-      $buttonAddChoice.show(300);
-    }, 100);
-    
-  });
-  
+  $formPollNew.images = {};
   window.$formPollNew = $formPollNew;
+
+  $formPollNew.attr('action', '/polls');
+  
+  // Run once: Choice management
+  (() => {
+    const $choices = $formPollNew.find('#choices');
+    const $manageChoices = $formPollNew.find('#manageChoices');
+    const $buttonAddChoice = $manageChoices.find('#buttonAddChoice');
+    const $buttonRemoveChoice = $manageChoices.find('#buttonRemoveChoice');
+    const minChoices = 2;
+    const maxChoices = 5;
+    const countChoice = $choices.children(`.choice-regular`).length;
+    if (countChoice >= maxChoices) {
+      $buttonAddChoice.hide();
+    }
+
+    if (countChoice <= minChoices) {
+      $buttonRemoveChoice.hide();
+    }
+
+    // Add initial choices to the form
+    for (let i = 1; i <= minChoices; i++) {
+      const id = countChoice + i;
+      $choices.append(createRegularChoice(choiceRegularHTML, id));
+    }
+
+    // Button press: Add Choice
+    $buttonAddChoice.on('click', function(event) {
+      event.preventDefault();
+      const countChoice = $choices.children(`.choice-regular`).length;
+      if (countChoice < maxChoices) {
+        const id = countChoice + 1;
+        const $choice = createRegularChoice(choiceRegularHTML, id);
+        $choices.append($choice);
+        $choice.hide().show(300);
+        $buttonRemoveChoice.show(300);
+        setTimeout(() => {
+          if ((countChoice + 1) === maxChoices) {
+            $buttonAddChoice.hide(300);
+          }
+        });
+      }
+    });
+
+    // Button press: Remove Choice
+    $buttonRemoveChoice.on('click', function(event) {
+      event.preventDefault();
+      const countChoice = $choices.children(`.choice-regular`).length;
+      if (countChoice > minChoices) {
+        const $choice = $choices.find(`#container${countChoice}`);
+        $choice.hide(100);
+        $formPollNew.images[`image${countChoice}`] = null;
+        setTimeout(() => {
+          $choice.remove();
+          $buttonAddChoice.show(300);
+          if ((countChoice - 1) === minChoices) {
+            $buttonRemoveChoice.hide(300);
+          }
+        }, 100);
+      }
+    });
+
+  })();
 
   const convertToBase64 = (file) => {
     return new Promise((resolve, reject) => {
