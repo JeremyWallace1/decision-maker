@@ -17,7 +17,7 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.urlencoded({ 
     extended: true,
-    limit: '10mb'
+    limit: '60mb'
   })
 );
 app.use(
