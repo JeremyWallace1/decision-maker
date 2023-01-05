@@ -87,7 +87,8 @@ $(() => {
             </div>
             <div class="d-none d-sm-block col-sm-3 px-0 imageBox">
               ${choiceImageHTML}
-            </div>` : 
+            </div>
+            <input type="hidden" name="choices" value="${poll.choices[choice].id}" />` : 
             `
             <h3 class="col-sm-12 choiceTitle">
               Choice #${count}: ${titleHTML}
