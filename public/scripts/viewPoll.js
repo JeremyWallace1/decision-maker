@@ -99,9 +99,9 @@ $(() => {
       choiceData.score = score;
       choiceData.showScore = showResults;
 
-      const titleHTML = `<h3 id="choice${choiceData.id}">${choiceData.title}</h3>`;
+      const titleHTML = `<span class="titleText" id="choice${choiceData.id}">${choiceData.title}</span>`;
       const choiceDescHTML = `<p id="description${choiceData.id}">${choiceData.description}</p>`;
-      const choiceScoreHTML = `${choiceData.showScore ? `<h6>Current score: ${choiceData.score}</h6>` : ''}`;
+      const choiceScoreHTML = `${choiceData.showScore ? `<span class="badge bg-secondary"><span class="smallerLabel">score</span><br>${choiceData.score}</span>` : ''}`;
       const choiceImageHTML = `<img src="${choiceData.image}" class="choiceImage rounded" />`;
 
       buffer += `
@@ -109,22 +109,20 @@ $(() => {
         ${choiceData.image ? 
           `
           <div class="col-sm-9 choiceTitle">
-            ${titleHTML}
-            <div class="d-none d-sm-block col-sm-9 choiceDescription">
+            ${choiceScoreHTML} ${titleHTML} 
+            <div class="d-sm-block choiceDescription">
               ${choiceDescHTML}
             </div> 
-            ${choiceScoreHTML}
           </div>
           <div class="d-none d-sm-block col-sm-3 imageBox">
             ${choiceImageHTML}
           </div>` : 
           `
           <div class="col-sm-12 choiceTitle">
-            ${titleHTML}
-            <div class="d-none d-sm-block col-sm-12 choiceDescription">
+            ${choiceScoreHTML} ${titleHTML} 
+            <div class="d-sm-block choiceDescription">
               ${choiceDescHTML}
             </div> 
-            ${choiceScoreHTML}
           </div>
           `}
         </div>
