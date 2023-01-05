@@ -68,11 +68,12 @@ $(() => {
         </div>
       </section>
 
-      <div class="row mb-3" id="moreChoices">
-        <div class="col">
-          <button type="button" class="button" id="addMoreChoices"  onclick="addChoices();">add choices</button>
-          <span class="">&nbsp&nbsp </span>
-          <button type="button" class="button" id="removeChoices" onclick="removeChoices();" style="display: none">remove choices</button>
+      <div class="row mb-3 align-items-start" id="containerManageChoices">
+        <div class="col-sm-6 col-md-3 col-lg-2">
+          <button type="button" class="button" id="buttonManageChoicesAdd">add choice</button>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-2 mx-2">
+          <button type="button" class="button" id="buttonManageChoicesRemove">remove choice</button>
         </div>
       </div>
 
@@ -165,6 +166,7 @@ $(() => {
       <div class="col-md-10" id="containerAddInputDescription:id:">
         <button type="button" class="button-link" id="buttonAddInputDescription:id:"><i class="fa-solid fa-plus fa-lg">&nbsp</i>add description</button>
       </div>
+
     </div>
 
   </div>
