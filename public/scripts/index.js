@@ -64,11 +64,9 @@ $(() => {
   } else {
     views_manager.show(defaultView);
   }
-  
-  
 
   const redirectButton = () => {
-    if ($('#inputEmail').val() || $('#inputQuestion').val() || $('#inputQuestion').val() || $('#choice1').val() || $('#choice2').val()) {
+    if ($('#inputEmail').val() || $('#inputTitle0').val() || $('#inputDescription0').val() || $('#inputTitle1').val() || $('#inputDescription1').val() || $('#inputTitle2').val() || $('#inputDescription2').val()) {
       if (confirm('This will start a new poll and remove the current form\'s data.\nAre you sure?')) {
         $(location).attr('href', '/');
       }
