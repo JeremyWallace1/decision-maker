@@ -37,7 +37,6 @@ router.post('/',
     req.body.results_url = 'r' + Math.floor(Math.random() * 99999) + 1;
     req.body.sharing_url = 's' + Math.floor(Math.random() * 99999) + 1;
     const output = [];
-    console.log(req.body);
     const pollData = {
       email:          req.body.email,
       question:       req.body.question0_title,
@@ -91,7 +90,6 @@ router.post('/',
     .then(all => {
       output[0].choices = [];
       all.forEach(element => output[0].choices.push(element));
-      console.log(output);
     })
     .then(() => {
       const referer = req.headers.referer;
