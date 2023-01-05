@@ -20,7 +20,7 @@ router.post('/',
       .isEmail()
       .withMessage("please enter a valid email")
       .normalizeEmail(),
-    body('question')
+    body('question0_title')
       .isLength({ min: 5})
       .withMessage("the poll question isn't descriptive long enough, please lengthen it")
       .isLength({ max: 255})
@@ -37,7 +37,16 @@ router.post('/',
     req.body.results_url = 'r' + Math.floor(Math.random() * 99999) + 1;
     req.body.sharing_url = 's' + Math.floor(Math.random() * 99999) + 1;
     const output = [];
-    pollQueries.createPoll(req.body)
+    const pollData = {
+      email:          req.body.email,
+      question:       req.body.question0_title,
+      image:          req.body.image0,
+      description:    req.body.question0_description,
+      results_url:    req.body.results_url,
+      sharing_url:    req.body.sharing_url,
+    }
+
+    pollQueries.createPoll(pollData)
     .then(data => output.push(data.response))
     .then(() => {
         const choicePromises = [];
@@ -48,12 +57,14 @@ router.post('/',
             break;
           }
 
-          const poll_id = output[0].id;
-          const image = req.body[`choice${countChoice}_image`];
-          const description = req.body[`choice${countChoice}_description`];
-          let title = req.body[`choice${countChoice}_title`];
+          const choiceData = {
+            poll_id: output[0].id,
+            title: req.body[`choice${countChoice}_title`],
+            image: req.body[`image${countChoice}`],
+            description: req.body[`choice${countChoice}_description`],
+          }
           
-          if (!title) {
+          if (!choiceData.title) {
             choicePromises.push(
               Promise.reject(
                 new Error(`choice${countChoice}_title cannot be empty`)
@@ -62,7 +73,7 @@ router.post('/',
             continue;
           }
           
-          if (title.length > 255) {
+          if (choiceData.title.length > 255) {
             choicePromises.push(
               Promise.reject(
                 new Error(`choice${countChoice}_title is too long`)
@@ -70,8 +81,6 @@ router.post('/',
             );
             continue;
           }
-          
-          const choiceData = { poll_id, title, image, description };
 
           choicePromises.push(pollQueries.createChoice(choiceData));
         }
@@ -81,7 +90,6 @@ router.post('/',
     .then(all => {
       output[0].choices = [];
       all.forEach(element => output[0].choices.push(element));
-      console.log(output);
     })
     .then(() => {
       const referer = req.headers.referer;

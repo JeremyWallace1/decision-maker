@@ -30,12 +30,11 @@ router.get('/:uri', (req, res) => {
         return pollData.config.id;
       }
       throw new Error('Poll not found!');
-      // res.status(404).send('404 - Poll not found!');
     })
     .then(pollId => pollQueries.getPollChoices(pollId))
     .then(choices => pollData.choices = choices)
-    .then(output => outputData.push(pollData))
-    .then(output => res.json(outputData))
+    .then(() => outputData.push(pollData))
+    .then(() => res.json(outputData))
     .catch(err => {
       if (err.message === 'Poll not found!') {
         return res.status(404)
@@ -45,22 +44,5 @@ router.get('/:uri', (req, res) => {
         .json({ error: err.message });
     });
 });
-
-// // creator views poll results & links for sharing
-// router.get('/:id', (req, res) => {
-//   const pollId = Number(req.params.id);
-//   const pollData = {};
-//   const outputData = [];
-//   pollQueries.getPollById(pollId)
-//     .then(poll => pollData.config = poll)
-//     .then(poll => pollQueries.getPollChoices(pollId))
-//     .then(choices => pollData.choices = choices)
-//     .then(output => outputData.push(pollData))
-//     .then(output => res.json(outputData))
-//     .catch(err => {
-//       res.status(500)
-//         .json({ error: err.message });
-//     });
-// });
 
 module.exports = router;

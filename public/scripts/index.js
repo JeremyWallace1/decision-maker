@@ -64,11 +64,9 @@ $(() => {
   } else {
     views_manager.show(defaultView);
   }
-  
-  
 
   const redirectButton = () => {
-    if ($('#inputEmail').val() || $('#inputQuestion').val() || $('#inputQuestion').val() || $('#choice1').val() || $('#choice2').val()) {
+    if ($('#inputEmail').val() || $('#inputTitle0').val() || $('#inputDescription0').val() || $('#inputTitle1').val() || $('#inputDescription1').val() || $('#inputTitle2').val() || $('#inputDescription2').val()) {
       if (confirm('This will start a new poll and remove the current form\'s data.\nAre you sure?')) {
         $(location).attr('href', '/');
       }
@@ -78,82 +76,6 @@ $(() => {
   };
 
   document.getElementById("newPoll").addEventListener("click", redirectButton);
-
-  let num = 2;
-  const max = 5;
-  const toggleButtons = () => {
-    // if (num > 2) {
-    //   $('#removeChoices').prop('disabled', false);
-    // } else {
-    //   $('#removeChoices').prop('disabled', true);
-    // }
-    // if (num === max) {
-    //   $('#addMoreChoices').prop('disabled', true);
-    // } else {
-    //   $('#addMoreChoices').prop('disabled', false);
-    // }
-    if (num > 2) {
-      $('#removeChoices').show();
-    } else {
-      $('#removeChoices').hide();
-    }
-    if (num === max) {
-      $('#addMoreChoices').hide();
-    } else {
-      $('#addMoreChoices').show();
-    }
-  };
-
-  addChoices = () => {
-    if (num < max) {
-      num++;
-      $('#moreChoices').append(
-        `
-        <div class="row mb-3" id="Choice${num}">
-          <h5>Choice #${num}:</h5>
-          <div class="row mb-3">
-            <label for="choice${num}" class="col-md-2 col-form-label">
-              Choice:
-            </label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="choice${num}" 
-              aria-describedby="choice${num}Feedback" name="choice${num}_title" required>
-            </div>
-          </div>
-          <div class="row mb-3" id="description${num}" style="display: none">
-            <label for="choice${num}_description" class="col-md-2 col-form-label">
-              Description:
-            </label>
-            <div class="col-md-10">
-              <textarea rows="3" class="form-control" id="choice${num}_description" name="choice${num}_description" placeholder="optional"></textarea>
-            </div>
-          </div>
-          <div class="row mb-1">
-            <div class="col-md-2">
-            </div>
-            <div class="col-md-10">
-              <button type="button" class="button-link" id="addDescription${num}"  onclick="addDescription(${num});"><i class="fa-solid fa-plus fa-lg">&nbsp</i>add description</button>
-            </div>
-          </div>
-        </div>
-        `
-      );
-      toggleButtons();
-    } 
-  };
-  removeChoices = () => {
-    if (num > 2) {
-      $(`#Choice${num}`).remove();
-      num--;
-      toggleButtons();
-    }
-  };
-
-  addDescription = (num) => {
-    // console.log(`clicked on #description${num}'s add description button...`)
-    $(`#addDescription${num}`).hide(300);
-    $(`#description${num}`).show(300);
-  };
 
   loadingButton = () => {
     $(`#createPollText`).hide(0);
