@@ -20,5 +20,5 @@
 * when a user visits the submission link, they enter their name if required and see a list of the choices for that poll
 * add accessibility fixes, etc.
 * DONE: (with charts)visual indicator of which poll answer is ahead based on current score (for admin view, i.e. /?r12345) (maybe a box around it, or highlighting, etc. -- also needs to handle multiple with the same number)
-* IN PROGRESS: add ability to attach pictures and hyperlinks to description fields
-* indicate (with a line of text?) if user has already responded to the question
+* DONE: add ability to attach pictures and hyperlinks to description fields
+* DONE: indicate (with a line of text?) if user has already responded to the question
