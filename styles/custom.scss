@@ -203,6 +203,7 @@ body {
   hr {
     color: $ltblue;
     opacity: 100%;
+    margin: 0.5em 0;
   }
 
   hr.major {
@@ -274,9 +275,10 @@ body {
   }
 
   .imageBox {
-    display: flex;
-    align-content: flex-end;
-    padding-right: 0.5em;
+    // display: flex;
+    // align-content: flex-end;
+    // padding-right: 0.5em;
+    text-align: right;
   }
   .choiceImage {
     max-width: 100%;
@@ -284,7 +286,7 @@ body {
     // object-fit: scale-down;
     // margin-right: 0.5em;
     // padding-bottom: 1em;
-    align-self: flex-end;
+    // align-self: flex-end;
   }
 
   @media only screen and (min-width: 400px){

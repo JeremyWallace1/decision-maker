@@ -17,7 +17,6 @@ router.post('/', (req, res) => {
 
   const output = [];
   output.push({ results_url: req.body.results_url });
-
   const countChoices = req.body.choices.length;
   let ip = null;
   const pollId = req.body.poll_id;

@@ -67,7 +67,6 @@ $(() => {
       // </li>
       // `;
       const choiceData = JSON.parse(JSON.stringify(poll.choices[choice]));
-
       const titleHTML = `${choiceData.title}`;
       const choiceDescHTML = `<p id="description${choiceData.id}">${choiceData.description}</p>`;
       const choiceImageHTML = `<img src="${choiceData.image}" class="choiceImage rounded" />`;
@@ -86,7 +85,7 @@ $(() => {
                 ${choiceDescHTML}
               </div>
             </div>
-            <div class="d-none d-sm-block col-sm-3 imageBox">
+            <div class="d-none d-sm-block col-sm-3 px-0 imageBox">
               ${choiceImageHTML}
             </div>` : 
             `
@@ -96,7 +95,7 @@ $(() => {
             <div class="d-none d-sm-block col-sm-12 choiceDescription">
               ${choiceDescHTML}
             </div> 
-
+            <input type="hidden" name="choices" value="${poll.choices[choice].id}" />
             `}
   
         </div>
@@ -125,15 +124,16 @@ $(() => {
     const $html = $(buffer);
     return $html;
   }
-  
+
   const createForm = (data) => {
     window.$formPollRespond = getHtml(data);
     attachEventListener(window.$formPollRespond);
   }
 
   window.poll_respond.createForm = createForm;
-  
+
   const attachEventListener = ($element) => {
+
     $element.on('submit', function (event) {
 
       event.preventDefault();

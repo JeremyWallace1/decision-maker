@@ -18,7 +18,7 @@ $(() => {
       url: resultsUrl,
       enable: showResults,
     };
-    
+
     let buffer = ``;
     if (alreadyAnswered === true && showResults === false) {
       buffer += `
@@ -55,7 +55,6 @@ $(() => {
           <hr class="major" id="resultsHr" hidden>
 
         </header>
-      
         ${generateChoicesHTML(poll, showResults)}
 
         <footer class="poll_footer row mb-3">
@@ -76,6 +75,7 @@ $(() => {
   };
 
   const generateQuestionImgHTML = (imageSrc) => {
+
     if (!imageSrc) {
       return '';
     }
@@ -135,6 +135,7 @@ $(() => {
   };
 
   const generateLinkHTML = (linkType, data) => {
+    
     if (!data.enable) {
       return '';
     }
