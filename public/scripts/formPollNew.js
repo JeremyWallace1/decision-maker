@@ -70,10 +70,10 @@ $(() => {
 
       <div class="row mb-3 align-items-start" id="manageChoices">
         <div class="col-sm-6 col-md-3 col-lg-2">
-          <button type="button" class="button" id="buttonChoiceAdd">add choice</button>
+          <button type="button" class="button" id="buttonAddChoice">add choice</button>
         </div>
         <div class="col-sm-6 col-md-3 col-lg-2">
-          <button type="button" class="button" id="buttonChoiceRemove">remove choice</button>
+          <button type="button" class="button" id="buttonRemoveChoice">remove choice</button>
         </div>
       </div>
 
@@ -220,10 +220,6 @@ $(() => {
   });
 
   const $choices = $formPollNew.find('#choices');
-  
-  const $manageChoices = $formPollNew.find('#manageChoices');
-  const $buttonAddChoice = $manageChoices.find('#buttonAddChoice');
-  const $buttonRemoveChoice = $manageChoices.find('#buttonRemoveChoice');
 
   const createRegularChoice = (choiceHTML) => {
     const totalChoices = $choices.children(`.choice-regular`).length;
@@ -294,6 +290,15 @@ $(() => {
   $choices.append(createRegularChoice(choiceRegularHTML));
   $choices.append(createRegularChoice(choiceRegularHTML));
   $choices.append(createRegularChoice(choiceRegularHTML));
+
+  const $manageChoices = $formPollNew.find('#manageChoices');
+  const $buttonAddChoice = $manageChoices.find('#buttonAddChoice');
+  const $buttonRemoveChoice = $manageChoices.find('#buttonRemoveChoice');
+  $buttonAddChoice.on('click', function(event) {
+    event.preventDefault();
+    $choices.append(createRegularChoice(choiceRegularHTML));
+    $buttonRemoveChoice.show(300);
+  });
   
   window.$formPollNew = $formPollNew;
 
