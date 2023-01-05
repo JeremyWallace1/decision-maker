@@ -102,7 +102,7 @@ $(() => {
       const titleHTML = `<h3 id="choice${choiceData.id}">${choiceData.title}</h3>`;
       const choiceDescHTML = `<p id="description${choiceData.id}">${choiceData.description}</p>`;
       const choiceScoreHTML = `${choiceData.showScore ? `<h6>Current score: ${choiceData.score}</h6>` : ''}`;
-      const choiceImageHTML = `<img src="${choiceData.image}" class="choiceImage" />`;
+      const choiceImageHTML = `<img src="${choiceData.image}" class="choiceImage rounded" />`;
 
       buffer += `
         <div class="row col-12 choiceRow">

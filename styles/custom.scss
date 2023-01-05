@@ -229,7 +229,7 @@ body {
 
   #sortable li { 
     margin: 0; 
-    padding: 1em;
+    padding: 0.5em;
     margin-bottom: 0.5em;
     background-color: $uberltblue;
     border-color: $dkblue;
@@ -276,13 +276,15 @@ body {
   .imageBox {
     display: flex;
     align-content: flex-end;
+    padding-right: 0.5em;
   }
   .choiceImage {
     max-width: 100%;
     max-height: 120px;
-    object-fit: scale-down;
+    // object-fit: scale-down;
+    // margin-right: 0.5em;
     // padding-bottom: 1em;
-    // align-self: flex-end;
+    align-self: flex-end;
   }
 
   @media only screen and (min-width: 400px){

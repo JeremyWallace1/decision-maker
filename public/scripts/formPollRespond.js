@@ -55,13 +55,50 @@ $(() => {
     let count = 0;
     for (const choice in poll.choices) {
       count++;
+      // buffer += `
+      // <li class="row ui-state-default ui-sortable-handle" id="choice${poll.choices[choice].id}">
+      //   <div class="row">
+      //     <h5 class="col-md-2" id="labelChoice${poll.choices[choice].id}">Choice #${count}:</h5>
+      //     <h6 class="col-md-10" id="choice${poll.choices[choice].id}">${poll.choices[choice].title}</h6>
+      //     <p class="col-md-12" id="description${poll.choices[choice].id}">${poll.choices[choice].description}</p>
+      //     <input type="hidden" name="choices" value="${poll.choices[choice].id}" />
+      //   </div>
+
+      // </li>
+      // `;
+      const choiceData = JSON.parse(JSON.stringify(poll.choices[choice]));
+
+      const titleHTML = `${choiceData.title}`;
+      const choiceDescHTML = `<p id="description${choiceData.id}">${choiceData.description}</p>`;
+      const choiceImageHTML = `<img src="${choiceData.image}" class="choiceImage rounded" />`;
+
+
       buffer += `
-      <li class="row ui-state-default ui-sortable-handle" id="choice${poll.choices[choice].id}">
-        <div class="row">
-          <h5 class="col-md-2" id="labelChoice${poll.choices[choice].id}">Choice #${count}:</h5>
-          <h6 class="col-md-10" id="choice${poll.choices[choice].id}">${poll.choices[choice].title}</h6>
-          <p class="col-md-12" id="description${poll.choices[choice].id}">${poll.choices[choice].description}</p>
-          <input type="hidden" name="choices" value="${poll.choices[choice].id}" />
+      <li class="row ui-state-default ui-sortable-handle" id="choice${choiceData.id}">
+        <div class="row col-12 choiceRow">
+          ${choiceData.image ? 
+            `
+            <div class="col-sm-9">
+              <h3 class="col-sm-9 choiceTitle">
+                Choice #${count}: ${titleHTML}
+              </h3> 
+              <div class="d-none d-sm-block col-sm-9 choiceDescription">
+                ${choiceDescHTML}
+              </div>
+            </div>
+            <div class="d-none d-sm-block col-sm-3 imageBox">
+              ${choiceImageHTML}
+            </div>` : 
+            `
+            <h3 class="col-sm-12 choiceTitle">
+              Choice #${count}: ${titleHTML}
+            </h3> 
+            <div class="d-none d-sm-block col-sm-12 choiceDescription">
+              ${choiceDescHTML}
+            </div> 
+
+            `}
+  
         </div>
 
       </li>
