@@ -22,7 +22,7 @@ $(() => {
         </label>
         <div class="col-md-10">
           <input
-            class="form-control"
+            class="form-control"1
             id="inputImage0"
             name="image_outputId"
             accept="image/*"
@@ -68,12 +68,12 @@ $(() => {
         </div>
       </section>
 
-      <div class="row mb-3 align-items-start" id="containerManageChoices">
+      <div class="row mb-3 align-items-start" id="manageChoices">
         <div class="col-sm-6 col-md-3 col-lg-2">
-          <button type="button" class="button" id="buttonManageChoicesAdd">add choice</button>
+          <button type="button" class="button" id="buttonChoiceAdd">add choice</button>
         </div>
-        <div class="col-sm-6 col-md-3 col-lg-2 mx-2">
-          <button type="button" class="button" id="buttonManageChoicesRemove">remove choice</button>
+        <div class="col-sm-6 col-md-3 col-lg-2">
+          <button type="button" class="button" id="buttonChoiceRemove">remove choice</button>
         </div>
       </div>
 
@@ -220,6 +220,10 @@ $(() => {
   });
 
   const $choices = $formPollNew.find('#choices');
+  
+  const $manageChoices = $formPollNew.find('#manageChoices');
+  const $buttonAddChoice = $manageChoices.find('#buttonAddChoice');
+  const $buttonRemoveChoice = $manageChoices.find('#buttonRemoveChoice');
 
   const createRegularChoice = (choiceHTML) => {
     const totalChoices = $choices.children(`.choice-regular`).length;
