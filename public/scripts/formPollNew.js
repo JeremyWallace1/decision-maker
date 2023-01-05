@@ -3,61 +3,8 @@ $(() => {
   const $formPollNew = $(`
     <form action="" method="POST" class="col-12" id="create-poll">
 
-      <div class="row mb-3">
+      <div class="row mb-3" id="question">
         <h3 class="col">What do you want to ask?</h3>
-      </div>
-
-      <div class="row mb-3">
-        <label for="inputQuestion" class="col-md-2 col-form-label">
-          Question:
-        </label>
-        <div class="col-md-10">
-          <input type="text" class="form-control" id="inputQuestion" name="question" minlength="5" required>
-        </div>
-      </div>
-
-      <div class="row mb-3 justify-content-end" id="containerImage0">
-        <label for="inputImage0" class="col-md-2 col-form-label">
-          Add Image:
-        </label>
-        <div class="col-md-10">
-          <input
-            class="form-control"1
-            id="inputImage0"
-            name="image_outputId"
-            accept="image/*"
-            type="file"
-            capture="user"
-          />
-        </div>
-        <div class="col-md-10 mt-3" id="previewImage0">
-          <img src="" class="img-fluid img-thumbnail d-block question img-preview" id="imgImage0" />
-          <button class="button my-2" id="removeImage0">remove image</button>
-        </div>
-      </div>
-        
-      <div class="row mb-3" id="containerDescription0" style="display: none">
-        <label for="inputTitle" class="col-md-2 col-form-label">
-          Description:
-        </label>
-        <div class="col-md-10">
-          <textarea rows="3" class="form-control" id="inputTitle" name="description" placeholder="optional"></textarea>
-        </div>
-      </div>
-
-      <div class="row mb-3 justify-content-end">
-        <div class="col-md-10" id="addImage0">
-          <button type="button" class="button-link">
-            <i class="fa-regular fa-image fa-lg">&nbsp</i>
-            add image
-          </button>
-        </div>
-        <div class="col-md-10" id="addDescription0">
-          <button type="button" class="button-link">
-            <i class="fa-solid fa-plus fa-lg">&nbsp</i>
-            add description
-          </button>
-        </div>
       </div>
       
       <hr class="minor">
@@ -103,16 +50,16 @@ $(() => {
     </form>
   `);
 
-  const choiceRegularHTML = (`
-  <div class="choice choice-regular" id="container:id:">
+  const htmlTemplateQuestionAndChoices = (`
+  <div class=":type: :type:-regular" id="container:id:">
     
     <!-- TITLE INPUT -->
     <div class="form-group row mb-3" id="containerTitle:id:">
-      <label for="choice_title:id:" class="col-md-2 col-form-label" id="labelChoiceTitle:id:">
-        Choice:
+      <label for=":type:_title:id:" class="col-md-2 col-form-label" id="labelChoiceTitle:id:">
+        :type:
       </label>
       <div class="col-md-10">
-        <input type="text" class="form-control" id="inputTitle:id:" name="choice:id:_title" required>
+        <input type="text" class="form-control" id="inputTitle:id:" name=":type::id:_title" required>
       </div>
     </div>
 
@@ -120,14 +67,14 @@ $(() => {
     <div class="form-group row mb-3 justify-content-end" id="containerImage:id:">
 
       <!-- IMAGE INPUT -->
-      <label for="choice:id:_image" class="col-md-2 col-form-label">
+      <label for=":type::id:_image" class="col-md-2 col-form-label">
         Add Image:
       </label>
       <div class="col-md-10">
         <input
           class="form-control"
           id="inputImage:id:"
-          name="choice:id:_image"
+          name=":type::id:_image"
           accept="image/*"
           type="file"
           capture="user"
@@ -144,11 +91,11 @@ $(() => {
 
     <!-- DESCRIPTION INPUT -->
     <div class="form-group row mb-3" id="containerDescription:id:">
-      <label for="choice:id:_description" class="col-md-2 col-form-label" id="labelDescription:id:">
+      <label for=":type::id:_description" class="col-md-2 col-form-label" id="labelDescription:id:">
         Description:
       </label>
       <div class="col-md-10">
-        <textarea rows="3" class="form-control" id="inputDescription:id:" name="choice:id:_description" placeholder="optional"></textarea>
+        <textarea rows="3" class="form-control" id="inputDescription:id:" name=":type::id:_description" placeholder="optional"></textarea>
       </div>
     </div>
 
@@ -170,18 +117,19 @@ $(() => {
   </div>
   `);
 
-  const createRegularChoice = (choiceHTML, id) => {
-    const parsedHTML = choiceHTML.replaceAll(':id:', id);
-    const $choice = $(parsedHTML);
-    const $containerDescription = $choice.find(`#containerDescription${id}`);
-    const $containerImage = $choice.find(`#containerImage${id}`);
-    const $containerPreviewImage = $choice.find(`#containerPreviewImage${id}`);
-    const $containerAddInputImage = $choice.find(`#containerAddInputImage${id}`);
-    const $buttonAddInputImage = $choice.find(`#buttonAddInputImage${id}`);
-    const $buttonRemoveImage = $choice.find(`#buttonRemoveImage${id}`);
-    const $buttonAddInputDescription = $choice.find(`#buttonAddInputDescription${id}`);
-    const $imgPreviewImage = $choice.find(`#imgPreviewImage${id}`);
-    const $inputImage = $choice.find(`#inputImage${id}`);
+  const createInputBlock = (html, id, type = 'choice') => {
+    let parsedHTML = html.replaceAll(':id:', id);
+    parsedHTML = parsedHTML.replaceAll(':type:', type);
+    const $buffer = $(parsedHTML);
+    const $containerDescription = $buffer.find(`#containerDescription${id}`);
+    const $containerImage = $buffer.find(`#containerImage${id}`);
+    const $containerPreviewImage = $buffer.find(`#containerPreviewImage${id}`);
+    const $containerAddInputImage = $buffer.find(`#containerAddInputImage${id}`);
+    const $buttonAddInputImage = $buffer.find(`#buttonAddInputImage${id}`);
+    const $buttonRemoveImage = $buffer.find(`#buttonRemoveImage${id}`);
+    const $buttonAddInputDescription = $buffer.find(`#buttonAddInputDescription${id}`);
+    const $imgPreviewImage = $buffer.find(`#imgPreviewImage${id}`);
+    const $inputImage = $buffer.find(`#inputImage${id}`);
     
     $formPollNew.images[`image${id}`] = null;
     
@@ -197,12 +145,14 @@ $(() => {
       $containerImage.show(300);
       $containerAddInputImage.hide(300);
     })
+
     // Button press: Add description
     $buttonAddInputDescription.on('click', function(event) {
       event.preventDefault();
       $containerDescription.show(300);
-      $choice.find(`#containerAddInputDescription${id}`).hide(300);
+      $buffer.find(`#containerAddInputDescription${id}`).hide(300);
     })
+
     // Button press: Remove image
     $buttonRemoveImage.on('click', function(event) {
       event.preventDefault();
@@ -211,6 +161,7 @@ $(() => {
       setTimeout(() => $imgPreviewImage.attr('src', ''), 100);
       $inputImage.val('');
     })
+
     // Input change: Choose image file
     $inputImage.on('change', function (event) {
       const file = this.files[0];
@@ -231,7 +182,7 @@ $(() => {
         console.log(error.message);
       })
     });
-    return $choice;
+    return $buffer;
   }
 
   $formPollNew.images = {};
@@ -239,7 +190,14 @@ $(() => {
 
   $formPollNew.attr('action', '/polls');
   
-  // Run once: Choice management
+  // Run once: Question
+  (() => {
+    const $question = $formPollNew.find('#question');
+    const id = 0;
+    $question.append(createInputBlock(htmlTemplateQuestionAndChoices, id, 'question'));
+  })();
+
+  // Run once: Choices
   (() => {
     const $choices = $formPollNew.find('#choices');
     const $manageChoices = $formPollNew.find('#manageChoices');
@@ -259,7 +217,7 @@ $(() => {
     // Add initial choices to the form
     for (let i = 1; i <= minChoices; i++) {
       const id = countChoice + i;
-      $choices.append(createRegularChoice(choiceRegularHTML, id));
+      $choices.append(createInputBlock(htmlTemplateQuestionAndChoices, id, 'choice'));
     }
 
     // Button press: Add Choice
@@ -268,7 +226,7 @@ $(() => {
       const countChoice = $choices.children(`.choice-regular`).length;
       if (countChoice < maxChoices) {
         const id = countChoice + 1;
-        const $choice = createRegularChoice(choiceRegularHTML, id);
+        const $choice = createInputBlock(htmlTemplateQuestionAndChoices, id, 'choice');
         $choices.append($choice);
         $choice.hide().show(300);
         $buttonRemoveChoice.show(300);
