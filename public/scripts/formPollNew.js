@@ -29,7 +29,7 @@ $(() => {
       </div>  
 
       <div class="row mb-3">
-        <label for="inputEmail" class="col-md-2 col-form-label">Your email:</label>
+        <label for="inputEmail" class="col-md-2 col-form-label text-capitalize">your email:</label>
         <div class="col-md-10">
           <input type="email" class="form-control" id="inputEmail" name="email" required>
         </div>
@@ -55,8 +55,8 @@ $(() => {
     
     <!-- TITLE INPUT -->
     <div class="form-group row mb-3" id="containerTitle:id:">
-      <label for=":type:_title:id:" class="col-md-2 col-form-label" id="labelChoiceTitle:id:">
-        :type:
+      <label for=":type:_title:id:" class="col-md-2 col-form-label text-capitalize" id="labelChoiceTitle:id:">
+        :type: #:id:
       </label>
       <div class="col-md-10">
         <input type="text" class="form-control" id="inputTitle:id:" name=":type::id:_title" required>
@@ -67,7 +67,7 @@ $(() => {
     <div class="form-group row mb-3 justify-content-end" id="containerImage:id:">
 
       <!-- IMAGE INPUT -->
-      <label for=":type::id:_image" class="col-md-2 col-form-label">
+      <label for=":type::id:_image" class="col-md-2 col-form-label text-capitalize">
         Add Image:
       </label>
       <div class="col-md-10">
@@ -91,7 +91,7 @@ $(() => {
 
     <!-- DESCRIPTION INPUT -->
     <div class="form-group row mb-3" id="containerDescription:id:">
-      <label for=":type::id:_description" class="col-md-2 col-form-label" id="labelDescription:id:">
+      <label for=":type::id:_description" class="col-md-2 col-form-label text-capitalize" id="labelDescription:id:">
         Description:
       </label>
       <div class="col-md-10">
@@ -194,7 +194,8 @@ $(() => {
   (() => {
     const $question = $formPollNew.find('#question');
     const id = 0;
-    $question.append(createInputBlock(htmlTemplateQuestionAndChoices, id, 'question'));
+    $question.append(createInputBlock(htmlTemplateQuestionAndChoices, id, 'question'))
+    $question.find(`#labelChoiceTitle0`).text('Question');
   })();
 
   // Run once: Choices
