@@ -79,7 +79,7 @@ $(() => {
             `
             <div class="col-sm-9">
               <h3 class="col-sm-9 choiceTitle">
-                Choice #${count}: ${titleHTML}
+                ${titleHTML}
               </h3> 
               <div class="d-sm-block choiceDescription">
                 ${choiceDescHTML}
@@ -91,7 +91,7 @@ $(() => {
             <input type="hidden" name="choices" value="${poll.choices[choice].id}" />` : 
             `
             <h3 class="col-sm-12 choiceTitle">
-              Choice #${count}: ${titleHTML}
+              ${titleHTML}
             </h3> 
             <div class="d-sm-block choiceDescription">
               ${choiceDescHTML}
