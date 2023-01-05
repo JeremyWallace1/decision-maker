@@ -142,8 +142,9 @@ $(() => {
     const linkTypeCapitalized = linkType[0].toUpperCase() + linkType.substring(1).toLowerCase();
     return `
       <h6 class="poll_${linkType}_url">
-        ${data.title}: &nbsp;&nbsp;<a href='${data.url}' class="${linkType}Url" title='${data.title}'>${data.url}</a>
-        <button type="button" class="button button-small" id="copy${linkTypeCapitalized}Url" onclick="copyUrl('${data.url}')"><i class="fa-solid fa-copy fa-lg"></i></i></button>
+        ${data.title}:
+        <br class="d-block d-sm-none">
+        <a href='${data.url}' class="${linkType}Url" title='${data.title}'>${data.url}</a>&nbsp&nbsp<button type="button" class="button button-small" id="copy${linkTypeCapitalized}Url" onclick="copyUrl('${data.url}')"><i class="fa-solid fa-copy fa-lg"></i></i></button>
       </h6>
     `;
   };
