@@ -6,9 +6,9 @@
 * DONE: (done as pie chart) poll options change to bar w/ weighting
 * DONE: copy button (copies to clipboard)
 * DONE: email link(s) button
-* you have already replied to this on <date>
-* responsive to screen sizes
-* works on mobile... (jquery UI draggable)
+* DONE (did not implement <date>): you have already replied to this on <date>
+* DONE: responsive to screen sizes
+* DONE: works on mobile... (jquery UI draggable)
 * DONE: pretty logo (not sure how pretty it is lol)
 * data security: use object getters and private keys to hide properties that we don't want users to see if they console.log(window) in the browser console (or we could encrypt the data that is meant to be private)
 * send the result_link to friends
