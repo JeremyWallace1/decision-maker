@@ -307,9 +307,10 @@ $(() => {
   });
   $buttonRemoveChoice.on('click', function(event) {
     event.preventDefault();
-    const totalChoicesInDOM = countChoicesInDOM();
-    const $choice = $choices.find(`#container${totalChoicesInDOM}`);
+    const countChoice = countChoicesInDOM();
+    const $choice = $choices.find(`#container${countChoice}`);
     $choice.hide(100);
+    $formPollNew.images[`image${countChoice}`] = null;
     setTimeout(() => {
       $choice.remove();
       $buttonAddChoice.show(300);
