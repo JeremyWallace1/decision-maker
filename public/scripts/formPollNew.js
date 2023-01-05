@@ -221,9 +221,13 @@ $(() => {
 
   const $choices = $formPollNew.find('#choices');
 
+  const countChoicesInDOM = () => {
+    return $choices.children(`.choice-regular`).length;
+  }
+
   const createRegularChoice = (choiceHTML) => {
-    const totalChoices = $choices.children(`.choice-regular`).length;
-    const countChoice = totalChoices + 1;
+    const totalChoicesInDOM = countChoicesInDOM();
+    const countChoice = totalChoicesInDOM + 1;
     const parsedHTML = choiceHTML.replaceAll(':id:', countChoice);
     const $choice = $(parsedHTML);
     const $containerDescription = $choice.find(`#containerDescription${countChoice}`);
@@ -296,8 +300,21 @@ $(() => {
   const $buttonRemoveChoice = $manageChoices.find('#buttonRemoveChoice');
   $buttonAddChoice.on('click', function(event) {
     event.preventDefault();
-    $choices.append(createRegularChoice(choiceRegularHTML));
+    const $choice = createRegularChoice(choiceRegularHTML);
+    $choices.append($choice);
+    $choice.hide().show(300);
     $buttonRemoveChoice.show(300);
+  });
+  $buttonRemoveChoice.on('click', function(event) {
+    event.preventDefault();
+    const totalChoicesInDOM = countChoicesInDOM();
+    const $choice = $choices.find(`#container${totalChoicesInDOM}`);
+    $choice.hide(100);
+    setTimeout(() => {
+      $choice.remove();
+      $buttonAddChoice.show(300);
+    }, 100);
+    
   });
   
   window.$formPollNew = $formPollNew;
