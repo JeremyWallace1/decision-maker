@@ -2,7 +2,6 @@
 // Client facing scripts here
 window.api = {};
 window.api.data = null;
-window.user_ip = null;
 
 $(() => {
   const queryString = location.search;
@@ -26,11 +25,9 @@ $(() => {
         return getEnvType()
           .then(envType => getMyIp(envType))
           .then(data => {
-            console.log('ip: ', data.ip);
             return data;
           })
-          .then(data => window.user_ip = data.ip)
-          .then(ip => getResponsesByIp(ip, uri))
+          .then(data => getResponsesByIp(data.ip, uri))
           .then(data => {
             if (data[0].responses.length === 0) {
               view = 'pollRespond';
