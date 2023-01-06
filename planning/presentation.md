@@ -76,3 +76,5 @@
 
 *** What you learned and/or what you’ll do differently in final projects ***
 * - More planning on stretch goals. Can end up going in a different direction without consensus from all parties.
+* - Adding new features in a branch should be done in as concise manner as possible to reduce exposure to merge conflicts.
+* - - I.e. branch often for big features!
