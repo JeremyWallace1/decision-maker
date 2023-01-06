@@ -1,32 +1,35 @@
+const xVal = [];
+const yVal = [];
+const toolTipVal = [];
+const colours = ['#008BBC', '#BBBC00', '#BC5F00', '#5F00BC', '#005777']; // #BC00BB
+
 $(() => {
-  // this is the creator view after creating a new poll 
+  // this is the creator view after creating a new poll
   // and same view for returning through admin link
-  xVal = [];
-  yVal = [];
-  toolTipVal = [];
-  colours = ['#008BBC', '#BBBC00', '#BC5F00', '#5F00BC', '#005777']; // #BC00BB
   
   const $polls = $(`
     <section class="polls" id="polls">
       <p>Loading...</p>
     </section>
     `
-  );
+ );
   
   window.$polls = $polls;
 
   window.polls = {};
 
-  function addPoll(poll) {
+  const addPoll = (poll) => {
     $polls.append(poll);
-  }
-  function clearPolls() {
+  };
+
+  const clearPolls = () => {
     $polls.empty();
-  }
+  };
+
   window.polls.clearPolls = clearPolls;
 
   // add all the polls by this creator
-  function addPolls(jsonData, showResults = false, alreadyAnswered = false) {
+  const addPolls = (jsonData, showResults = false, alreadyAnswered = false) => {
     clearPolls();
 
     for (const pollData of jsonData) {
@@ -48,11 +51,11 @@ $(() => {
         yVal.push(jsonData[0]['scores'][i].scoring);
       }
       if (showResults && length > 0) {
-        $.getScript( "scripts/chart.js", function( data, textStatus, jqxhr ) {
-          console.log( data ); // Data returned
-          console.log( textStatus ); // Success
-          console.log( jqxhr.status ); // 200
-          console.log( "Load was performed." );
+        $.getScript("scripts/chart.js", function(data, textStatus, jqxhr) {
+          console.log(data); // Data returned
+          console.log(textStatus); // Success
+          console.log(jqxhr.status); // 200
+          console.log("Load was performed.");
           const pollWithResults = $(createdPoll).append(`<script>${data}</script>`);
           $(pollWithResults).find('#resultsArea').removeAttr('hidden');
           $(pollWithResults).find('#resultsHr').removeAttr('hidden');
@@ -62,7 +65,8 @@ $(() => {
         addPoll(createdPoll);
       }
     }
-  }
+  };
 
   window.polls.addPolls = addPolls;
+
 });
