@@ -22,46 +22,67 @@ $(() => {
     if (alreadyAnswered === true && showResults === false) {
       buffer += `
       <div class="row">
-        <h1 class="" id="alreadyAnsweredAlert">
+        <h1 class="display-2" id="alreadyAnsweredAlert">
           You've submitted your choices in this poll.
         </h1>
       </div>
-      `
-    }
-
-    buffer += `
       <article class="poll" id="poll_${poll.config.id}">
-      <header class="poll_heading">
-  
-          <div class="row">
-            <h1 class="display-4" id="question${poll.config.id}">
-              ${poll.config.question}
-            </h1>
-          </div>
+        <header class="poll_heading mt-5">
       
-          ${generateQuestionImgHTML(poll.config.image)}
-  
-          <div class="row">
-            <p class="col-12" id="description${poll.config.id}">
-              ${poll.config.description}
-            </p>
-          </div>
-
-          <hr class="major">
-          <div class="row" id="resultsArea" hidden>
-            <canvas id="resultsChart"></canvas>
-          </div>
-          <hr class="major" id="resultsHr" hidden>
-
-        </header>
-        ${generateChoicesHTML(poll, showResults)}
+        <div class="row">
+          <h1 class="" id="question${poll.config.id}">
+            ${poll.config.question}
+          </h1>
+        </div>
+    
+        ${generateQuestionImgHTML(poll.config.image)}
+        <div class="row">
+          <p class="col-12" id="description${poll.config.id}">
+            ${poll.config.description}
+          </p>
+        </div>
 
         <footer class="poll_footer row mb-3">
           ${generateLinkHTML('share', pollUrlData.sharing)}
           ${generateLinkHTML('results', pollUrlData.results)}
         </footer>
       </article>
-    `;
+      `
+    }
+
+    if (showResults === true) {
+      buffer += `
+        <article class="poll" id="poll_${poll.config.id}">
+          <header class="poll_heading">
+    
+            <div class="row">
+              <h1 class="display-4" id="question${poll.config.id}">
+                ${poll.config.question}
+              </h1>
+            </div>
+        
+            ${generateQuestionImgHTML(poll.config.image)}
+    
+            <div class="row">
+              <p class="col-12" id="description${poll.config.id}">
+                ${poll.config.description}
+              </p>
+            </div>
+            <hr class="major">
+            <div class="row" id="resultsArea" hidden>
+              <canvas id="resultsChart"></canvas>
+            </div>
+            <hr class="major" id="resultsHr" hidden>
+          </header>
+          ${generateChoicesHTML(poll, showResults)}
+          <footer class="poll_footer row mb-3">
+            ${generateLinkHTML('share', pollUrlData.sharing)}
+            ${generateLinkHTML('results', pollUrlData.results)}
+          </footer>
+        </article>
+      `;
+    }
+
     return buffer;
   }
 
