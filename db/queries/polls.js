@@ -36,7 +36,7 @@ const createChoice = (data) => {
     VALUES ($1, $2, $3, $4)
     RETURNING *
   `,
-    values: [data.poll_id, data.title, data.image, data.description],
+    values: [data.pollId, data.title, data.image, data.description],
   };
   
   return db.query(query)
