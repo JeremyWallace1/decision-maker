@@ -143,8 +143,6 @@ $(() => {
       // adding artificial delay 
       delay(2000).then(() => {
 
-        views_manager.show('none');
-        
         const postData = $(this).serialize();
         const output = [];
         let uri = null;
