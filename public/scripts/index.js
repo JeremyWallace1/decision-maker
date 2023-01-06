@@ -5,7 +5,6 @@ window.api.data = null;
 window.user_ip = null;
 
 $(() => {
-
   const queryString = location.search;
   const defaultView = 'pollNew';
   const output = [];
@@ -24,21 +23,26 @@ $(() => {
     .then(() => {
       if (output[0].uriType === 'Share') {
         api.data = output[0];
-        return getMyIp()
-        .then(data => window.user_ip = data.ip)
-        .then(ip => getResponsesByIp(ip, uri))
-        .then(data => {
-          if (data[0].responses.length === 0) {
-            view = 'pollRespond';
+        return getEnvType()
+          .then(envType => getMyIp(envType))
+          .then(data => {
+            console.log('ip: ', data.ip);
+            return data;
+          })
+          .then(data => window.user_ip = data.ip)
+          .then(ip => getResponsesByIp(ip, uri))
+          .then(data => {
+            if (data[0].responses.length === 0) {
+              view = 'pollRespond';
+              return Promise.reject('end promise chain');
+            }
+            output[0].pollId = output[0].config.id;
+            output[0].responses = data[0].responses;
+            output[0].scores = [];
+            polls.addPolls(output, false, false);
+            view = 'polls';
             return Promise.reject('end promise chain');
-          }
-          output[0].pollId = output[0].config.id;
-          output[0].responses = data[0].responses;
-          output[0].scores = [];
-          polls.addPolls(output, false, false);
-          view = 'polls';
-          return Promise.reject('end promise chain');
-        })
+          })
       }
     })
     .then(() => getResponsesByUri(uri))
