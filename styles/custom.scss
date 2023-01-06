@@ -43,7 +43,6 @@ body {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    // align-content: flex-start;
 
     section {
       article {
@@ -99,7 +98,6 @@ body {
     padding-left: 1em;
     padding-right: 1em;
   }
-
 
   .form-control:focus {  
     border-color: $dkblue;
@@ -182,7 +180,6 @@ body {
   }
 
   .titleText {
-    // display: block;
     font-size: 1.5em;
     margin-top: 1em;
     margin-bottom: 1em;
@@ -225,7 +222,6 @@ body {
     color: $uberltblue;
   }
 
- 
   #sortable { 
     list-style-type: none; margin: 0; padding: 0; 
   }
@@ -243,11 +239,9 @@ body {
     line-height: 1;
     border-radius: 0.5em;
     font-weight: 400;
-
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     text-transform: none;
     overflow: visible;
-    // margin: 0;
     font-family: inherit;
     cursor: pointer;
     border-style: groove;
@@ -318,7 +312,6 @@ body {
     .smallerLabel {
       font-size: 0.75em;
     }
-  
   }
     
   @media only screen and (min-width: 768px){
