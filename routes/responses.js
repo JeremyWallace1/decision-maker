@@ -18,12 +18,11 @@ router.post('/', (req, res) => {
   const output = [];
   output.push({ results_url: req.body.results_url });
   const countChoices = req.body.choices.length;
-  let ip = null;
+  const ip = req.body.ip;
   const pollId = req.body.poll_id;
   const promises = [];
-  getIP(req)
-    .then(data => ip = data.ip)
-    .then(() => responseQueries.getRespondentChoices(ip, pollId))
+  
+  responseQueries.getRespondentChoices(ip, pollId)
     .then(data => {
       if (data.length > 0) {
         throw new Error(`IP address ${ip} has already replied to this poll`)
