@@ -77,7 +77,6 @@ $(() => {
           name=":type::id:_image"
           accept="image/*"
           type="file"
-          capture="user"
         />
       </div>
 
