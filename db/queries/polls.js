@@ -14,7 +14,7 @@ const createPoll = (data) => {
     VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING *
   `,
-    values: [data.email, data.question, data.image, data.description, data.results_url, data.sharing_url],
+    values: [data.email, data.question, data.image, data.description, data.resultsUri, data.sharingUri],
   };
   
   return db.query(query)
