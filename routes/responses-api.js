@@ -5,7 +5,6 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const { response } = require('express');
 const express = require('express');
 const router  = express.Router();
 const responseQueries = require('../db/queries/polls');
@@ -16,16 +15,16 @@ router.get('/:uri/:ip', (req, res) => {
   const ip = req.params.ip;
   const responsesData = {};
   const outputData = [];
-  responsesData.response_url = uri;
+  responsesData.responseUri = uri;
   responseQueries.getPollBySharingUri(uri)
-    .then(data => responsesData.poll_id = data.id)
+    .then(data => responsesData.pollId = data.id)
     .then(pollId => responseQueries.getRespondentChoices(ip, pollId))
     .then(data => responsesData.responses = data)
     .then(() => outputData.push(responsesData))
     .then(() => res.json(outputData))
     .catch(err => {
       res.status(500)
-      .json({ error: err.message });
+        .json({ error: err.message });
     });
 });
 
@@ -35,16 +34,16 @@ router.get('/:uri', (req, res) => {
   const responsesData = {};
   const outputData = [];
   responseQueries.getPollByResultsUri(uri)
-    .then(data => responsesData.poll_id = data.id)
-    .then(responseQueries.getPollResponses(responsesData.poll_id))
+    .then(data => responsesData.pollId = data.id)
+    .then(responseQueries.getPollResponses(responsesData.pollId))
     .then(data => responsesData.responses = data)
-    .then(() => responseQueries.sumResponseScores(responsesData.poll_id))
+    .then(() => responseQueries.sumResponseScores(responsesData.pollId))
     .then(scores => responsesData.scores = scores)
     .then(() => outputData.push(responsesData))
     .then(() => res.json(outputData))
     .catch(err => {
       res.status(500)
-      .json({ error: err.message });
+        .json({ error: err.message });
     });
 });
 
