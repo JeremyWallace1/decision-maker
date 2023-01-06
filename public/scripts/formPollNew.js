@@ -1,5 +1,4 @@
 $(() => {
-
   const $formPollNew = $(`
     <form action="" method="POST" class="col-12" id="create-poll">
 
@@ -110,9 +109,8 @@ $(() => {
       <div class="col-md-10" id="containerAddInputDescription:id:">
         <button type="button" class="button-link" id="buttonAddInputDescription:id:"><i class="fa-solid fa-plus fa-lg">&nbsp</i>add description</button>
       </div>
-
+      
     </div>
-
   </div>
   `);
 

@@ -2,7 +2,6 @@ $(() => {
   window.poll = {};
   // TO DO: toggle whether email should show as part of the poll info
   const createPoll = (poll, showResults, alreadyAnswered) => { 
-    // console.log(`poll info: ${JSON.stringify(poll.config)}`);
     const origin = window.location.origin;
     const sharingUrl = origin.concat('/?', poll.config.sharing_url);
     const resultsUrl = origin.concat('/?', poll.config.results_url);

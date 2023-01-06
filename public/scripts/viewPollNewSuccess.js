@@ -7,8 +7,6 @@ $(() => {
   window.$newPollSuccessMessage = $newPollSuccessMessage;
 
   const generateHTML = (poll) => { 
-
-    console.log('poll = ', poll);
     const origin = window.location.origin;
     const sharingUrl = origin.concat('/?', poll.config.sharing_url);
     const resultsUrl = origin.concat('/?', poll.config.results_url);

@@ -28,21 +28,9 @@ $(() => {
   // add all the polls by this creator
   function addPolls(jsonData, showResults = false, alreadyAnswered = false) {
     clearPolls();
-    console.log('jsonData[0]',jsonData[0]);
-    
-    // if (showResults) {
-    //   $polls.append( `
-    //     <h2 class="titling">
-    //       ${jsonData[0]['config'].creator_email}'s Polls
-    //     </h2>
-    //   `);
-    // }
 
     for (const pollData of jsonData) {
-      console.log('pollData is:', pollData);
       const createdPoll = poll.createPoll(pollData, showResults, alreadyAnswered = true);
-
-      // creator = jsonData[0]['config'].creator_email;
       const length = jsonData[0]['scores'].length;
       let minNum = Infinity;
       for (let j = 0; j < length; j++) {
@@ -56,7 +44,6 @@ $(() => {
             toolTipVal.push(jsonData[0]['choices'][k].title);
           }
         }
-        // console.log('toolTipVal =', toolTipVal);
         xVal.push('Choice #' + (jsonData[0]['scores'][i].choice_id - minNum + 1));
         yVal.push(jsonData[0]['scores'][i].scoring);
       }
@@ -67,7 +54,6 @@ $(() => {
           console.log( jqxhr.status ); // 200
           console.log( "Load was performed." );
           const pollWithResults = $(createdPoll).append(`<script>${data}</script>`);
-          console.log(pollWithResults);
           $(pollWithResults).find('#resultsArea').removeAttr('hidden');
           $(pollWithResults).find('#resultsHr').removeAttr('hidden');
           addPoll(pollWithResults);
