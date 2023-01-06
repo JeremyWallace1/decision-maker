@@ -6,13 +6,11 @@
 * As a poll creator, I shouldn't be permitted to modify the poll after it's been created because that would be unfair to the poll users that have already responded.
 * As a poll creator, I should be allowed to respond to the poll I created because my preference(s) are as important as my friends.
 
-* As a poll user, when I receive a poll from a friend in email with a submission link, I want to be able to open the poll to see the questions and make a decision, because...
+* As a poll user, when I receive a sharing link from a friend, I want to be able to use the link to open the poll to see the questions and make a decision, because my input is valuable.
 * As a poll user, I want to be able to rank the responses in the poll in the order I choose to specify my preference(s), because...
 * As a poll user, I shouldn't be able to view the results of the poll unless the poll creator has shared that link with me, because we don't want to influence the outcome of the poll.
 * As a poll user, I should only be permitted to respond one time to each poll, because each users response needs to be weighted equally.
 * As a poll user, I should only be permitted to see the poll that was shared with me, for the privacy of the poll creator and other users is important.
-
-
 
 ### TABLE NAMES ###
 - polls
