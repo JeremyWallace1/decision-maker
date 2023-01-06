@@ -60,9 +60,22 @@ const submitResponse = (data) => {
   });
 }
 
-const getMyIp = () => {
+const getEnvType = () => {
   return $.ajax({
     method: "GET",
-    url: "/env/ip",
+    url: "/env/type",
   });
+}
+
+const getMyIp = (envType = 'production') => {
+  let url = "/env/ip";
+  if (envType === 'production') {
+    url = "https://api.ipify.org?format=json";
+  }
+  
+  return $.ajax({
+    url,
+    method: "GET",
+  });
+
 };
