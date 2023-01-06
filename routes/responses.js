@@ -5,18 +5,16 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const { response } = require('express');
 const express = require('express');
 const router  = express.Router();
 const responseQueries = require('../db/queries/polls');
-const { getIP } = require('../lib/helpers.js');
 const sendEmail = require('../lib/emailBuilder.js');
 
 // user responds to a poll
 router.post('/', (req, res) => {
 
   const output = [];
-  output.push({ results_url: req.body.results_url });
+  output.push({ resultsUri: req.body.results_url });
   const countChoices = req.body.choices.length;
   const ip = req.body.ip;
   const pollId = req.body.poll_id;
@@ -25,16 +23,16 @@ router.post('/', (req, res) => {
   responseQueries.getRespondentChoices(ip, pollId)
     .then(data => {
       if (data.length > 0) {
-        throw new Error(`IP address ${ip} has already replied to this poll`)
+        throw new Error(`IP address ${ip} has already replied to this poll`);
       }
     })
     .then(() => {
       for (const choice in req.body.choices) {
         const data = {};
-        data.poll_id = pollId;
-        data.choice_id = req.body.choices[choice];
-        data.respondent_ip = ip;
-        data.rank_score = countChoices - choice;
+        data.pollId = pollId;
+        data.choiceId = req.body.choices[choice];
+        data.respondentIp = ip;
+        data.rankScore = countChoices - choice;
         promises.push(responseQueries.createResponse(data));
       }
 
@@ -43,7 +41,7 @@ router.post('/', (req, res) => {
           output[0].responses = all;
           console.log('database updated!', output);
         })
-        .then(() => responseQueries.getPollByResultsUri(output[0].results_url))
+        .then(() => responseQueries.getPollByResultsUri(output[0].resultsUri))
         .then(data => {
           const referer = req.headers.referer;
           const indexOriginEnd = referer.indexOf('/', 8) + 1;
@@ -52,15 +50,15 @@ router.post('/', (req, res) => {
           const poll = data;
           let recipientEmail = null;
           switch (process.env.ENV_TYPE) {
-            case ('development') :
-              recipientEmail = process.env.DEV_EMAIL || null;
-              break;
-            case ('staging') :
-              recipientEmail = process.env.STAGING_EMAIL || null;
-              break;
-            case ('production') :
-              recipientEmail = poll.creator_email || null;
-              break;
+          case ('development') :
+            recipientEmail = process.env.DEV_EMAIL || null;
+            break;
+          case ('staging') :
+            recipientEmail = process.env.STAGING_EMAIL || null;
+            break;
+          case ('production') :
+            recipientEmail = poll.creator_email || null;
+            break;
           }
 
           const emailConfig = {};
@@ -74,23 +72,24 @@ router.post('/', (req, res) => {
             'body': `We have just received a new response to your poll, ${poll.question}. Please use the links below to view results or share your poll with others.`,
             'share': 'Sharing url: ' + origin + '?' + poll.sharing_url,
             'results': 'Results url: ' + origin + '?' + poll.results_url
-          }
+          };
 
           const sendReceipt = process.env.SENDINBLUE_ENABLE;
           if (!sendReceipt || sendReceipt === 'false') {
             return {};
           }
+
           return sendEmail(emailConfig);
         })
         .then((data) => console.log(data))
         .then(() => res.send(output))
         .catch(error => {
-          console.log(err.message)
+          console.log(error.message);
           return error;
         });
     })
     .catch(error => {
-      console.log(`error output: `, error.message)
+      console.log(`error output: `, error.message);
       res.status(500).send('403 - Forbidden. ' + error.message);
     });
     

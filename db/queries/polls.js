@@ -14,14 +14,14 @@ const createPoll = (data) => {
     VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING *
   `,
-    values: [data.email, data.question, data.image, data.description, data.results_url, data.sharing_url],
-  }
+    values: [data.email, data.question, data.image, data.description, data.resultsUri, data.sharingUri],
+  };
   
   return db.query(query)
     .then(response => {
       data.response = response.rows[0];
       return data;
-    })
+    });
 };
 
 const createChoice = (data) => {
@@ -36,13 +36,13 @@ const createChoice = (data) => {
     VALUES ($1, $2, $3, $4)
     RETURNING *
   `,
-    values: [data.poll_id, data.title, data.image, data.description],
-  }
+    values: [data.pollId, data.title, data.image, data.description],
+  };
   
   return db.query(query)
     .then(response => {
       return response.rows[0];
-    })
+    });
 };
 
 const createResponse = (data) => {
@@ -57,13 +57,13 @@ const createResponse = (data) => {
     VALUES ($1, $2, $3, $4)
     RETURNING *
   `,
-    values: [data.poll_id, data.choice_id, data.respondent_ip, data.rank_score],
-  }
+    values: [data.pollId, data.choiceId, data.respondentIp, data.rankScore],
+  };
   
   return db.query(query)
     .then(response => {
       return response.rows[0];
-    })
+    });
 };
 
 const getPollById = (id) => {
@@ -171,7 +171,7 @@ const sumResponseScores = (id) => {
     ORDER BY scoring DESC
   `,
     values: [id],
-  }
+  };
 
   return db.query(query)
     .then(response => {

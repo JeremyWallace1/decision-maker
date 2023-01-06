@@ -5,7 +5,6 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const { response } = require('express');
 const express = require('express');
 const router  = express.Router();
 const { getIP, getEnvType } = require('../lib/helpers.js');
