@@ -142,7 +142,7 @@ $(() => {
             return finalPostData;
           })
           .then(data => submitResponse(data))
-          .then(data => uri = data[0].results_url)
+          .then(data => uri = data[0].resultsUri)
           .then(() => getPollByUri(uri))
           .then(data => output.push(data[0]))
           .then(() => getResponsesByUri(uri))
