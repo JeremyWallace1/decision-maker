@@ -1,12 +1,12 @@
 ### Which project you chose and why ***
-* Option 4: Decision Maker
+* - For our midterm project we chose option 4: Decision Maker
 * - This is a web app that helps groups of friends to vote on a preferred choice (using ranked voting), for example: "What movie should we see next Friday?"
-* - We liked the idea of a app that could start small and be expanded to add extra features, if we wanted, that would be challenging but simple to use. 
+* - We chose the app because we knew we had more time than normal for this project and felt we could expand it to add extra features if we wanted that would be challenging to develop but simple to use. 
+* - Also, it was different enough from what we've done in bootcamp thus far while still being able to use the skills we've developed.
 
 *** Show us what you built (demo the app and show us the features) ***
 * - https://the-decision-maker.azurewebsites.net
 * - http://localhost:8080/
-
 
 *** What each of you did, individually ***
 # Jeremy
