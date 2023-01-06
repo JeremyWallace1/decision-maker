@@ -57,7 +57,7 @@ const createResponse = (data) => {
     VALUES ($1, $2, $3, $4)
     RETURNING *
   `,
-    values: [data.poll_id, data.choice_id, data.respondent_ip, data.rank_score],
+    values: [data.pollId, data.choiceId, data.respondentIp, data.rankScore],
   };
   
   return db.query(query)

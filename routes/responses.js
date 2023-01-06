@@ -5,18 +5,16 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const { response } = require('express');
 const express = require('express');
 const router  = express.Router();
 const responseQueries = require('../db/queries/polls');
-const { getIP } = require('../lib/helpers.js');
 const sendEmail = require('../lib/emailBuilder.js');
 
 // user responds to a poll
 router.post('/', (req, res) => {
 
   const output = [];
-  output.push({ results_url: req.body.results_url });
+  output.push({ resultsUri: req.body.results_url });
   const countChoices = req.body.choices.length;
   const ip = req.body.ip;
   const pollId = req.body.poll_id;
@@ -43,7 +41,7 @@ router.post('/', (req, res) => {
           output[0].responses = all;
           console.log('database updated!', output);
         })
-        .then(() => responseQueries.getPollByResultsUri(output[0].results_url))
+        .then(() => responseQueries.getPollByResultsUri(output[0].resultsUri))
         .then(data => {
           const referer = req.headers.referer;
           const indexOriginEnd = referer.indexOf('/', 8) + 1;
