@@ -8,7 +8,7 @@
 const { response } = require('express');
 const express = require('express');
 const router  = express.Router();
-const { getIP } = require('../lib/helpers.js');
+const { getIP, getEnvType } = require('../lib/helpers.js');
 
 router.get('/ip', (req, res) => {
   getIP(req)
@@ -17,6 +17,12 @@ router.get('/ip', (req, res) => {
       return res.status(500)
         .json({ error: err.message });
     });
+});
+
+// Exposes ENV_TYPE from .env to front-end requests
+router.get('/type', (req, res) => {
+  const envType = getEnvType();
+  res.json(envType);
 });
 
 module.exports = router;
