@@ -1,6 +1,12 @@
 ### Which project you chose and why ***
 * Option 4: Decision Maker
-* - Liked the idea of a single-page app (SPA) that could start small and be expanded to add extra features if we wanted that would be challenging, but come across as a 'simple' app 
+* - This is a web app that helps groups of friends to vote on a preferred choice (using ranked voting), for example: "What movie should we see next Friday?"
+* - We liked the idea of a app that could start small and be expanded to add extra features, if we wanted, that would be challenging but simple to use. 
+
+*** Show us what you built (demo the app and show us the features) ***
+* - https://the-decision-maker.azurewebsites.net
+* - http://localhost:8080/
+
 
 *** What each of you did, individually ***
 # Jeremy
@@ -26,10 +32,6 @@
 * - ERD diagram for project
 * - Wireframe diagram
 * - Pair programmed multiple front and back-end issues to resolution
-
-*** Show us what you built (demo the app and show us the features) ***
-* - https://the-decision-maker.azurewebsites.net
-* - http://localhost:8080/
 
 *** What challenges you had and how you overcame them ***
 * - PROBLEM: hosted on local machine so ip address will always be the same
