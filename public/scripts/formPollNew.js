@@ -141,14 +141,14 @@ $(() => {
       event.preventDefault();
       $containerImage.show(300);
       $containerAddInputImage.hide(300);
-    })
+    });
 
     // Button press: Add description
     $buttonAddInputDescription.on('click', function(event) {
       event.preventDefault();
       $containerDescription.show(300);
       $buffer.find(`#containerAddInputDescription${id}`).hide(300);
-    })
+    });
 
     // Button press: Remove image
     $buttonRemoveImage.on('click', function(event) {
@@ -157,30 +157,30 @@ $(() => {
       $containerPreviewImage.hide(100);
       setTimeout(() => $imgPreviewImage.attr('src', ''), 100);
       $inputImage.val('');
-    })
+    });
 
     // Input change: Choose image file
-    $inputImage.on('change', function (event) {
+    $inputImage.on('change', function() {
       const file = this.files[0];
       convertToBase64(file)
-      .then(data => {
-        // Store image data, so it can be used by the form POST
-        $formPollNew.images[`image${id}`] = data;
-        // Preview image on display
-        $containerPreviewImage.hide(100);
-        setTimeout(() => {
-          $imgPreviewImage.attr('src', '');
-          $imgPreviewImage.attr('src', data);
-          $containerPreviewImage.show(300);
-        }, 300);
-      })
-      .catch(error => {
-        $(this).toggleClass("error", true);
-        console.log(error.message);
-      })
+        .then(data => {
+          // Store image data, so it can be used by the form POST
+          $formPollNew.images[`image${id}`] = data;
+          // Preview image on display
+          $containerPreviewImage.hide(100);
+          setTimeout(() => {
+            $imgPreviewImage.attr('src', '');
+            $imgPreviewImage.attr('src', data);
+            $containerPreviewImage.show(300);
+          }, 300);
+        })
+        .catch(error => {
+          $(this).toggleClass("error", true);
+          console.log(error.message);
+        });
     });
     return $buffer;
-  }
+  };
 
   $formPollNew.images = {};
   window.$formPollNew = $formPollNew;
@@ -191,7 +191,7 @@ $(() => {
   (() => {
     const $question = $formPollNew.find('#question');
     const id = 0;
-    $question.append(createInputBlock(htmlTemplateQuestionAndChoices, id, 'question'))
+    $question.append(createInputBlock(htmlTemplateQuestionAndChoices, id, 'question'));
     $question.find(`#labelChoiceTitle0`).text('Question');
   })();
 
@@ -270,11 +270,11 @@ $(() => {
     });
   };
 
-  $formPollNew.on('submit', function (event) {
+  $formPollNew.on('submit', function(event) {
     event.preventDefault();
     // loading button when it's taking it's time
     loadingButton();
-    // adding artificial delay 
+    // adding artificial delay
     delay(0).then(() => {
       const submittedPostData = $(this).serialize();
       let appendPostData = '';
@@ -290,25 +290,25 @@ $(() => {
       let uri = null;
       const output = [];
       submitPoll(finalPostData)
-      .then(data => {
-        uri = data[0].results_url;
-      })
-      .then(() => getPollByUri(uri))
-      .then(data => output.push(data[0]))
-      .then(() => getResponsesByUri(uri))
-      .then(data => {
-        output[0].pollId = output[0].config.id;
-        output[0].responses = data[0].responses;
-        output[0].scores = data[0].scores;
-      })
-      .then(() => {
-        window.api.data = output[0];
-        views_manager.show('pollNewSuccess');
-      })
-      .catch((error) => {
-        console.error(error);
-        views_manager.show('pollNew');
-      })
-    })
-  })
+        .then(data => {
+          uri = data[0].results_url;
+        })
+        .then(() => getPollByUri(uri))
+        .then(data => output.push(data[0]))
+        .then(() => getResponsesByUri(uri))
+        .then(data => {
+          output[0].pollId = output[0].config.id;
+          output[0].responses = data[0].responses;
+          output[0].scores = data[0].scores;
+        })
+        .then(() => {
+          window.api.data = output[0];
+          viewsManager.show('pollNewSuccess');
+        })
+        .catch((error) => {
+          console.error(error);
+          viewsManager.show('pollNew');
+        });
+    });
+  });
 });

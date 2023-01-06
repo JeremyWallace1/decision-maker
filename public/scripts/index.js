@@ -12,58 +12,58 @@ $(() => {
   if (queryString) {
     uri = queryString.slice(1).split('&')[0];
     getPollByUri(uri)
-    .then(data => {
-      if (!data[0]) {
-        return Promise.reject('end');
-      }
-      
-      output.push(data[0]);
-    })
-    .then(() => {
-      if (output[0].uriType === 'Share') {
-        api.data = output[0];
-        return getEnvType()
-          .then(envType => getMyIp(envType))
-          .then(data => {
-            return data;
-          })
-          .then(data => getResponsesByIp(data.ip, uri))
-          .then(data => {
-            if (data[0].responses.length === 0) {
-              view = 'pollRespond';
+      .then(data => {
+        if (!data[0]) {
+          return Promise.reject('end');
+        }
+        
+        output.push(data[0]);
+      })
+      .then(() => {
+        if (output[0].uriType === 'Share') {
+          api.data = output[0];
+          return getEnvType()
+            .then(envType => getMyIp(envType))
+            .then(data => {
+              return data;
+            })
+            .then(data => getResponsesByIp(data.ip, uri))
+            .then(data => {
+              if (data[0].responses.length === 0) {
+                view = 'pollRespond';
+                return Promise.reject('end promise chain');
+              }
+              output[0].pollId = output[0].config.id;
+              output[0].responses = data[0].responses;
+              output[0].scores = [];
+              polls.addPolls(output, false, false);
+              view = 'polls';
               return Promise.reject('end promise chain');
-            }
-            output[0].pollId = output[0].config.id;
-            output[0].responses = data[0].responses;
-            output[0].scores = [];
-            polls.addPolls(output, false, false);
-            view = 'polls';
-            return Promise.reject('end promise chain');
-          })
-      }
-    })
-    .then(() => getResponsesByUri(uri))
-    .then(data => {
-      output[0].pollId = output[0].config.id;
-      output[0].responses = data[0].responses;
-      output[0].scores = data[0].scores;
-      polls.addPolls(output, true, false);
-      view = 'polls';
-      return Promise.reject('end promise chain');
-    })
-    .catch(err => {
-      if (err.message) {
-        console.log(err.message);
-      };
-    })
-    .then(() => {
-      if (!view) {
-        view = defaultView; 
-      }
-      views_manager.show(view);
-    })
+            });
+        }
+      })
+      .then(() => getResponsesByUri(uri))
+      .then(data => {
+        output[0].pollId = output[0].config.id;
+        output[0].responses = data[0].responses;
+        output[0].scores = data[0].scores;
+        polls.addPolls(output, true, false);
+        view = 'polls';
+        return Promise.reject('end promise chain');
+      })
+      .catch(err => {
+        if (err.message) {
+          console.log(err.message);
+        }
+      })
+      .then(() => {
+        if (!view) {
+          view = defaultView;
+        }
+        viewsManager.show(view);
+      });
   } else {
-    views_manager.show(defaultView);
+    viewsManager.show(defaultView);
   }
 
   const redirectButton = () => {
@@ -78,21 +78,21 @@ $(() => {
 
   document.getElementById("newPoll").addEventListener("click", redirectButton);
 
-  loadingButton = () => {
-    $(`#createPollText`).hide(0);
-    $(`#loadingText`).show(0);
-    $(`#loadingSpinner`).show(0);
-    document.querySelector('#submitButton').disabled = true;
-  }
-
-  copyUrl = (url) => {
-    navigator.clipboard.writeText(url);
-    // Alert the copied text
-    alert(`Copied the text '${url}' to the clipboard.`);
-  };
-
-  delay = (t, v) => {
-    return new Promise(resolve => setTimeout(resolve, t, v));
-  }
-
 });
+
+function loadingButton() {
+  $(`#createPollText`).hide(0);
+  $(`#loadingText`).show(0);
+  $(`#loadingSpinner`).show(0);
+  document.querySelector('#submitButton').disabled = true;
+}
+
+function copyUrl(url) {
+  navigator.clipboard.writeText(url);
+  // Alert the copied text
+  alert(`Copied the text '${url}' to the clipboard.`);
+};
+
+function delay(t, v) {
+  return new Promise(resolve => setTimeout(resolve, t, v));
+}

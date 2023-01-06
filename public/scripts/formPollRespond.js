@@ -1,6 +1,6 @@
 $(() => {
 
-  window.poll_respond = {};
+  window.pollRespond = {};
   const $formPollRespond = $('<form></form>');
   window.$formPollRespond = $formPollRespond;
 
@@ -16,8 +16,7 @@ $(() => {
           ${poll.config.question}
         </h1>
       </div>
-
-          `
+    `;
     let questionImage = poll.config.image;
     if (questionImage) {
       buffer += `
@@ -26,35 +25,31 @@ $(() => {
           <img src="${questionImage}" class="img-fluid img-thumbnail mx-auto d-block question img-preview" />
         </div>
       </div>
-      `
+      `;
     }
 
     buffer += `
-
-          <div class="row">
-            <p class="col-md-12" id="description${poll.config.id}">
-              ${poll.config.description}
-            </p>
-          </div>
-
-          <hr class="major">
-          
-        </header>
-        <script>
-          $(()=> {
-            $( "#sortable" ).sortable();
-          });
-        </script>
-        <p class="col-md-12" id="orderInstructions">
-          Please order your choices from top to bottom before submitting.
+      <div class="row">
+        <p class="col-md-12" id="description${poll.config.id}">
+          ${poll.config.description}
         </p>
-        <ul id="sortable" class="ui-sortable">
+      </div>
 
-      `;
+      <hr class="major">
+        
+      </header>
+      <script>
+        $(()=> {
+          $( "#sortable" ).sortable();
+        });
+      </script>
+      <p class="col-md-12" id="orderInstructions">
+        Please order your choices from top to bottom before submitting.
+      </p>
+      <ul id="sortable" class="ui-sortable">
+    `;
 
-    let count = 0;
     for (const choice in poll.choices) {
-      count++;
       const choiceData = JSON.parse(JSON.stringify(poll.choices[choice]));
 
       const titleHTML = `${choiceData.title}`;
@@ -64,29 +59,38 @@ $(() => {
       buffer += `
       <li class="row ui-state-default ui-sortable-handle" id="choice${choiceData.id}">
         <div class="row col-12 choiceRow">
-          ${choiceData.image ? 
-            `
-            <div class="col-sm-9">
-              <h3 class="col-sm-9 choiceTitle">
-                ${titleHTML}
-              </h3> 
-              <div class="d-sm-block choiceDescription">
-                ${choiceDescHTML}
-              </div>
-            </div>
-            <div class="d-none d-sm-block col-sm-3 px-0 imageBox">
-              ${choiceImageHTML}
-            </div>
-            <input type="hidden" name="choices" value="${poll.choices[choice].id}" />` : 
-            `
-            <h3 class="col-sm-12 choiceTitle">
+        `;
+
+      if (choiceData.image) {
+        buffer += `
+          <div class="col-sm-9">
+            <h3 class="col-sm-9 choiceTitle">
               ${titleHTML}
             </h3> 
             <div class="d-sm-block choiceDescription">
               ${choiceDescHTML}
-            </div> 
-            <input type="hidden" name="choices" value="${poll.choices[choice].id}" />
-            `}
+            </div>
+          </div>
+          <div class="d-none d-sm-block col-sm-3 px-0 imageBox">
+            ${choiceImageHTML}
+          </div>
+          <input type="hidden" name="choices" value="${poll.choices[choice].id}" />
+        `;
+      }
+          
+      if (!choiceData.image) {
+        buffer += `
+          <h3 class="col-sm-12 choiceTitle">
+            ${titleHTML}
+          </h3> 
+          <div class="d-sm-block choiceDescription">
+            ${choiceDescHTML}
+          </div> 
+          <input type="hidden" name="choices" value="${poll.choices[choice].id}" />
+        `;
+      }
+      
+      buffer += `
         </div>
       </li>
       `;
@@ -111,22 +115,22 @@ $(() => {
     
     const $html = $(buffer);
     return $html;
-  }
+  };
 
   const createForm = (data) => {
     window.$formPollRespond = getHtml(data);
     attachEventListener(window.$formPollRespond);
-  }
+  };
 
-  window.poll_respond.createForm = createForm;
+  window.pollRespond.createForm = createForm;
 
   const attachEventListener = ($element) => {
 
-    $element.on('submit', function (event) {
+    $element.on('submit', function(event) {
       event.preventDefault();
       // loading button when it's taking it's time
       loadingButton();
-      // adding artificial delay 
+      // adding artificial delay
       delay(500).then(() => {
 
         const postData = $(this).serialize();
@@ -153,9 +157,9 @@ $(() => {
           })
           .then(() => {
             polls.addPolls(output, false, false);
-            views_manager.show('polls');
-          })
-      })
+            viewsManager.show('polls');
+          });
+      });
     });
-  }
+  };
 });

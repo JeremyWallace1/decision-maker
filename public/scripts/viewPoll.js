@@ -1,7 +1,7 @@
 $(() => {
   window.poll = {};
   // TO DO: toggle whether email should show as part of the poll info
-  const createPoll = (poll, showResults, alreadyAnswered) => { 
+  const createPoll = (poll, showResults, alreadyAnswered) => {
     const origin = window.location.origin;
     const sharingUrl = origin.concat('/?', poll.config.sharing_url);
     const resultsUrl = origin.concat('/?', poll.config.results_url);
@@ -47,7 +47,7 @@ $(() => {
           ${generateLinkHTML('results', pollUrlData.results)}
         </footer>
       </article>
-      `
+      `;
     }
 
     if (showResults === true) {
@@ -84,7 +84,7 @@ $(() => {
     }
 
     return buffer;
-  }
+  };
 
   window.poll.createPoll = createPoll;
 
@@ -105,11 +105,10 @@ $(() => {
         <img src="${imageSrc}" class="img-fluid img-thumbnail mx-auto d-block question img-preview" />
       </div>
     </div>
-    `
+    `;
   };
 
   const generateChoicesHTML = (poll, showResults) => {
-    const imagePoll = isImagePoll(poll);
     let buffer = '';
 
     for (const choice in poll.choices) {
@@ -124,10 +123,10 @@ $(() => {
       const choiceScoreHTML = `${choiceData.showScore ? `<span class="badge bg-secondary"><span class="smallerLabel">score</span><br>${choiceData.score}</span>` : ''}`;
       const choiceImageHTML = `<img src="${choiceData.image}" class="choiceImage rounded" />`;
 
-      buffer += `
-        <div class="row col-12 choiceRow">
-        ${choiceData.image ? 
-          `
+      buffer += `<div class="row col-12 choiceRow">`;
+      
+      if (choiceData.image) {
+        buffer += `
           <div class="col-sm-9 choiceTitle">
             ${choiceScoreHTML} ${titleHTML} 
             <div class="d-sm-block choiceDescription">
@@ -136,19 +135,26 @@ $(() => {
           </div>
           <div class="d-none d-sm-block col-sm-3 imageBox">
             ${choiceImageHTML}
-          </div>` : 
-          `
+          </div>
+        `;
+      }
+
+      if (!choiceData.image) {
+        buffer += `
           <div class="col-sm-12 choiceTitle">
             ${choiceScoreHTML} ${titleHTML} 
             <div class="d-sm-block choiceDescription">
               ${choiceDescHTML}
             </div> 
           </div>
-          `}
+        `;
+      }
+
+      buffer += `
         </div>
-        <hr class="minor"></hr>
+      <hr class="minor"></hr>
       `;
-    };
+    }
     return buffer;
   };
 
@@ -165,12 +171,6 @@ $(() => {
         <a href='${data.url}' class="${linkType}Url" title='${data.title}'>${data.url}</a>&nbsp&nbsp<button type="button" class="button button-small" id="copy${linkTypeCapitalized}Url" onclick="copyUrl('${data.url}')"><i class="fa-solid fa-copy fa-lg"></i></i></button>
       </h6>
     `;
-  };
-
-  const isImagePoll = (poll) => {
-    const images = poll.choices.filter(element => element.image);
-    const foundImages = images.length > 0;
-    return foundImages;
   };
 
 });

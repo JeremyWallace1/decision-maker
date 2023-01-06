@@ -1,12 +1,12 @@
 $(() => {
-  window.poll_new_success = {};
+  window.pollNewSuccess = {};
   const $newPollSuccessMessage = $(`
     <section></section>
     `
   );
   window.$newPollSuccessMessage = $newPollSuccessMessage;
 
-  const generateHTML = (poll) => { 
+  const generateHTML = (poll) => {
     const origin = window.location.origin;
     const sharingUrl = origin.concat('/?', poll.config.sharing_url);
     const resultsUrl = origin.concat('/?', poll.config.results_url);
@@ -44,12 +44,12 @@ $(() => {
     </article>
     `;
     return buffer;
-  }
+  };
 
   const createSuccessMessage = (pollData) => {
     window.$newPollSuccessMessage = $(generateHTML(pollData));
-  }
+  };
 
-  window.poll_new_success.createSuccessMessage = createSuccessMessage;
+  window.pollNewSuccess.createSuccessMessage = createSuccessMessage;
 
 });

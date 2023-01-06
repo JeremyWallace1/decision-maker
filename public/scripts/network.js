@@ -3,7 +3,7 @@ const getPollById = (id) => {
     method: "GET",
     url: "/api/polls/" + id
   });
-}
+};
 
 const getPollByUri = (uri) => {
   if (!uri) {
@@ -13,7 +13,7 @@ const getPollByUri = (uri) => {
     method: "GET",
     url: "/api/polls/" + uri
   });
-}
+};
 
 const getResponsesByUri = (uri) => {
   if (!uri) {
@@ -23,7 +23,7 @@ const getResponsesByUri = (uri) => {
     method: "GET",
     url: "/api/responses/" + uri
   });
-}
+};
 
 const getResponsesByIp = (ip, uri) => {
   if (!ip) {
@@ -33,14 +33,14 @@ const getResponsesByIp = (ip, uri) => {
     method: "GET",
     url: "/api/responses/" + uri + "/" + ip
   });
-}
+};
 
 const getResponsesById = (id) => {
   return $.ajax({
     method: "GET",
     url: "/api/responses/" + id
   });
-}
+};
 
 
 const submitPoll = (data) => {
@@ -49,7 +49,7 @@ const submitPoll = (data) => {
     url: "/polls",
     data,
   });
-}
+};
 
 
 const submitResponse = (data) => {
@@ -58,14 +58,14 @@ const submitResponse = (data) => {
     url: "/responses",
     data,
   });
-}
+};
 
 const getEnvType = () => {
   return $.ajax({
     method: "GET",
     url: "/env/type",
   });
-}
+};
 
 const getMyIp = (envType = 'production') => {
   let url = "/env/ip";
