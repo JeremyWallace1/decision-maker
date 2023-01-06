@@ -12,7 +12,7 @@ $(() => {
       <p>Loading...</p>
     </section>
     `
- );
+  );
   
   window.$polls = $polls;
 
