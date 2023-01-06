@@ -1,6 +1,45 @@
 LHL Node Skeleton
 =========
 
+## About this project
+* This is the Lighthouse Labs web development bootcamp mid-term project option 4: Decision Maker
+* This web app helps groups of friends to vote on a preferred choice (using ranked voting), for example: "What movie should we see next Friday?"
+* We chose the app because we knew we had more time than normal for this project and felt we could expand it to add extra features if we wanted that would be challenging to develop but simple to use. 
+* Also, it was different enough from what we've done in bootcamp thus far while still being able to use the skills we've developed.
+
+## Screenshots (click image thumbnail for full size)
+
+<table>
+  <tr>
+    <th> Description </th>
+    <th> Image Thumbnail </th>
+  </tr>
+  <tr>
+    <td>
+      Creating a new poll on a narrow screen like an iPhone SE:
+    </td>
+    <td style="text-align: center">
+      <a href="https://github.com/JeremyWallace1/decision-maker/tree/master/screenshots/dm_smallscreen.jpg"><img src="./screenshots/dm_smallscreen.jpg" alt="Creating a new poll on a narrow screen like an iPhone SE" height="200"/></a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Answering a poll on a mid-width screen like an iPad Air:
+    </td>
+    <td style="text-align: center">
+      <a href="https://github.com/JeremyWallace1/decision-maker/tree/master/screenshots/dm_midscreen.jpg"><img src="./screenshots/dm_midscreen.jpg" alt="Answering a poll on a mid-width screen like an iPad Air" height="200" /></a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Viewing the results of a poll on a wide screen like a PC:
+    </td>
+    <td style="text-align: center">
+      <a href="https://github.com/JeremyWallace1/decision-maker/tree/master/screenshots/dm_largescreen.jpg"><img src="./screenshots/dm_largescreen.jpg" alt="Viewing the results of a poll on a wide screen like a PC" height="200"/></a>
+    </td>
+  </tr>
+</table>
+
 ## Setup
 1. Clone your own copy of this repo using the `<> Code` button, then copy the SSH link for use in terminal on your dev machine.
 2. Add any team members as collaborators to the project so that they can push to this repo.
