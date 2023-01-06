@@ -127,13 +127,21 @@ $(() => {
       // loading button when it's taking it's time
       loadingButton();
       // adding artificial delay 
-      delay(2000).then(() => {
+      delay(500).then(() => {
 
         const postData = $(this).serialize();
         const output = [];
         let uri = null;
 
-        submitResponse(postData)
+        getEnvType()
+          .then(envType => getMyIp(envType))
+          .then(data => {
+            const ip = data.ip;
+            const appendPostData = '&ip=' + ip;
+            const finalPostData = postData + appendPostData;
+            return finalPostData;
+          })
+          .then(data => submitResponse(data))
           .then(data => uri = data[0].results_url)
           .then(() => getPollByUri(uri))
           .then(data => output.push(data[0]))
