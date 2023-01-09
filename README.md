@@ -1,4 +1,4 @@
-LHL Node Skeleton
+The Decision Maker
 =========
 
 ## About this project
